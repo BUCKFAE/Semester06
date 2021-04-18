@@ -1,0 +1,77 @@
+\documentclass[14pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage[T1]{fontenc}
+
+\title{Theoretische Informatik}
+\author{Julian Schubert}
+
+% Theorem
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\begin{document}
+
+
+    \maketitle
+    \tableofcontents
+
+    \newpage
+
+    \section{Wichtige Vermutungen}
+    \begin{definition}[Goldbachsche Vermutung]
+        Jede natürliche gerade Zahl größer 2 ist Summe zweier Primzahlen
+    \end{definition}
+    \begin{definition}[Collaz-Problem (3n +1)-Vermutung]
+        \begin{itemize}
+            \item Beginne mit irgendeiner natürlichen Zahl $n > 0$
+            \item Ist n gerade, son imm als nächstes $n // 2$ (abrundende Division)
+            \item Wiederhole das Vorgehen mit der erhaltenen Zahl
+        \end{itemize}
+        \noindent
+        \textbf{Vermutung:} Jede so konstruierte Zahlenfolge mündet in den Zyklus
+            4, 2, 1, egal mit welcher natürlichen zahl $n > 0$ beginnt
+    \end{definition}
+    
+    \section{Elementare Begriffe}
+        \subsection{Komplexitätsklassen}
+        \[
+            ALL \subset P \subset NP
+        \]
+        \begin{itemize}
+            \item \textbf{ALL:} Alle Probleme
+            \item \textbf{NP:} Probleme, deren Lösungen schnell übrprüft weden können
+                (effizient überprüfbare Probleme)
+            \item \textbf{P:} Probleme, die isch in polynomieller Zeit lösen lassen 
+                (effizient lösbare Probleme)
+        \end{itemize}
+        \subsection{Funktionen}
+        % TODO: Folie 6, gehört bis 0:52
+\end{document}
