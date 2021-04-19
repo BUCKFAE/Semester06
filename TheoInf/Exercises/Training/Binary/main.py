@@ -2,9 +2,9 @@
 
 from typing import List
 
-def to_binary(num: int, curr="") -> str:
+def to_binary(num: int) -> str:
     """Converts the given number n into a string representing it's binary form"""
-    return str(num) if num in (0, 1) else curr + to_binary(num // 2, curr) + str(num % 2)
+    return str(num) if num in (0, 1) else to_binary(num // 2) + str(num % 2)
 
 def to_binary_list(nums: List[int]):
     """Converts the given integers (base 10) into their list representation"""
