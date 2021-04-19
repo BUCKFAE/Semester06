@@ -1,0 +1,153 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[german,vlined,longend]{algorithm2e}
+\usepackage{graphicx}
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}  
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata}
+\usepackage{listings}
+
+% --- math operators ---
+\usepackage{mathtools}
+\DeclarePairedDelimiter\set{\{}{\}} % use $\set*{1, 2, 3}$ 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceils{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\angles{\langle}{\rangle}
+\def\Oh{\ensuremath{\mathcal{O}}} % big O like $\Oh(n)$
+\def\oh{\ensuremath{\scriptstyle{\mathcal{O}}}} % small O
+% ---
+
+\begin{document}
+
+\begin{small}
+	\noindent
+	Name 1, Gruppe X\\
+	Name 2, Gruppe Y
+\end{small}
+\bigskip
+
+\begin{center}
+	\LARGE Lösungen zum 0. Übungsblatt (AGT 21)
+\end{center}
+\smallskip
+
+\subsection*{Aufgabe 1:}
+
+\paragraph{a)}
+Diese Aussage ist korrekt. In einem zusammenhängenden Graphen besucht die Breitensuche
+jeden knoten genau ein mal. Der Breitensuchenbaum enthält genau $|V| - 1$ Kanten (da
+jeder Knoten über genau eine Kante besucht wird) und hat somit ein gesamtes Gewicht von
+$|V| - 1$. Da der minimale Spannbaum ebenfalls $|V| - 1$ Kanten enthalten muss (Graph ist
+zusammenhängend) und alle Kanten das Gewicht 1 haben, muss das Gewicht jedes minimalen 
+Spannbaums ebenfalls gleich $|V| - 1$ sein. Da also alle möglichen Breitensuchenbäume
+das selbe gewicht wie der minimale Spannbaum (bzw. die minimalen Spannbäume) hat, ist 
+jeder Breitensuchbaum somit ein minimaler Spannbaum.
+\paragraph{b)}
+Der blau gezeichnete minimale Spannbaum vom Graphen G ist kein Breitensuchbaum mit Quelle 1.
+Dies ist gegeben da wenn man mit der Breitensuche von 1 startet, man zunächst den Knoten 2, 
+dann den Knoten 3 besuchen würde (oder umgekehrt). Der eingezeichnete Spannbaum ist also 
+kein Breitensuchbaum mit Startpunkt 1.
+\begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+	\node[state]          (1)                        {$1$};
+	\node[state]          (2) [above right =of 1]    {$2$};
+	\node[state]          (3) [below right =of 1]    {$3$};
+	\node[state]          (4) [below right =of 2]    {$4$};
+  \tikzset{mystyle/.style={->,double=orange}} 
+  \tikzset{every node/.style={fill=white}} 
+  \tikzset{mystyle/.style={<->,double=black}}   
+  \path (1)     edge [mystyle]   node   {$1$} (2);
+  \path (1)     edge [mystyle]   node   {$1$} (3);
+  \path (2)     edge [mystyle]   node   {$1$} (4);
+  \path (3)     edge [mystyle]   node   {$1$} (4);
+  \tikzset{mystyle/.style={,double=blue}}   
+  \path (1)     edge [mystyle, in = 200, out = 80]   node   {$1$} (2);
+  \path (2)     edge [mystyle, in = 100, out = 340]   node   {$1$} (4);
+  \path (3)     edge [mystyle, in = 260, out = 10]   node   {$1$} (4);
+
+\end{tikzpicture}
+
+\subsection*{Aufgabe 2:}
+
+\paragraph{a)}
+
+Die Skize zeigt den kleinsten nicht zweifärbbaren Graphen. \\
+Graph mit 1 Knoten: Eigenschaft trivial erfüllt \\
+Graph mit 2 Knoten: Färbe Knoten 1 rot, Knoten 2 blau \\
+$\Rightarrow$ Der kleinste nicht zweifärbbare Graph hat 3 Knoten.
+
+\begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+	\node[state]          (1)                        {$1$};
+	\node[state]          (2) [above right =of 1]    {$2$};
+	\node[state]          (3) [right =of 1]    {$3$};
+  \tikzset{mystyle/.style={->,double=orange}} 
+  \tikzset{every node/.style={fill=white}} 
+  \tikzset{mystyle/.style={<->,double=black}}   
+  \path (1)     edge [mystyle]   node   {$1$} (2);
+  \path (2)     edge [mystyle]   node   {$1$} (3);
+  \path (1)     edge [mystyle]   node   {$1$} (3);
+\end{tikzpicture}
+
+\paragraph{b)}
+Der Algorithmus hat eine Laufzeit von O($|V| + |E|$) da unsere erste For-Schleife jeden 
+Knoten genau einmal behandelt (wir gehen davon aus das c für jeden Knoten eine Färbung
+besitzt) und wir in der zweiten Schleife ein mal über alle Kanten iterieren. \\
+\\
+\noindent TesteFärbung($G, c$)\\
+\begin{algorithm}[H]
+	// Map die für jeden Knoten die Färbung speichert \\
+	f = \{\} \\
+	\ForEach(Alle Knoten färben){k $\in c $}{
+		// Färbung des Knoten speichern \\
+		f[k] = k.color \\
+	}
+
+	\ForEach(Testen ob alle Knoten passend gefärbt sind){e $\in V$} {
+		\If(Wenn die Knoten am Start und Ende der Kante nicht 
+		unterschiedlich gefärbt sind){f[e.start] == f[e.end]}{
+			return false
+		}
+	}
+
+	\Return true \\
+\end{algorithm}
+
+\paragraph{c)}
+Der Algorithmus läuft in O($|V| + |E|$) da von jedem Knoten alle ausgehenden 
+Kanten behandelt werden. \\
+\noindent Färbbar($G$)\\
+\begin{algorithm}[H]
+	c = 0 \\
+	\ForEach{$k \in V$}{
+		\If(Wenn der aktuelle Knoten schon eine Färbung hat die anders
+		ist als die aktuelle Färbung){$k.c == (c + 1 \% 2)$}{
+			Return false
+		}
+
+		// Den aktuellen Knoten in der aktuelle Farbe färben
+		k.color = c \\
+
+		\ForEach(){$n \in Adj[k]$}{
+			\If(Wenn beide Knoten die selbe Farbe haben){n.color == k.color}{
+				Return false
+			}
+		}
+
+		// C von 0 auf 1 bzw von 1 auf 0 setzen \\
+		c = c + 1 \% 2
+	}
+	\Return true \\
+\end{algorithm}
+
+\subsection*{Aufgabe 3:}
+
+\paragraph{a)}
+Die Knoten des Graphen sind alle Felder des Schachbrettes.
+Von einem Knoten (also Schabrett-Feld) gibt es eine Kante zu all den Feldern, 
+auf die ein Springer sich (vom aktuellen Feld aus) bewegen kann.
+
+\end{document}
