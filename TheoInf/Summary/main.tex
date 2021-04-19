@@ -12,7 +12,7 @@
 \title{Theoretische Informatik}
 \author{Julian Schubert}
 
-% Theorem
+% Definition
 \mdfdefinestyle{theoremstyle}{
     linecolor=blue!50,
     linewidth=2pt,
@@ -21,6 +21,17 @@
     innertopmargin=\topskip
 }
 \mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
 
 % Kopf- / Fußzeile
 \makeatletter
@@ -61,6 +72,7 @@
     \end{definition}
     
     \section{Elementare Begriffe}
+
         \subsection{Komplexitätsklassen}
         \[
             ALL \subset P \subset NP
@@ -72,6 +84,7 @@
             \item \textbf{P:} Probleme, die isch in polynomieller Zeit lösen lassen 
                 (effizient lösbare Probleme)
         \end{itemize}
+
         \subsection{Funktionen}
         \begin{definition}[Funktionen]
             Seien $f: A \rightarrow B$ und $g : B \rightarrow C$ Funktionen
@@ -83,7 +96,40 @@
                 $D_f = \{a \in A |$ es existiert ein $ a \in A$ mit $f(a) = b$\} \\
                 $\Rightarrow$ alles was von etwas im Definitionsbereich 
                 getroffen wird
-                \item \textbf{Total}
+                \item \textbf{Total:} $D_f = A$
+                \item \textbf{Surjektiv:} $W_f = B$
+                \item \textbf{Injektiv:} aus $a_1, a_2 \in D$ und $a_1 \neq a_2$
+                folgt $f(a_1) \neq f(a_2)$
+                \item \textbf{Bijektiv:} $f$ ist total, surjektiv und injektiv
+                \item ist $f$ injektiv, so existiert die \textbf{Umkehrfunktion}
+                $f^{-1}: B \rightarrow A$ mit $f^{-1}(b) = $ dasjenige $a  \in A$
+                mit $f(a) = b$
             \end{itemize}
         \end{definition}
+
+        \subsection{Binärdarstellung}
+        \begin{definition}
+            Jede natürliche Zahl $n \geq 1$ ist in genau einer Weise darstellbar
+            als 
+            \[
+                n = \sum_{i = 0}^m a_i \cdot 2^i
+            \]
+            mit $m \in \mathbb{N}, a_m = 1$ und $a_0, \dots, a_{m - 1} 
+            \in \{0, 1\}$.
+        \end{definition}
+        \begin{eigenschaft}[Binärdarstellung]
+            \begin{center}
+            $bin(2n + a) = bin(n)a$ für $n \geq 1$ und $a \in  \{0, 1\}$ 
+            \end{center}
+        \end{eigenschaft}
+
+        \subsection{Listencodierung}
+        Liste von Binärzahlen: $\langle x_1, \dots, x_n \rangle$ \\
+        \textbf{Anwendung:} Bits verdoppeln, 10 alss Anfangs-, Trenn- und Enmarkierung
+        \textbf{Beispiele:} \\
+        $
+            \indent \langle \rangle = bin^{-1}(10) = 2 \\
+            \indent \langle 2 \rangle = bin^{-1}(10110010) = 178 \\
+            \indent \langle 5, 3, 2 \rangle = bin^{-1}(1011001110111110110010) = 2944946
+        $
 \end{document}
