@@ -1,22 +1,109 @@
-\documentclass{article}
-    % General document formatting
-    \usepackage[margin=0.7in]{geometry}
-    \usepackage[parfill]{parskip}
-    \usepackage[utf8]{inputenc}
-    
-    % Related to math
-    \usepackage{amsmath,amssymb,amsfonts,amsthm}
+\documentclass[14pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage[T1]{fontenc}
+
+\title{Algorithmische Graphentheorie}
+\author{Julian Schubert}
+
+% Definition
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
 
 \begin{document}
 
-Name, date, Exercise X
 
-\section*{Part a}
+    \maketitle
+    \tableofcontents
 
-Put your answer to part a here
+    \newpage
+    \section{Wichtige Begriffe}
+    \begin{definition}
+        Ein gerichteter Graph $G$ ist \textbf{schwach} zusammenhängend
+        wenn der darunterliegende ungerichtete Graph zusammenhängend 
+        ist \\
+        Ein gerichteter Graph $G$ ist \textbf{stark} zusammenhängend
+        wenn es für jedes Knotenpaar $(u, v)$ einen gerichteten Weg 
+        von $u$ nach $v$ gibt
+    \end{definition}
 
-\section*{Part b}
-
-etc
-
+    \section{Eulerkreise}
+    \begin{definition}[Eulerkreis]
+        Sei $G$ ein (un-)gerichteter Grpah. \\
+        Ein Eulerkreis (-weg) in 
+        $G$ ist ein Kreis (Weg), der jede \textbf{Kante} genau 
+        einmal durchläuft. \\
+        Ein Graph heißt \textbf{eulersch}, falls er einen 
+        Eulerkreis enthält
+    \end{definition}
+    Ein Graph der nur einen Eulerweg aber keinen Eulerkreis 
+    enthält, ist nicht eulersch!
+    \begin{eigenschaft}[Satz von Euler]
+        Sei $G$ ein ungerichteter und zsh. Graph.  \\
+        Dann gilt:
+        $G$ eulersch $\Leftrightarrow$ alle Knoten haben geraden Grad
+    \end{eigenschaft}
+    Bei gerichteten Graphen: indeg($v$) = outdeg($v$)
+    \subsection{Eulerkreis finden}
+        Man kann in $O(E)$ testen on G eulersch ist (Knotengrade zählen) \\
+        Eulerkreis finden: \\
+        Verwalte in jedem Knoten $v$ eien zeiger curr[$v$], der auf 
+        den ersten unbenutzten Nachbarn $w$ zeigt
+    
+    \section{Hamiltonkreise}
+    \begin{definition}[Hamiltonkreis NP-schwer]
+        Sei $G$ ein (un-)gerichteter Graph. Ein Hamiltonkreis (-weg)
+        in $G$ ist ein Kreis (Weg), der jeden \textbf{Knoten} genau
+        einmal durchläuft.
+    \end{definition}
+    \begin{eigenschaft}[Satz von Bondy und Chvátal]
+        Sei $G = (V, E)$ ein ungerichteter Graph mit $|V| \geq 3$ \\
+        Seien $u$ und $v$ nicht-adjazente Knoen von G mit deg($u$)
+        + deg($v$) $\geq n$ := |V|. Dann gilt: \\
+        \indent G hamiltons $\Leftrightarrow$ G + $uv$ hamitlonsch 
+    \end{eigenschaft}
+    \begin{eigenschaft}[Satz von Dirac]
+        Sei G = (V, E) ein ungerichteter Graph mit |V| $\geq$ 3.
+        Falls jeder Knoten von G Grad $\geq$ |V| / 2 hat, so ist 
+        G hamiltonsch
+    \end{eigenschaft}
+    TODO: Beweisen
 \end{document}
