@@ -132,4 +132,22 @@
             \indent \langle 2 \rangle = bin^{-1}(10110010) = 178 \\
             \indent \langle 5, 3, 2 \rangle = bin^{-1}(1011001110111110110010) = 2944946
         $
+    \section{While}
+    \begin{definition}[While-Berechenbarkeit]
+        Eine Funktion ist dann \textbf{While-Berechenbar}, falls es 
+        ein While-Programm gibt, sodass der Definitionsbereich von 
+        beiden identisch ist und der Wert für alle Eingaben übereinstimmt.
+    \end{definition}
+    \begin{definition}[Loop-Programm]
+        ein \textbf{Loop-Programm} ist ein While-Programm mit folgenden
+        Eigenschaften: 
+        \begin{itemize}
+            \item Das Programm enthält keine While-Schleifen
+            \item Aus einer Funktion können nur weiter oben deklarierte
+            Funktionen aufgerufen werden. Insbesondere sind keine 
+            Selbstaufrufe erlaubt
+            \item Das Programm enhält nur Funktionsdeklarationen mit 
+            Initialiserung
+        \end{itemize}
+    \end{definition}
 \end{document}

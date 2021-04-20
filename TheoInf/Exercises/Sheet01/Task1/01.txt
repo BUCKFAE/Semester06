@@ -1,0 +1,8 @@
+Zeile 2 (return f * 2): Mal ist in While-Programmen nicht definiert
+Zeile 5 (if x < 0): Klammern fehlen, und doppelpunkt fehlt (Richtig: if (x < 0):)
+Zeile 6: Es darf nur ein return-statement pro funktion geben
+Zeile 7: Else-If gibt es in While-Programmen nicht, muss durch else - if ersetzt werden, x = 0 muss durch (x == 0) ersetzt werden.
+Es fehlt der Doppelpunkt nach dem if
+Zeile 8: Einrückung des Else ist fehlerhaft, {} muss durch doppelpunkt ersetzt werden (siehe Korrektur des Programms)
+Zeile 9: Es fehlen klammern um x-1
+Zeile 10: Hier muss auch das Return-Statement nach unten gezogen werden (siehe Korrektur des Programms)
