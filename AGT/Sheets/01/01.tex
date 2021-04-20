@@ -26,13 +26,13 @@
 
 \begin{small}
 	\noindent
-	Name 1, Gruppe X\\
-	Name 2, Gruppe Y
+	Schubert Julian, Gruppe 4 \\
+	Philipp Wahl, Gruppe 4
 \end{small}
 \bigskip
 
 \begin{center}
-	\LARGE Lösungen zum 0. Übungsblatt (AGT 21)
+	\LARGE Abgabe zum 1. Übungsblatt (AGT 21)
 \end{center}
 \smallskip
 
@@ -91,7 +91,9 @@ $\Rightarrow$ Der kleinste nicht zweifärbbare Graph hat 3 Knoten.
   \path (2)     edge [mystyle]   node   {$1$} (3);
   \path (1)     edge [mystyle]   node   {$1$} (3);
 \end{tikzpicture}
-
+\\
+Ein Graph mit 0 Knoten und 0 Kanten verletzt die Eigenschaft der zweifärbbarkeit
+nicht, da es ja keine Kante gibt die die Eigenschaft verletzt.
 \paragraph{b)}
 Der Algorithmus hat eine Laufzeit von O($|V| + |E|$) da unsere erste For-Schleife jeden 
 Knoten genau einmal behandelt (wir gehen davon aus das c für jeden Knoten eine Färbung
@@ -150,4 +152,75 @@ Die Knoten des Graphen sind alle Felder des Schachbrettes.
 Von einem Knoten (also Schabrett-Feld) gibt es eine Kante zu all den Feldern, 
 auf die ein Springer sich (vom aktuellen Feld aus) bewegen kann.
 
+\paragraph{b)}
+Schaut man sich alle 8 Möglichkeiten an die der Springer zum ziehen hat
+(Wenn er nicht am Rand steht), fällt auf, dass sich der Springer 
+\textbf{IMMER} von einem weißen Feld auf ein Schwarzes Feld (auf
+dem Schachbrett) bewegt. Daher muss der Graph zweifärbbar sein.
+
+\paragraph{c)}
+Es ergeben sich im gerichteten Graphen genau 336 Kanten, im ungerichtetem demnach
+168. Die berechnung haben wir mit folgendem Python-Code durchgeführt (der auf unserem
+Lösungsansatz aus paragraph d beruht):
+\begin{lstlisting}[language=Python]
+def calculate_possible_moves(size: int) -> int:
+
+    # To small for any moves
+    if size < 3:
+        return 0
+
+    if size == 3:
+        # Two move from each field (but the middle one)
+        return 16
+
+    # 4 Corners
+    corners = sum([4 * corner for corner in [2, 3, 3, 4]])
+
+    # Border of the board
+    border_length = max(0, size - 4)
+    borders = sum([4 * border * border_length for border in [4, 6]])
+
+    # Inner part of the board
+    inner_length = max(0, size - 4)
+    inner = 8 * inner_length * inner_length
+
+    return corners + borders + inner
+
+print('\n'.join(str(calculate_possible_moves(size)) for size in range(0, 10)))
+\end{lstlisting}
+
+\paragraph{d)}
+\textbf{1. Fall:} $n < 3$: \\
+Auf einem solchen Schachfeld hat der Springer null Möglichkeiten, es gibt
+also null kanten. \\
+\textbf{2. Fall:} $n = 3$: \\
+Auf jeden Feld (außer dem Feld in der Mitte) hat der Springer 2 Möglichkeiten,
+es gibt also $[(n \cdot n) - 1] * 2 = 16$ Möglichkeiten. \\
+\textbf{3. Fall:} $ n > 3$ \\
+1. Betrachte alle 2x2 Ecken des Feldes: \\
+Auf dem Feld ganz in der Ecken hat der Springer nur 2 Möglichkeiten, 
+auf den anderen beiden Feldern am Rand hat er 3 Möglichkeiten, im 
+letzen Feld der 2x2 Ecke hat er 4 Möglichkeiten \\
+2. Betrachte die $2 \times m$ Teilstücke zwischen den Ecken: \\
+Jedes dieser Teilstücke hat eine Länge von $n - 4$ (da links und rechts die
+beiden Ecken sind). In dem einen Streifen am Rand hat der Springer 4 Möglichkeiten 
+(pro Feld), auf dem anderen Streifen sind es 6 Möglichkeiten. \\
+3. Betrachte die Mitte des Feldes: \\
+Die Mitte des Feldes enthält genau ($(n - 4) \cdot (n - 4)$) Felder, auf jedem 
+dieser Felder hat der Springer 8 Möglichkeiten. \\
+Da wir eine quadratisch wachsende Anzahl an Möglichkeiten haben ist die 
+obere Schranke $O(n^2)$
+\subsection*{Aufgabe 4:}
+\textbf{1. Fall:} Null Knoten mit deg($v$) ist ungerade: \\
+Offensichtlich erfüllt, da es in diesem Fall (laut Vorlesung) einen 
+EulerKreis geben muss. Jeder Eulerkreis ist gleichzeitig ein 
+Eulerweg, da ein Eulerkreis ein Eulerweg ist bei dem der Startknoten
+gleich dem Endknoten ist \\
+\textbf{2. Fall:} Zwei Knoten mit deg($v$) ist ungerade: \\
+Da G zusammenhängend ist gibt es einen Pfad p der x-viele Kanten enthält
+der die beiden Knoten mit ungeradem Grad ($u, v$) verbindet. Wenn man nun 
+alle Kanten im Pfad p entfernt, gibt es einen Eulerkreis im Restgraphen.
+Wenn man nun den Pfad p wieder hinzufügt, kann man den Eulerkreis aus dem 
+Teilgraphen mit dem Pfad p kombinieren, wodurch man einen Eulerpfad
+mit start $u$ und ende $v$ erhält.
 \end{document}
