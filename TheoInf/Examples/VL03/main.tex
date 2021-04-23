@@ -10,5 +10,33 @@
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 
 \begin{document}
-\subsection{}
+\textbf{Bestimmung der berechneten Funktion}
+\begin{lstlisting}
+    def f1(x, y):
+        z = 0
+        while (x > y):
+            x = (x + 2)
+            y = (y + 3)
+            z = ( z + 1)
+        return z
+\end{lstlisting}
+
+In jedem Schleifendurchlauf: 
+\begin{itemize}
+    \item x wird um 2 erhöht
+    \item y wird um 3 erhöht
+    \item z wird um 1 erhöht
+\end{itemize}
+$\Rightarrow$ Wert $x - y$ verringert sich in jedem Durchlauf
+um 1 \\
+\textbf{Schleifenabbruch:} falls $x - y \geq 0$ \\
+$\Rightarrow$ Anzahl schleifendurchläufe beim Aufruf f1(a, b): \\
+\begin{itemize}
+    \item $a - b$ falls $a \geq b$
+    \item $0$, sonst
+\end{itemize}
+$\Rightarrow$ Die Ausgabe $z$ ist die Anzahl der schleifendurchläufe \\
+$\Rightarrow$ f(a, b) = a - b falls $a \geq b$, 0 sonst\\
+\\
+Anderes Beispiel: VL 03 ab Minute 33
 \end{document}
