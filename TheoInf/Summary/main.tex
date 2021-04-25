@@ -7,7 +7,9 @@
 \usepackage{fancyhdr}
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{amsthm}
+\usepackage{amsmath}
 \usepackage[T1]{fontenc}
+\usepackage{mathabx}
 
 \title{Theoretische Informatik}
 \author{Julian Schubert}
@@ -71,7 +73,22 @@
         \textbf{Vermutung:} Jede so konstruierte Zahlenfolge mündet in den Zyklus
             4, 2, 1, egal mit welcher natürlichen zahl $n > 0$ beginnt
     \end{definition}
-    
+    \begin{definition}[Ackermann-Funktion]
+        \textbf{Frage:} Gilt LOOP = $\{f \in$ WHILE | $f$ ist total\}? \\
+        Die folgende Funktion (auch \textbf{Ackermann-Funktion} genannt)
+        $a: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}$ ist
+        total und While-berechenbar, aber nicht Loop-berechenbar: \\
+        \begin{equation*}
+            a(n, m) = 
+            \begin{cases}
+                m + 1 & \text{falls $n = 0$} \\
+                a(n - 1, 1) & \text{falls $n > 0$ und $m = 0$} \\
+                a(n - 1, a(n, m - 1)) & \text{falls $n > 0$ und $m > 0$}
+            \end{cases}
+        \end{equation*}
+        $\Rightarrow$ Die Ackermann-Funktion ist eine totale Funktion in 
+        $WHILE-LOOP$
+    \end{definition}
     \section{Elementare Begriffe}
 
         \subsection{Komplexitätsklassen}
@@ -151,5 +168,24 @@
             Initialiserung
             \item Das Programm ist für alle Eingaben definiert
         \end{itemize}
+    \end{definition}
+    $\Rightarrow$ Alle Loop-berechenbaren Funktionen sind total.
+    \subsection{Berechnende Funktion bestimmen}
+    \begin{enumerate}
+        \item Schauen für welche Eingabe(n) die Schleife(n) wie oft 
+        ausgeführt werden
+        \item Schauen was sich mit jedem Schleifendurchlauf verändert
+    \end{enumerate}
+
+
+    \section{Ram-Programme}
+    \begin{definition}[modifizierte Differenz]
+        \begin{equation*}
+            x \dotdiv y =  md(x, y)
+            \begin{cases}
+                x - y & \text{falls $x > y$} \\
+                0 & \text{sonst}
+            \end{cases}
+        \end{equation*}
     \end{definition}
 \end{document}
