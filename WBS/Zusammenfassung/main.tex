@@ -1,0 +1,150 @@
+\documentclass[14pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{mathabx}
+
+\title{Wissensbasierte Systeme}
+\author{Julian Schubert}
+
+% Definition
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\begin{document}
+
+
+    \maketitle
+    \tableofcontents
+
+    \newpage
+
+    \section{Einführung}
+    \subsection{Was sind Wissensbasierte Systeme?}
+        \begin{itemize}
+            \item \textbf{Ziel}
+            \begin{itemize}
+                \item Lösen eines Problems durch Wissen und Inferenz
+            \end{itemize}
+            \item \textbf{Unterschied zu Neuronalen Netzen}
+            \begin{itemize}
+                \item Lösung erklärbar und kritisierbar
+                \item Aufwändiger Wissenserwerbsprozess
+            \end{itemize}
+            \item \textbf{Arten von Wissen}
+            \begin{itemize}
+                \item Fakten, Wahrscheinlichkeiten
+                \item Relationen, REgeln, Constraints
+                \item Muster, Fälle + Ähnlichkeitsmaß
+            \end{itemize}
+            \item \textbf{Wissenserwerb}
+            \begin{itemize}
+                \item durch Fachexperten
+                \item durch Lernen aus Fällen
+                \item durch Extraktion aus Literatur
+            \end{itemize}
+        \end{itemize}
+
+    \subsection{Zentrale Aufgaben}
+
+    \textbf{Wissensrepräsentation festlegen} \\
+    \begin{itemize}
+        \item Basiert häufig auf einer Befragung von Fachexperten
+        \begin{itemize}
+            \item Für Fachexperten natürlich
+            \item Präzise zur Herleitung von Schlussfolgerungen
+            \item Effizient verarbeitbar
+        \end{itemize}
+    \end{itemize}
+    \textbf{Wissen aquirieren} \\
+    Editor zur Eingabe von Wissen wird benötigt
+    \begin{itemize}
+        \item Geringe Einarbeitungszeit
+        \item Natürliche Darstellung
+        \item Effiziente Wissenseingabe
+        \item Übersichtlich auch für große Wissensbasen
+        \item Sollte eine Schnittstelle zum Testen des Wissens bieten
+    \end{itemize}
+    \textbf{Wissen verarbeiten (Reasoning)} \\
+    \textbf{Evaluation mit Fällen}
+
+    \subsection{Interaktive und eingebettete WBS}
+    \begin{itemize}
+        \item \textbf{Interaktiv}
+        \begin{itemize}
+            \item WBS berät Nuzter in geführtem Dialog
+            \item WBS präsentiert Lösung(en) mit vorheriger 
+            Dateneingabe
+            \item WBS unterstützt Exploration des Lösungsraums
+        \end{itemize}
+        \item \textbf{Embedded}
+        \begin{itemize}
+            \item WBS präsentiert Lösung ohne Dateneingabe
+            \item WBS gibt Hinweise (Alerts), falls notwendig 
+            (z.B. Kritik)
+            \item WBS handelt autonom
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Lebenszyklus eines WBS}
+    \begin{itemize}
+        \item \textbf{Bedarf feststellen:} Ist-Zustand, Ziele
+        \item \textbf{Entwickeln:} Methoden, Phasen
+        \item \textbf{Bereitstellen:} z.B. Server, Integration in 
+        anderes System
+        \item \textbf{Nutzen:} GUI, autonom
+        \item \textbf{Evaluieren:} Korrektheit, Zeitersparnis,
+        Dokumentation
+        \item \textbf{Evolvieren:} Lernen, Weiterentwickeln
+    \end{itemize}
+
+    \subsection{Domain Specific Languages (DSL)}
+    Abgrenzung zu WBS, trotz ähnlicher Zielsetzung: Formale Sprache 
+    Programmierung und Wissenformalisierung in einer eingeschränkten
+    Domäne für Domänenspezialisten \\
+    \subsubsection{Interne DSL}
+    \textbf{Untermenge einer generellen Sprache}, z.B. UML-Profile, 
+    domänenspezifische XML-Schemata
+    \subsubsection{Externe DSL}
+    \textbf{Neu definiert}, z.B. SQL, reguläre Ausdrücke
+
+\end{document}
