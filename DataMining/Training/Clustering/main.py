@@ -17,16 +17,15 @@ features, true_labels = make_blobs(
 def k_means(points: List[List[float]], num_centers: int):
 
     # Stores the id of all centroids
-    clusters = {}
+    clusters = {0: [], 1: [], 2: []}
+
     centroid_coordinates = []
 
     # Creating three distinct random centroids
     while len(centroid_coordinates) < num_centers:
         random_node = random.choice(range(len(features)))
-        random_point = [points[random_node][0], points[random_node][1]]
+        random_point = (points[random_node][0], points[random_node][1])
         centroid_coordinates.append(random_point)
-
-        clusters[len(clusters.keys())] = []
 
     # Initial assignment of point to clusters
     assign_points(points, clusters, centroid_coordinates)
@@ -38,11 +37,13 @@ def k_means(points: List[List[float]], num_centers: int):
     while centroid_coordinates != new_centroid_coordinates:
 
         new_centroid_coordinates = centroid_coordinates.copy()
+        clusters = {0: [], 1: [], 2: []}
+
         assign_points(points, clusters, centroid_coordinates)
 
         for c in clusters.keys():
-            new_x = round(sum([points[point][0] for point in clusters[c]]) / len(clusters[c]), 1)
-            new_y = round(sum([points[point][1] for point in clusters[c]]) / len(clusters[c]), 1)
+            new_x = round(sum([points[point][0] for point in clusters[c]]) / len(clusters[c]), 4)
+            new_y = round(sum([points[point][1] for point in clusters[c]]) / len(clusters[c]), 4)
             centroid_coordinates[c] = [new_x, new_y]
 
 
@@ -52,11 +53,11 @@ def k_means(points: List[List[float]], num_centers: int):
 
 
 
-def assign_points(points: List[List[float]], clusters: Dict[int, List[float]], centroid_coordinates: List[List[float]]):
+def assign_points(points: List[List[float]], clusters: Dict[int, List[float]], centroid_coordinates: List[Tuple[float, float]]):
     for point in range(len(points)):
         clusters[get_closest_centroid(points, point, clusters, centroid_coordinates)].append(point)
 
-def get_closest_centroid(points: List[List[float]], index: int, clusters: Dict[int, List[float]], centroid_coordinates: List[List[float]]):
+def get_closest_centroid(points: List[List[float]], index: int, clusters: Dict[int, List[float]], centroid_coordinates: List[Tuple[float, float]]):
     return min(clusters.keys(), key=lambda centroid: get_distance(points[index], centroid_coordinates[centroid]))
 
 def get_distance(p1: List[float], p2: List[float]) -> float:
@@ -71,6 +72,7 @@ def get_color_for_cluster(cluster_id: int):
         return 'green'
 
 clusters = k_means(features, 3)
+
 
 current_id = 0
 for cluster in clusters.values():
