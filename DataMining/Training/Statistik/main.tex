@@ -1,0 +1,116 @@
+\documentclass[14pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{mathabx}
+
+\title{Statistik Basics}
+\author{Julian Schubert}
+
+% Definition
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\begin{document}
+
+\section{Standardabweichung}
+    \begin{definition}[Standardabweichung]
+        Die \textbf{Standardabweichung} gibt die Streubreite einer Variable rund 
+        um deren Mittelwert an. Damit ist die Standardabweichung die 
+        durchschnittliche Entfernung aller gemessenen Werte einer Variable vom 
+        Mittelwert der Verteilung.
+    \end{definition}
+    \subsection{Berechnung}
+    Die Standardabweichung $\sigma$ lässt sich wie folgt berechnen: 
+    \[
+        \sigma = \sqrt{\frac{1}{n} \sum_{i=0}^n(x_i - \text{Mittelwert})^2}
+    \]
+
+\section{Varianz}
+    \begin{definition}[Varianz]
+        Die \textbf{Varianz} ist das Quadrat der Standardabweichung
+    \end{definition}
+
+\section{Relative Häufigkeit / Wahrscheinlichkeit}
+    Die \textbf{relative Häufigkeit} lässt sich wie folgt berechnen:
+    \[
+        \text{relative Häufigkeit} 
+            = \frac{\text{Ergebnisanzahl}}{\text{Versuchsanzahl}}  
+    \]
+    Daraus lässt sich dann die \textbf{relative Wahrscheinlichkeit}
+    berechne.
+
+\section{Wahrscheinlichkeiten in Abhängigkeit}
+    Es gilt: 
+    \[
+        P(A | B) = \frac{P(A \cap B)}{P(B)}
+    \]
+    \textbf{Satz von Bayes:}
+    \[
+        P(A | B) = \frac{P(B | A) \cdot P(A)}{P(B)}
+    \]
+
+\section{Binominalkoeffizient}
+    \begin{definition}[Binominalkoeffizient]
+        Der \textbf{Binomialkoeffizient} $\binom{n}{k}$ gibt an auf 
+        wie viele verschiedene Arten man  $k$ bestimmte Objekte aus 
+        einer Menge von $n$ Objekten auswählen kann. \\
+        Er ist also die Anzahl der $k$-elementigen Teilmengen 
+        einer $n$-elementigen Menge.
+    \end{definition}
+    Es gilt:
+    \[
+        \binom{n}{k} = \frac{n!}{k! \cdot (n - k)!}
+    \]  
+
+\section{Binomialverteilung}
+    \begin{definition}[Binomialverteilung]
+        Ist $p$ die Erfolgswahrscheinlichkeit bei einem Versuch und $n$
+        die Anzahl der Versuche, dann bezeichnet man mit $B(k | p, n)$
+        die Wahrscheinlichkeit, genau $k$ Erfolge zu erzielen.
+    \end{definition}
+        
+    \subsection{Berechnung}
+        \[
+            B(k | p, n) = \binom{n}{k} p^k (1 - p)^{n - k} 
+        \]
+\end{document}
