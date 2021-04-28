@@ -65,11 +65,11 @@ def get_distance(p1: List[float], p2: List[float]) -> float:
 
 def get_color_for_cluster(cluster_id: int):
     if cluster_id == 0:
-        return 'red'
+        return 'pink'
     if cluster_id == 1:
         return 'blue'
     if cluster_id == 2:
-        return 'green'
+        return 'purple'
 
 clusters = k_means(features, 3)
 

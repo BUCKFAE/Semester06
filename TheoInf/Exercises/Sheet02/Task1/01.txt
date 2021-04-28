@@ -1,0 +1,8 @@
+Die gegebene Funktion ist Für alle natürlichen Zahlen (inklusive Null) definiert.
+Falls x0 größer als 4 ist, soll die Funktion Null zurück geben, andernfalls soll
+eine abrundende Division durchgeführt werden. Da für x kleiner gleich 4 das 
+Ergebnis selbiger Division immer gleich Null ist fällt das RAM-Programm entsprechend
+kurz aus (da für egal welche Eingabe Null zurück gegeben werden soll):
+
+0 R0 <- 0
+STOP
