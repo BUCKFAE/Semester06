@@ -1,0 +1,31 @@
+\documentclass{article}
+% General document formatting
+\usepackage[margin=0.7in]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Related to math
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+\begin{document}
+\section{Berechnung der k-adischen Darstellung}
+\subsection{k = 2 (dyadische Darstellung)}
+
+\begin{align*}
+    109 &= 2 \cdot 54 + 1 \\
+    54 &= 2 \cdot 26 + 2 \\
+    26 &= 2 \cdot 12 + 2 \\
+    12 &= 2 \cdot 5 + 2 \\
+    5 &= 2 \cdot 2 + 1 \\
+    2 &= 2 \cdot 0 + 2
+\end{align*}
+$\Rightarrow$ dya(109) = 212221 (von unten nach oben gelesen) \\
+\textbf{Probe:} \\
+$2 \cdot 2^5 +  1 \cdot 2^4 + 2 \cdot 2^3 + 2 \cdot 2^2 + 2 \cdot 2^1 + 1 \cdot 2^0 = 109$
+
+\subsection{k = 3}
+Beispiel: Vl 05 Minute 28
+\end{document}

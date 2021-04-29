@@ -150,6 +150,7 @@
             \indent \langle 2 \rangle = bin^{-1}(10110010) = 178 \\
             \indent \langle 5, 3, 2 \rangle = bin^{-1}(1011001110111110110010) = 2944946
         $
+
     \section{While-Programme}
     \begin{definition}[While-Berechenbarkeit]
         Eine Funktion ist dann \textbf{While-Berechenbar}, falls es 
@@ -188,4 +189,79 @@
             \end{cases}
         \end{equation*}
     \end{definition}
+
+    \section{Alphabete und Wörter}
+        \begin{definition}[Alphabete und Wörter]
+            \begin{itemize}
+                \item Ein \textbf{Alphabet} ist eine endliche, nichtleere Menge
+                \item Die Elemente eines Alphabets werden \textbf{Buchstaben}
+                oder \textbf{Symbole} genannt
+                \item Ein \textbf{Wort über einem Alphabet $\varSigma$} ist eine
+                endliche Folge von 0 oder mehr Elementen aus $\varSigma$
+                \item das \textbf{leere Wort} (d.h. das Wort, das aus 0 Buchstaben)
+                besteht bezeichnen wir mit $\varepsilon$ 
+            \end{itemize}
+        \end{definition}
+        \begin{definition}[Mengen von Wörtern]
+            Sei $\varSigma$ ein Alphabet, $n \geq 0$ und $a_1, a_2, \dots a_n 
+            \in \varSigma$
+            \begin{itemize}
+                \item Die \textbf{Länge eines Wortes} w $a_1a_2\dots a_n$ ist 
+                $|w| = n$
+                \item \textbf{Menge aller Wörter mit Länge n:} \\
+                $\varSigma^n = \{ w | w \text{ ist ein Wort über $\varSigma$ 
+                mit $|w| = n$} \}$ \\
+                Es gilt $\varSigma^0 = \{ \varepsilon \}$
+                \item \textbf{Menge aller Wörter:} \\
+                $\varSigma^* = \{ w | w \text{ ist ein Wort über $\varSigma$}\}
+                = \bigcup_{u\geq 0} \varSigma^n \text{ und } \varSigma^+ 
+                = \varSigma^* \backslash \{ \varepsilon \} $
+                \item eine \textbf{formale Sprache über} $\varSigma$ ist 
+                eine Teilmenge von $\varSigma^*$ 
+                \item Das \textbf{Entscheidungsproblem} einer formalen Sprache
+                $L \subseteq \varSigma^*$ ist folgende Aufagbe: \\
+                Eingabe: $w \in \varSigma^*$ \\
+                Ausgabe: \\
+                1, falls $w \in L$ \\
+                0, falls $w \notin L$
+            \end{itemize}
+        \end{definition}
+        \begin{definition}[Dyadische dartstellung]
+            dya: $\mathbb{N} \rightarrow \{ 1, 2\}^*$ ist definiert durch
+            \begin{itemize}
+                \item dya(0) = $\varepsilon$
+                \item day(n) = $a_m \dots a_0$ falls $n \geq 1, n = \sum_{i = 0}^m
+                a_i \cdot 2^i$ und $a_0, \dots, a_m \in \{ 1, 2 \}$
+            \end{itemize}
+        \end{definition}
+        
+        \begin{eigenschaft}[k-adische Darstellung]
+            Sei $k \geq 2$
+            \begin{enumerate}
+                \item ad$_k$(kn + a) = ad$_k$(n)a für $n \geq 0$ und $a \in \{ 1, \dots k\}$
+                \item ad$_k$$^{-1}$(xa) = k $\cdot$ ad$_k$$^{-1}$(x) + a
+                für $x \in \{ 1, \dots, k\}^*, a \in \{ 1, \dots, k \}$
+            \end{enumerate}
+        \end{eigenschaft}
+
+    \section{Turing-Maschinen}
+        \begin{definition}[Turing Maschiene]
+            Sei $k \geq 1$. Eine \textbf{k-Band-Turing-Maschine} ist 
+            ein Quintupel $(\varSigma, Z, f, z_0, z_1)$ mit 
+            \begin{itemize}
+                \item $\varSigma$ ist eine endliche Menge (Alphabet)
+                \item $Z$ ist eine endliche Menge (Zustandsmenge)
+                \item $f(Z \backslash \{ z_1\}) \times \varSigma^k \rightarrow
+                Z \times \varSigma^k \times \{ L, O, R \}^k$ ist eine totale Funktion
+                (Überführungsfunktion)
+                \item $z_0 \in Z$ (Startzustand)
+                \item $z_1 \in Z$ (Stoppzustand)
+            \end{itemize}
+            $M(z, a_1 \dots a_m)$: Wort das auf Band 1 steht, alle anderen 
+            Bänder leer, und $a \in \varSigma \backslash \{ \text{Leersymbol} \}$
+        \end{definition}
+        \begin{definition}[Palindrom]
+            Ein wort $a_1 \dots a_n$ heißt symmetrisch oder auch 
+            \textbf{Palindrom}, falls $a_1 \dots a_n = a_n \dots a_1$
+        \end{definition}
 \end{document}

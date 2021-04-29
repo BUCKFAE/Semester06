@@ -52,7 +52,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(0, task3.ListGetLength(l))
         self.assertEqual(l, 2)
 
-        for i in range(0, 4):
+        for i in range(0, 1):
             l = task3.ListAppendElement(l,  i)
 
         self.assertEqual(l, 2288830)
