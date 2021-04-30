@@ -8,6 +8,7 @@
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{amsthm}
 \usepackage[T1]{fontenc}
+\usepackage{amsmath}
 
 \title{Algorithmische Graphentheorie}
 \author{Julian Schubert}
@@ -109,4 +110,45 @@
 
     \section{Handlungsreisen (TSP)}
     Lösbar mit Algorithmmus von Bellman \& Held-Karp
+
+    \section{Lineare Programmierung}
+        \begin{definition}[Knotenüberdeckung]
+            \textbf{Gegeben:} Graph $G = (V, E)$ \\
+            \textbf{Gesucht:} Knotenüberdeckung, d.h. $V' 
+            \subseteq V$, so dass jede Kante mindestens einen 
+            Endpunkt in $V'$ hat. \\
+            \textbf{Ziel:} $|V'|$ minimal
+        \end{definition}
+        \begin{definition}[Clique]
+            \textbf{Gegeben:} ungerichteter, ungewichteter Graph $G = (V, E)$ \\
+            \textbf{Gesucht:} Clique in $G$ \\
+            d.h. $V' \subseteq V$, so dass der von $V'$ induzierte Graph 
+            $G[V']$ vollständig ist (also jeder Knoten eine Verbindung 
+            zu jedem anderen Knoten hat) \\
+            Mit anderen Worten: $V' \subseteq V$, so dass für alle $\{u', v'\}
+            \in \binom{V'}{2}$ gilt $u'v' \in E$
+        \end{definition}
+
+        \begin{definition}[Fluss]
+            Sei $G = (V, E)$ ein gerichteter Graph mit $s, t \in V$. 
+            Eine funktion $f : E \rightarrow \mathbb{R}_{\geq 0}$ heißt
+            s-t-Fluss (Fluss), wenn für jeden Knoten $v \in V \backslash
+            \{ s, t \}$ gilt: 
+            \[
+                \sum_{u \in V | uv \in E} f(uv) 
+                - \sum_{w \in V vw \in E} f(vw) = 0
+            \]
+            Zufluss zum knoten V = Abfluss vom Knoten v, also der 
+            Nettozufluss muss gleich Null sein.
+        \end{definition}
+        \begin{definition}
+            Sei $G = (V, E)$ ein gerichteter Graph mit $s, t \in V$. \\
+            Seien durch $c: E \rightarrow \mathbb{R}_{\geq 0}$ Kantenkapazitäten
+            gegeben. Ein Fluss f ist zulässig, wenn für jede Kante $e \in E$ gilt:
+            \[
+                0 \leq f(e) \leq c(e)  
+            \]
+        \end{definition}
+        Der \textbf{Wert} $|f|$ eines Flusses f ist der Nettozufluss 
+        zum Knoten t.
 \end{document} 

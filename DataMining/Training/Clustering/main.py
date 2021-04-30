@@ -89,9 +89,7 @@ def get_closest_centroid(points: List[List[float]], index: int, clusters: Dict[i
     return min(clusters.keys(), key=lambda centroid: get_distance(points[index], centroid_coordinates[centroid]))
 
 def get_distance(p1: List[float], p2: List[float]) -> float:
-    upper = (sum([p1[i] * p2[i] for i in range(len(p1))]))
-    lower = (math.sqrt(sum([p1[i] ** 2 for i in range(len(p1))]) * sum([p2[i] ** 2 for i in range(len(p1))])))
-    return 1 - upper / lower
+    return 1 - (sum([p1[i] * p2[i] for i in range(len(p1))])) / (math.sqrt(sum([p1[i] ** 2 for i in range(len(p1))]) * sum([p2[i] ** 2 for i in range(len(p1))])))
 
 def get_distance2(p1: List[float], p2: List[float]) -> float:
     return math.sqrt(sum([abs(p1[d] - p2[d]) for d in range(len(p1))]))
