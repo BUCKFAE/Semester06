@@ -1,0 +1,216 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[german,vlined,longend]{algorithm2e}
+\usepackage{graphicx}
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}  
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata}
+\usepackage{listings}
+
+% --- math operators ---
+\usepackage{mathtools}
+\DeclarePairedDelimiter\set{\{}{\}} % use $\set*{1, 2, 3}$ 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceils{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\angles{\langle}{\rangle}
+\def\Oh{\ensuremath{\mathcal{O}}} % big O like $\Oh(n)$
+\def\oh{\ensuremath{\scriptstyle{\mathcal{O}}}} % small O
+% ---
+
+\begin{document}
+
+\begin{small}
+	\noindent
+	Schubert Julian, Gruppe 4 \\
+	Philipp Wahl, Gruppe 4
+\end{small}
+\bigskip
+
+\begin{center}
+	\LARGE Abgabe zum 3. Übungsblatt (AGT 21)
+\end{center}
+\smallskip
+
+\subsection*{Aufgabe 1:}
+Wir lösen die Aufgabe mit CPLEX:
+\begin{lstlisting}[frame=single]
+$ cat task.mod 
+dvar float+ x;
+dvar float+ y;
+dvar float+ z;
+
+maximize 3.6 * x - 1.7 * y + 2.2 * z;
+
+subject to {
+
+	250 * x - 480 * y + 150 * z <= 18000;
+	475 * x           + 300 * z <= 84000;
+	180 * x + 75  * y           <= 25000;
+	400 * x + 250 * y + 260 * z <= 60000;
+}
+
+execute {
+	writeln("x: ", x);
+	writeln("y: ", y);
+	writeln("z: ", z);
+}
+$ oplrun task.mod 
+
+<<< setup
+
+
+<<< generate
+
+Tried aggregator 1 time.
+No LP presolve or aggregator reductions.
+Presolve time = 0,00 sec. (0,00 ticks)
+
+Iteration log . . .
+Iteration:     1   Scaled dual infeas =      0,000000
+Iteration:     2   Dual objective     =      543,802632
+
+<<< solve
+
+
+OBJECTIVE: 418.4825
+x: 126.179
+y: 30.5046
+z: 7.31691
+
+<<< post process
+
+
+<<< done
+\end{lstlisting}
+Die optimale Lösung lautet also: \\
+x: 126.179 \\
+y: 30.5046 \\
+z: 7.31691 \\
+
+\subsection*{Aufgabe 2:}
+\paragraph{a)}
+Zunächst muss für alle Städte gelten, dass die Summe aller Kosten die eine 
+Stadt bezahl nicht größer sein darf als das Budget dieser Stadt. 
+\[
+    \forall v \in V: \sum_{\text{Zahlungen der Stadt v}}
+    \leq \text{Budget der Stadt v}    
+\]
+Zusätzlich muss aber für jede Straße gelten, dass der Teil den die eine 
+Stadt an Kosten trägt addiert mit den Kosten die die andere Stadt trägt 
+gleich den Reperaturkosten für die jeweilige Straße ist
+\[
+    \forall s \in E : \text{Teil den Stadt1 bezahlt} + 
+    \text{Teil den Stadt2 bezahlt} = \text{Kosten Reperatur für $s$}
+\]
+Wir minimieren nun einfach nach der Summe der Zahlungen aller Städte
+und erhalten unsere Zielfunktion
+\[
+    \text{minimize} \sum_{v \in V} \sum_{\text{Zahlungen der Stadt v}}
+\]
+Unsere Lösung ist korrekt da unsere erste Nebenbedingung dafür sorgt, 
+dass keine Stadt mehr bezahlt als ihr budget. Die zweite Nebenbedingung
+sorgt dafür, dass die Kosten von für jede Straße gedeckt sind.
+\paragraph{b)}
+Wir verwenden hier den selben Aufbau wie in Teilaufgabe a, allerdings 
+Ändern wie die zweite Bedingung wie folgt ab: \\
+Die Kosten für die Reperatur der Straße s wird nun gleichgesetzt mit  
+x multipliziert mit den Kosten die Stadt 1 trägt und dazu y mal die Kosten
+die Stadt zwei trägt hinzuaddiert. Wir fordern zusätzlich das x und y
+natürliche Zahlen (inklusive Null) sind und das x + y = 1 ergibt. 
+Das stellt sicher das entweder x = 0 y = 1 oder x = 1 y = 0 gelten muss,
+die Kosten für die Reperatur der Straße kann nun also nur noch von 
+einer der beiden Städte getragen werden. \\
+Unsere Lösung ist ein ganzzahliges lineares Programm da wir keine 
+Kommazahlen benötigen. 
+\paragraph{c)}
+Wir zeigen zunächst wie aus unserer Lösung ein Flussnetzwerk modelliert werden kann: \\
+Zunächst erstellen wir für jede Stadt einen Knoten, dann verbinden wir die Städte mit 
+den Straßen durch ungerichtete Kanten. Das Gewicht der Kanten ist dabei die Kosten 
+die Reperatur der jeweiligen Straße. \\
+Dann Fügen wir einen Startknoten s hinzu, dieser hat zu jeder Stadt eine gerichtete
+Kante (Start: s, Ende: Stadt). Das Gewicht dieser Kante ist dabei das Budget der 
+Jeweiligen Stadt. \\
+Wir erstellen noch einen Endknoten t, der noch keine Kanten besitzt. \\
+Nun ersetzen wir die ungerichteten Katnen zwischen zwei Städten nach folgendem Schema:
+Wir erstellen jede die ungerichtete Kante zwischen zwei Städten einen Hilfsknoten h.
+Anschließend erstellen wir gerichtete Kanten von beiden ursprünglichen Städten 
+zum Hilfsknoten h, die kapazität der Kante ist dabei beide male die Kosten 
+für die Reperatur der Straße. Dann erstellen wir noch eine gerichtete Kante vom 
+Hilfspunkt h zum Endknoten t, die Kapazität der Kante ist dabei wieder die Kosten 
+der Reperatur der Straße. \\
+Nun berechnet man den maximalen s-t-Fluss. Ist der Wert dieses Flusses gleich der 
+Summe aller Straßenreperaturen existiert eine zulässige Verteilung (die genau dem
+Fluss entspricht). Die Rückrichtung ist hier sehr einfach indem man alle Schritte
+Rückwährts ausführt, man also die gerichteten Kanten durch die entsprechenden 
+Ungerichteten ersetzt und s, t sowie alle Hilfspunkte entfernt. \\
+Unsere Lösung ist korrekt da durch die Kanten ausgehend von s zu den Städten
+sicher gestellt wird, dass keine Stadt mehr als ihr Budget zulässt bezahlen kann. \\
+Die Kosten für alle Reperaturen werden ebenfalls korrekt erfasst da diese sich 
+im maximalen s-t-Fluss befinden.
+\subsection*{Aufgabe 3:}
+\begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+	\node[state]          (s)                        {s};
+	\node[state]          (a) [below right =of s]    {a};
+	\node[state]          (b) [above right =of s]    {b};
+	\node[state]          (c) [above right =of a]    {c};
+	\node[state]          (d) [above right =of c]    {d};
+	\node[state]          (e) [below right =of c]    {e};
+	\node[state]          (t) [above right =of e]    {t};
+
+  \tikzset{mystyle/.style={->,double=orange}} 
+  \tikzset{every node/.style={fill=white}} 
+  \tikzset{mystyle/.style={->,double=black}}   
+    \path (s)     edge [mystyle]   node   {$5/5$} (b);
+    \path (s)     edge [mystyle]   node   {$5/7$} (a);
+    \path (a)     edge [mystyle]   node   {$3/3$} (e);
+    \path (a)     edge [mystyle]   node   {$2/2$} (c);
+    \path (b)     edge [mystyle]   node   {$0/3$} (a);
+    \path (b)     edge [mystyle]   node   {$5/6$} (d);
+    \path (c)     edge [mystyle]   node   {$0/6$} (b);
+    \path (c)     edge [mystyle, in = 70, out = 20]   node   {$5/5$} (e);
+    \path (d)     edge [mystyle]   node   {$2/2$} (t);
+    \path (d)     edge [mystyle]   node   {$3/4$} (c);
+    \path (e)     edge [mystyle]   node   {$0/1$} (c);
+    \path (e)     edge [mystyle]   node   {$8/8$} (t);
+\end{tikzpicture}
+\\
+Der Maximale Wert des s-t-Flusses ist hierbei 10.
+\paragraph{b)}
+Da die Kanten die in den Knoten t gehen eine maximale Kapazität von 10 haben,
+kann es keinen s-t Fluss mit einer größeren Kapazität als der von uns 
+angegebene Fluss haben (unser Fluss hat bereits den höchsten Möglichen Wert)
+
+\subsection*{Aufgabe 4}
+\paragraph{a)}
+Hat man einen einfachen Weg der länge k kann man daraus wie folgt einen s-t-Weg
+in G' bilden: \\
+Man Startet am Knoten s (den wir zu G hinzu gefügt haben), und gehen dann zum 
+ersten Knoten des einfachen Weges der länge k in G. Diese Verbindung muss 
+existieren da s (und t) jeweils zu jedem Knoten in G adjazent sind. Dann 
+geht man den Weg weiter (wie in G), am letzen Knoten geht man dann noch zu t.
+Auch diese Verbindung muss existieren da auch t adjazent zu allen Knoten 
+in G ist. So kann man also aus einem Weg der Länge k in G einen s-t-Weg der Länge 
+k +  2 in G' bilden. \\
+Rückrichtung: Man entfernt einfach s und t aus dem s-t-Weg (inklusive der 
+Kanten zu s bzw t) und erhält somit direkt den Weg der länge k - 2 in G aus 
+dem orginalen s-t-Weg in G'
+\paragraph{b)}
+Hinrichtung: \\
+Angenommen es gibt einen einfachen s-t-Weg der länge n+1 in G', dann kann 
+man daraus einen Hamiltonweg bilden. Dies ist gegeben da ein Hamiltonweg 
+ein einfacher s-t-Weg (wobei s der Start des Weges und t das ende des weges ist)
+ist, der die Länge n - 1 hat. Wie man dann aus dem 
+s-t-Weg den Hamiltonweg konstruieren kann haben wir bereits in Aufgabe 4a 
+gezeigt. \\
+Rückrichtung \\
+Aus einem Hamiltonkreis lässt sich ein s-t-Weg der Länge n+1 in G' bilden.
+Auch hier nutzen wir die Eigenschaft das ein Hamiltonweg ein einfacher Weg
+(bzw s-t-weg mit start s und ende t des Weges) mit länge n - 1 ist. Auch 
+hierzu haben wir in Aufgabe 4a gezeigt wie sich aus dem s-t-weg der Länge 
+n -1 ein s-tWeg der Länge n+1 in G' bilden lässt.
+\end{document}
