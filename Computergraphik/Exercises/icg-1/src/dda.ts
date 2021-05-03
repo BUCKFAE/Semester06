@@ -22,15 +22,6 @@ export function dda(
     var p2x = Math.round(pointB[0])
     var p2y = Math.round(pointB[1])
 
-    // Flipping so p1x is always bigger than p2x
-    if (p1x > p2x) {
-        p2x = Math.round(pointA[0])
-        p2y = Math.round(pointA[1])
-    
-        p1x = Math.round(pointB[0])
-        p1y = Math.round(pointB[1])
-    }
-
     // Slope of the line
     var m = (p2y - p1y) / (p2x - p1x)
 
@@ -38,14 +29,21 @@ export function dda(
     colorPixelBlack(data, p1x, p1y, width, height)
     colorPixelBlack(data, p2x, p2y, width, height)
 
-    // Getting b
-    var b = (m * (0 - p1x)) + p1y
+    // Getting t
+    var t = (m * (0 - p1x)) + p1y
 
-    // Drawing pixel between the start and end
-    for(var x = p1x + 1; x < p2x; x++) {
-        var newY = Math.round(m * x + b)
+    // Iterating over x to draw the line
+    for(var x = Math.min(p1x, p2x); x < Math.max(p1x, p2x); x++) {
+        var newY = Math.round(m * x + t)
         colorPixelBlack(data, x, newY, width, height)
     }
+
+    // Iterating over y to draw the line
+    for(var y = Math.min(p1y, p2y); y < Math.max(p1y, p2y); y++) {
+        var newX = Math.round((y - t) / m)
+        colorPixelBlack(data, newX, y, width, height)
+    }
+
 }
 
 // Colors the pixel at the given x / y coordinate black

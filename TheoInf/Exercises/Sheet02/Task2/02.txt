@@ -1,3 +1,7 @@
+// Julian Schubert
+// Philipp Wahl
+// Timo Schröder
+
 Wir bestimmen die berechnete Funktion von f6(x):
 
 Für x kleiner gleich null gibt die Funktion 0 zurück.
@@ -25,14 +29,33 @@ x = x - 9 - 2 * 3 - 1 = x - 16
 y = 3 + 1 = 4
 
 y ist also die größte Zahl für die gilt:
-x - summe_{i = 0}^{y} 2y - i > 0
+x - summe_{i = 0}^{y} 2y - 1 > 0
 
 Insgesamt ist die berechnete Funktion also:
 f6(x) = Die größte natürliche Zahl y, für die gilt:
-x - summe_{i = 0}^{y} 2y - i > 0
+x - summe_{i = 0}^{y} 2y - 1 > 0
+
+Wir können nun mit folständiger Induktion zeigen, dass das Ergebnis dieser
+Summe gleich n^2 ist. 
+
+Wir zeigen das für die summe von i = 1 bis n 2i - 1 gleich n^2 gilt:
+
+Induktionsvoraussetzung: sum_{i = 1}^n 2i - 1 = n^2
+
+Induktionsanfang: n = 0
+0^2 = 0, summe ist ebenfalls null (da der Start i = 1 nach dem Ende n=0 liegt)
+
+Indunktionsschrit: Die summe sei gleich n^2 für ein gegebenes n
+sum_{i=1}^{n + 1} 2i - 1 = (2 * (n + 1)) - 1 + sum_{i = 1} 2i - 1
+Durch IA:
+= (2 * (n + 1)) - 1 + n^2 = 2n + 1 + n^2 = (n + 1)^2
+
+Die Funktion f6 berechnet also die aufgerundete Wurzelfunktion
 
 
 Diese haben wir ebenfalls mit dem folgenden Python-Program validiert:
+
+import math
 
 def f6(x):
     y = 0
@@ -47,4 +70,8 @@ def predict_f6(x):
         y += 1
     return y
 
-assert all([f6(x) == predict_f6(x) for x in range(0, 200)])
+def predict_f6_2(x):
+    return math.ceil(math.sqrt(x)) if x > 0 else 0
+
+print(''.join("{}: {} {} {}\n".format(i, f6(i), predict_f6(i), predict_f6_2(i)) for i in range(0, 200)))
+assert all([f6(x) == predict_f6(x) == predict_f6_2(x) for x in range(0, 200)])
