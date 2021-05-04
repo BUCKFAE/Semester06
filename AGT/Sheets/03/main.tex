@@ -212,5 +212,17 @@ Aus einem Hamiltonkreis lässt sich ein s-t-Weg der Länge n+1 in G' bilden.
 Auch hier nutzen wir die Eigenschaft das ein Hamiltonweg ein einfacher Weg
 (bzw s-t-weg mit start s und ende t des Weges) mit länge n - 1 ist. Auch 
 hierzu haben wir in Aufgabe 4a gezeigt wie sich aus dem s-t-weg der Länge 
-n -1 ein s-tWeg der Länge n+1 in G' bilden lässt.
+n -1 ein s-tWeg der Länge n+1 in G' bilden lässt. 
+Dies funktioniert da ein s-t-weg der länge n + 1 alle Knoten im Graphen 
+besucht (wenn n die anzahl der Knoten in G ist)
+\paragraph{c)}
+Wenn das längste Pfad Problem in polynomialzeit lösbar wäre, könnte man zu jedem
+ungerichtetem graphen zwei knoten s und t hinzufügen, welceh mit jedem Knoten
+verbunden wären, und dann einen längsten pfad berechnet, der mit s startet 
+und mit t endet. Diese könnten nun wieder entfernt werden um einen hamilton 
+weg in polynomialziet zu finden. Da jedoch hamilton np-schwer ist, kann dies 
+nicht sein woraus resultiert das gegebenes Problem mindestens np schwer ist.
+Da ein hamilton weg in np berechenbar ist ist es offensichtlich möglich einen 
+längsten weg in np zu berechnen, da ein hamitlon kreis bereits ein längster
+einfacher weg ist. Also muss das längste wege Problem genau np-schwer sein.
 \end{document}
