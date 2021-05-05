@@ -151,4 +151,55 @@
         \end{definition}
         Der \textbf{Wert} $|f|$ eines Flusses f ist der Nettozufluss 
         zum Knoten t.
+
+    \section{Flussalgorithmen}
+        \begin{definition}[Kapazität eines Schnittes]
+            G Graph mit Kap. c: $E \rightarrow \mathbb{R}_{> 0}$, (S, T) s-t-Schnitt. \\
+            Dann ist c(S) := c(Raus(S)) die \text{Kapazität} von (S, T)
+        \end{definition}
+
+        \subsection{Flussvergrößernde Wege}
+            \begin{enumerate}
+                \item Residualgraph G' bilden:
+                \begin{itemize}
+                    \item Hinrichtung: Benutzte Kapazität in G
+                    \item Rückrichtung: Übrige Kapazität der Kante
+                \end{itemize}
+            \end{enumerate}
+            \begin{definition}
+                Eins s-t-Weg W in G$_f$ heißt flussvergrößernder Weg für f. \\
+                Die Residualkapatziät von W ist 
+                \[
+                    \bigtriangleup_W  := min_{e \in W} c_f(e)  
+                \]
+            \end{definition}
+            Ein zulässiger s-t-Fluss in G ist maximal $\Leftrightarrow$ es gibt 
+            keinen Flussvergrößenderen Weg in G$_f$
+        
+            \begin{definition}[Max-Flow-Min-Cut-Theorem]
+                Sei f ein zulässiger s-t-Fluss in einem gerichteten Graphen 
+                G mit Kapazitäten $c : E \rightarrow \mathbb{R}_{\geq 0}$ \\
+                Dann sind folgende Bedingugnen äquivalent:
+                \begin{enumerate}
+                    \item f ist ein maximaler Fluss in G
+                    \item G$_f$ enthält keine augmentierenden Wege
+                    \item Es gibt einen s-t-Schnitt (S, T) mit $|f| = c(S)$
+                \end{enumerate}
+                Kurz \\
+                \begin{centering}
+                    \[
+                        max_{\text{f zulässiger s-t-Fluss}} |f| 
+                        = min_{\text{(S, T) s-t-Schnitt}} c(S)
+                    \]
+                \end{centering}
+            \end{definition}
+
+        \subsection{Algorithmen}
+            \begin{definition}[FordFulkerson / EdmonsKarp]
+                Suche s-t-weg in G$_f$ und füge das dann den 
+                Kanten hinzu. \\
+                Änderung von EdmonsKarp: Muss der Kürzeste s-t-Weg sein
+            \end{definition}
+            EdmonsKarp führt O(VE) Flussvergrößerungen durch \\
+            EdmonsKarp läuft in O(VE$^2$)
 \end{document} 
