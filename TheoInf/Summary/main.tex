@@ -16,7 +16,7 @@
 
 % Definition
 \mdfdefinestyle{theoremstyle}{
-    linecolor=blue!50,
+    linecolor=blue!20,
     linewidth=2pt,
     frametitlerule=true,
     frametitlebackgroundcolor=gray!20,
@@ -53,226 +53,282 @@
 \begin{document}
 
 
-    \maketitle
-    \tableofcontents
+\maketitle
+\tableofcontents
 
-    \newpage
+\newpage
 
-    \section{Wichtige Vermutungen}
-    \begin{definition}[Goldbachsche Vermutung]
-        Jede natürliche gerade Zahl größer 2 ist Summe zweier Primzahlen
-    \end{definition}
-    \begin{definition}[Collaz-Problem (3n +1)-Vermutung]
-        \begin{itemize}
-            \item Beginne mit irgendeiner natürlichen Zahl $n > 0$
-            \item Ist n gerade, so nimm als nächstes $n // 2$ (abrundende Division)
-            \item ist n ungerade, so nimm als nächstes $3n + 1$
-            \item Wiederhole das Vorgehen mit der erhaltenen Zahl
-        \end{itemize}
-        \noindent
-        \textbf{Vermutung:} Jede so konstruierte Zahlenfolge mündet in den Zyklus
-            4, 2, 1, egal mit welcher natürlichen zahl $n > 0$ beginnt
-    \end{definition}
-    \begin{definition}[Ackermann-Funktion]
-        \textbf{Frage:} Gilt LOOP = $\{f \in$ WHILE | $f$ ist total\}? \\
-        Die folgende Funktion (auch \textbf{Ackermann-Funktion} genannt)
-        $a: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}$ ist
-        total und While-berechenbar, aber nicht Loop-berechenbar: \\
-        \begin{equation*}
-            a(n, m) = 
-            \begin{cases}
-                m + 1 & \text{falls $n = 0$} \\
-                a(n - 1, 1) & \text{falls $n > 0$ und $m = 0$} \\
-                a(n - 1, a(n, m - 1)) & \text{falls $n > 0$ und $m > 0$}
-            \end{cases}
-        \end{equation*}
-        $\Rightarrow$ Die Ackermann-Funktion ist eine totale Funktion in 
-        $WHILE-LOOP$
-    \end{definition}
+\section{Wichtige Vermutungen}
+\begin{definition}[Goldbachsche Vermutung]
+    Jede natürliche gerade Zahl größer 2 ist Summe zweier Primzahlen
+\end{definition}
+\begin{definition}[Collaz-Problem (3n +1)-Vermutung]
+    \begin{itemize}
+        \item Beginne mit irgendeiner natürlichen Zahl $n > 0$
+        \item Ist n gerade, so nimm als nächstes $n // 2$ (abrundende Division)
+        \item ist n ungerade, so nimm als nächstes $3n + 1$
+        \item Wiederhole das Vorgehen mit der erhaltenen Zahl
+    \end{itemize}
+    \noindent
+    \textbf{Vermutung:} Jede so konstruierte Zahlenfolge mündet in den Zyklus
+    4, 2, 1, egal mit welcher natürlichen zahl $n > 0$ beginnt
+\end{definition}
+\begin{definition}[Ackermann-Funktion]
+    \textbf{Frage:} Gilt LOOP = $\{f \in$ WHILE | $f$ ist total\}? \\
+    Die folgende Funktion (auch \textbf{Ackermann-Funktion} genannt)
+    $a: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}$ ist
+    total und While-berechenbar, aber nicht Loop-berechenbar: \\
+    \begin{equation*}
+        a(n, m) =
+        \begin{cases}
+            m + 1                 & \text{falls $n = 0$}             \\
+            a(n - 1, 1)           & \text{falls $n > 0$ und $m = 0$} \\
+            a(n - 1, a(n, m - 1)) & \text{falls $n > 0$ und $m > 0$}
+        \end{cases}
+    \end{equation*}
+    $\Rightarrow$ Die Ackermann-Funktion ist eine totale Funktion in
+    $WHILE-LOOP$
+\end{definition}
 
-    \begin{definition}[Hauptsatz der Algorithmentheorie]
-        $RAM = WHILE = MINIWHILE = TM$
-    \end{definition}
-    \section{Elementare Begriffe}
+\begin{definition}[Hauptsatz der Algorithmentheorie]
+    $RAM = WHILE = MINIWHILE = TM$
+\end{definition}
 
-        \subsection{Komplexitätsklassen}
-        \[
-            ALL \subset P \subset NP
-        \]
-        \begin{itemize}
-            \item \textbf{ALL:} Alle Probleme
-            \item \textbf{NP:} Probleme, deren Lösungen schnell übrprüft weden können
-                (effizient überprüfbare Probleme)
-            \item \textbf{P:} Probleme, die isch in polynomieller Zeit lösen lassen 
-                (effizient lösbare Probleme)
-        \end{itemize}
+\begin{definition}[Curch-Turing These]
+    Auch: These von Church: \\
+    Turing-Berechenbarkeit erfasst den intitiven Begriff der
+    Berechenbarkeit.
+\end{definition}
+\section{Elementare Begriffe}
 
-        \subsection{Funktionen}
-        \begin{definition}[Funktionen]
-            Seien $f: A \rightarrow B$ und $g : B \rightarrow C$ Funktionen
-            \begin{itemize}
-                \item \textbf{Definitionsbereich} von f: \\
-                $D_f = \{a \in A |$ es existiert ein $ b \in B$ mit $f(a) = b$\} \\
-                $\Rightarrow$ Alles was etwas im Wertebereich trifft
-                \item \textbf{Wertebereich} von f: \\
-                $D_f = \{a \in A |$ es existiert ein $ a \in A$ mit $f(a) = b$\} \\
-                $\Rightarrow$ alles was von etwas im Definitionsbereich 
-                getroffen wird
-                \item \textbf{Total:} $D_f = A$
-                \item \textbf{Surjektiv:} $W_f = B$
-                \item \textbf{Injektiv:} aus $a_1, a_2 \in D$ und $a_1 \neq a_2$
-                folgt $f(a_1) \neq f(a_2)$
-                \item \textbf{Bijektiv:} $f$ ist total, surjektiv und injektiv
-                \item ist $f$ injektiv, so existiert die \textbf{Umkehrfunktion}
-                $f^{-1}: B \rightarrow A$ mit $f^{-1}(b) = $ dasjenige $a  \in A$
-                mit $f(a) = b$
-            \end{itemize}
-        \end{definition}
+\subsection{Komplexitätsklassen}
+\[
+    ALL \subset P \subset NP
+\]
+\begin{itemize}
+    \item \textbf{ALL:} Alle Probleme
+    \item \textbf{NP:} Probleme, deren Lösungen schnell übrprüft weden können
+          (effizient überprüfbare Probleme)
+    \item \textbf{P:} Probleme, die isch in polynomieller Zeit lösen lassen
+          (effizient lösbare Probleme)
+\end{itemize}
 
-        \subsection{Binärdarstellung}
-        \begin{definition}
-            Jede natürliche Zahl $n \geq 1$ ist in genau einer Weise darstellbar
-            als 
-            \[
-                n = \sum_{i = 0}^m a_i \cdot 2^i
-            \]
-            mit $m \in \mathbb{N}, a_m = 1$ und $a_0, \dots, a_{m - 1} 
-            \in \{0, 1\}$.
-        \end{definition}
-        \begin{eigenschaft}[Binärdarstellung]
-            \begin{center}
-            $bin(2n + a) = bin(n)a$ für $n \geq 1$ und $a \in  \{0, 1\}$ 
-            \end{center}
-        \end{eigenschaft}
+\subsection{Funktionen}
+\begin{definition}[Funktionen]
+    Seien $f: A \rightarrow B$ und $g : B \rightarrow C$ Funktionen
+    \begin{itemize}
+        \item \textbf{Definitionsbereich} von f: \\
+              $D_f = \{a \in A |$ es existiert ein $ b \in B$ mit $f(a) = b$\} \\
+              $\Rightarrow$ Alles was etwas im Wertebereich trifft
+        \item \textbf{Wertebereich} von f: \\
+              $D_f = \{a \in A |$ es existiert ein $ a \in A$ mit $f(a) = b$\} \\
+              $\Rightarrow$ alles was von etwas im Definitionsbereich
+              getroffen wird
+        \item \textbf{Total:} $D_f = A$
+        \item \textbf{Surjektiv:} $W_f = B$
+        \item \textbf{Injektiv:} aus $a_1, a_2 \in D$ und $a_1 \neq a_2$
+              folgt $f(a_1) \neq f(a_2)$
+        \item \textbf{Bijektiv:} $f$ ist total, surjektiv und injektiv
+        \item ist $f$ injektiv, so existiert die \textbf{Umkehrfunktion}
+              $f^{-1}: B \rightarrow A$ mit $f^{-1}(b) = $ dasjenige $a  \in A$
+              mit $f(a) = b$
+    \end{itemize}
+\end{definition}
 
-        \subsection{Listencodierung}
-        Liste von Binärzahlen: $\langle x_1, \dots, x_n \rangle$ \\
-        \textbf{Anwendung:} Bits verdoppeln, 10 alss Anfangs-, Trenn- und Enmarkierung
-        \textbf{Beispiele:} \\
-        $
-            \indent \langle \rangle = bin^{-1}(10) = 2 \\
-            \indent \langle 2 \rangle = bin^{-1}(10110010) = 178 \\
-            \indent \langle 5, 3, 2 \rangle = bin^{-1}(1011001110111110110010) = 2944946
-        $
+\subsection{Binärdarstellung}
+\begin{definition}
+    Jede natürliche Zahl $n \geq 1$ ist in genau einer Weise darstellbar
+    als
+    \[
+        n = \sum_{i = 0}^m a_i \cdot 2^i
+    \]
+    mit $m \in \mathbb{N}, a_m = 1$ und $a_0, \dots, a_{m - 1}
+        \in \{0, 1\}$.
+\end{definition}
+\begin{eigenschaft}[Binärdarstellung]
+    \begin{center}
+        $bin(2n + a) = bin(n)a$ für $n \geq 1$ und $a \in  \{0, 1\}$
+    \end{center}
+\end{eigenschaft}
 
-    \section{While-Programme}
-    \begin{definition}[While-Berechenbarkeit]
-        Eine Funktion ist dann \textbf{While-Berechenbar}, falls es 
-        ein While-Programm gibt, sodass der Definitionsbereich von 
-        beiden identisch ist und der Wert für alle Eingaben übereinstimmt.
-    \end{definition}
-    \begin{definition}[Loop-Programm]
-        ein \textbf{Loop-Programm} ist ein While-Programm mit folgenden
-        Eigenschaften: 
-        \begin{itemize}
-            \item Das Programm enthält keine While-Schleifen
-            \item Aus einer Funktion können nur weiter oben deklarierte
-            Funktionen aufgerufen werden. Insbesondere sind keine 
-            Selbstaufrufe erlaubt
-            \item Das Programm enhält nur Funktionsdeklarationen mit 
-            Initialiserung
-            \item Das Programm ist für alle Eingaben definiert
-        \end{itemize}
-    \end{definition}
-    $\Rightarrow$ Alle Loop-berechenbaren Funktionen sind total.
-    \subsection{Berechnende Funktion bestimmen}
+\subsection{Listencodierung}
+Liste von Binärzahlen: $\langle x_1, \dots, x_n \rangle$ \\
+\textbf{Anwendung:} Bits verdoppeln, 10 alss Anfangs-, Trenn- und Enmarkierung
+\textbf{Beispiele:} \\
+$
+    \indent \langle \rangle = bin^{-1}(10) = 2 \\
+    \indent \langle 2 \rangle = bin^{-1}(10110010) = 178 \\
+    \indent \langle 5, 3, 2 \rangle = bin^{-1}(1011001110111110110010) = 2944946
+$
+
+\section{While-Programme}
+\begin{definition}[While-Berechenbarkeit]
+    Eine Funktion ist dann \textbf{While-Berechenbar}, falls es
+    ein While-Programm gibt, sodass der Definitionsbereich von
+    beiden identisch ist und der Wert für alle Eingaben übereinstimmt.
+\end{definition}
+\begin{definition}[Loop-Programm]
+    ein \textbf{Loop-Programm} ist ein While-Programm mit folgenden
+    Eigenschaften:
+    \begin{itemize}
+        \item Das Programm enthält keine While-Schleifen
+        \item Aus einer Funktion können nur weiter oben deklarierte
+              Funktionen aufgerufen werden. Insbesondere sind keine
+              Selbstaufrufe erlaubt
+        \item Das Programm enhält nur Funktionsdeklarationen mit
+              Initialiserung
+        \item Das Programm ist für alle Eingaben definiert
+    \end{itemize}
+\end{definition}
+$\Rightarrow$ Alle Loop-berechenbaren Funktionen sind total.
+\subsection{Berechnende Funktion bestimmen}
+\begin{enumerate}
+    \item Schauen für welche Eingabe(n) die Schleife(n) wie oft
+          ausgeführt werden
+    \item Schauen was sich mit jedem Schleifendurchlauf verändert
+\end{enumerate}
+
+
+\section{Ram-Programme}
+\begin{definition}[modifizierte Differenz]
+    \begin{equation*}
+        x \dotdiv y =  md(x, y)
+        \begin{cases}
+            x - y & \text{falls $x > y$} \\
+            0     & \text{sonst}
+        \end{cases}
+    \end{equation*}
+\end{definition}
+
+\section{Alphabete und Wörter}
+\begin{definition}[Alphabete und Wörter]
+    \begin{itemize}
+        \item Ein \textbf{Alphabet} ist eine endliche, nichtleere Menge
+        \item Die Elemente eines Alphabets werden \textbf{Buchstaben}
+              oder \textbf{Symbole} genannt
+        \item Ein \textbf{Wort über einem Alphabet $\varSigma$} ist eine
+              endliche Folge von 0 oder mehr Elementen aus $\varSigma$
+        \item das \textbf{leere Wort} (d.h. das Wort, das aus 0 Buchstaben)
+              besteht bezeichnen wir mit $\varepsilon$
+    \end{itemize}
+\end{definition}
+\begin{definition}[Mengen von Wörtern]
+    Sei $\varSigma$ ein Alphabet, $n \geq 0$ und $a_1, a_2, \dots a_n
+        \in \varSigma$
+    \begin{itemize}
+        \item Die \textbf{Länge eines Wortes} w $a_1a_2\dots a_n$ ist
+              $|w| = n$
+        \item \textbf{Menge aller Wörter mit Länge n:} \\
+              $\varSigma^n = \{ w | w \text{ ist ein Wort über $\varSigma$
+                      mit $|w| = n$} \}$ \\
+              Es gilt $\varSigma^0 = \{ \varepsilon \}$
+        \item \textbf{Menge aller Wörter:} \\
+              $\varSigma^* = \{ w | w \text{ ist ein Wort über $\varSigma$}\}
+                  = \bigcup_{u\geq 0} \varSigma^n \text{ und } \varSigma^+
+                  = \varSigma^* \backslash \{ \varepsilon \} $
+        \item eine \textbf{formale Sprache über} $\varSigma$ ist
+              eine Teilmenge von $\varSigma^*$
+        \item Das \textbf{Entscheidungsproblem} einer formalen Sprache
+              $L \subseteq \varSigma^*$ ist folgende Aufagbe: \\
+              Eingabe: $w \in \varSigma^*$ \\
+              Ausgabe: \\
+              1, falls $w \in L$ \\
+              0, falls $w \notin L$
+    \end{itemize}
+\end{definition}
+\begin{definition}[Dyadische dartstellung]
+    dya: $\mathbb{N} \rightarrow \{ 1, 2\}^*$ ist definiert durch
+    \begin{itemize}
+        \item dya(0) = $\varepsilon$
+        \item day(n) = $a_m \dots a_0$ falls $n \geq 1, n = \sum_{i = 0}^m
+                  a_i \cdot 2^i$ und $a_0, \dots, a_m \in \{ 1, 2 \}$
+    \end{itemize}
+\end{definition}
+
+\begin{eigenschaft}[k-adische Darstellung]
+    Sei $k \geq 2$
     \begin{enumerate}
-        \item Schauen für welche Eingabe(n) die Schleife(n) wie oft 
-        ausgeführt werden
-        \item Schauen was sich mit jedem Schleifendurchlauf verändert
+        \item ad$_k$(kn + a) = ad$_k$(n)a für $n \geq 0$ und $a \in \{ 1, \dots k\}$
+        \item ad$_k$$^{-1}$(xa) = k $\cdot$ ad$_k$$^{-1}$(x) + a
+                      für $x \in \{ 1, \dots, k\}^*, a \in \{ 1, \dots, k \}$
     \end{enumerate}
+\end{eigenschaft}
 
+\section{Turing-Maschinen}
+\begin{definition}[Turing Maschiene]
+    Sei $k \geq 1$. Eine \textbf{k-Band-Turing-Maschine} ist
+    ein Quintupel $(\varSigma, Z, f, z_0, z_1)$ mit
+    \begin{itemize}
+        \item $\varSigma$ ist eine endliche Menge (Alphabet)
+        \item $Z$ ist eine endliche Menge (Zustandsmenge)
+        \item $f(Z \backslash \{ z_1\}) \times \varSigma^k \rightarrow
+                  Z \times \varSigma^k \times \{ L, O, R \}^k$ ist eine totale Funktion
+              (Überführungsfunktion)
+        \item $z_0 \in Z$ (Startzustand)
+        \item $z_1 \in Z$ (Stoppzustand)
+    \end{itemize}
+    $M(z, a_1 \dots a_m)$: Wort das auf Band 1 steht, alle anderen
+    Bänder leer, und $a \in \varSigma \backslash \{ \text{Leersymbol} \}$
+\end{definition}
+\begin{definition}[Palindrom]
+    Ein wort $a_1 \dots a_n$ heißt symmetrisch oder auch
+    \textbf{Palindrom}, falls $a_1 \dots a_n = a_n \dots a_1$
+\end{definition}
 
-    \section{Ram-Programme}
-    \begin{definition}[modifizierte Differenz]
-        \begin{equation*}
-            x \dotdiv y =  md(x, y)
-            \begin{cases}
-                x - y & \text{falls $x > y$} \\
-                0 & \text{sonst}
-            \end{cases}
-        \end{equation*}
-    \end{definition}
+\section{Laufzeit von Algorithmen}
+\begin{definition}[Länge einer Zahl]
+    \[
+        |x| = |dya(abs(x))|
+    \]
+\end{definition}
 
-    \section{Alphabete und Wörter}
-        \begin{definition}[Alphabete und Wörter]
-            \begin{itemize}
-                \item Ein \textbf{Alphabet} ist eine endliche, nichtleere Menge
-                \item Die Elemente eines Alphabets werden \textbf{Buchstaben}
-                oder \textbf{Symbole} genannt
-                \item Ein \textbf{Wort über einem Alphabet $\varSigma$} ist eine
-                endliche Folge von 0 oder mehr Elementen aus $\varSigma$
-                \item das \textbf{leere Wort} (d.h. das Wort, das aus 0 Buchstaben)
-                besteht bezeichnen wir mit $\varepsilon$ 
-            \end{itemize}
-        \end{definition}
-        \begin{definition}[Mengen von Wörtern]
-            Sei $\varSigma$ ein Alphabet, $n \geq 0$ und $a_1, a_2, \dots a_n 
-            \in \varSigma$
-            \begin{itemize}
-                \item Die \textbf{Länge eines Wortes} w $a_1a_2\dots a_n$ ist 
-                $|w| = n$
-                \item \textbf{Menge aller Wörter mit Länge n:} \\
-                $\varSigma^n = \{ w | w \text{ ist ein Wort über $\varSigma$ 
-                mit $|w| = n$} \}$ \\
-                Es gilt $\varSigma^0 = \{ \varepsilon \}$
-                \item \textbf{Menge aller Wörter:} \\
-                $\varSigma^* = \{ w | w \text{ ist ein Wort über $\varSigma$}\}
-                = \bigcup_{u\geq 0} \varSigma^n \text{ und } \varSigma^+ 
-                = \varSigma^* \backslash \{ \varepsilon \} $
-                \item eine \textbf{formale Sprache über} $\varSigma$ ist 
-                eine Teilmenge von $\varSigma^*$ 
-                \item Das \textbf{Entscheidungsproblem} einer formalen Sprache
-                $L \subseteq \varSigma^*$ ist folgende Aufagbe: \\
-                Eingabe: $w \in \varSigma^*$ \\
-                Ausgabe: \\
-                1, falls $w \in L$ \\
-                0, falls $w \notin L$
-            \end{itemize}
-        \end{definition}
-        \begin{definition}[Dyadische dartstellung]
-            dya: $\mathbb{N} \rightarrow \{ 1, 2\}^*$ ist definiert durch
-            \begin{itemize}
-                \item dya(0) = $\varepsilon$
-                \item day(n) = $a_m \dots a_0$ falls $n \geq 1, n = \sum_{i = 0}^m
-                a_i \cdot 2^i$ und $a_0, \dots, a_m \in \{ 1, 2 \}$
-            \end{itemize}
-        \end{definition}
-        
-        \begin{eigenschaft}[k-adische Darstellung]
-            Sei $k \geq 2$
-            \begin{enumerate}
-                \item ad$_k$(kn + a) = ad$_k$(n)a für $n \geq 0$ und $a \in \{ 1, \dots k\}$
-                \item ad$_k$$^{-1}$(xa) = k $\cdot$ ad$_k$$^{-1}$(x) + a
-                für $x \in \{ 1, \dots, k\}^*, a \in \{ 1, \dots, k \}$
-            \end{enumerate}
-        \end{eigenschaft}
-
-    \section{Turing-Maschinen}
-        \begin{definition}[Turing Maschiene]
-            Sei $k \geq 1$. Eine \textbf{k-Band-Turing-Maschine} ist 
-            ein Quintupel $(\varSigma, Z, f, z_0, z_1)$ mit 
-            \begin{itemize}
-                \item $\varSigma$ ist eine endliche Menge (Alphabet)
-                \item $Z$ ist eine endliche Menge (Zustandsmenge)
-                \item $f(Z \backslash \{ z_1\}) \times \varSigma^k \rightarrow
-                Z \times \varSigma^k \times \{ L, O, R \}^k$ ist eine totale Funktion
-                (Überführungsfunktion)
-                \item $z_0 \in Z$ (Startzustand)
-                \item $z_1 \in Z$ (Stoppzustand)
-            \end{itemize}
-            $M(z, a_1 \dots a_m)$: Wort das auf Band 1 steht, alle anderen 
-            Bänder leer, und $a \in \varSigma \backslash \{ \text{Leersymbol} \}$
-        \end{definition}
-        \begin{definition}[Palindrom]
-            Ein wort $a_1 \dots a_n$ heißt symmetrisch oder auch 
-            \textbf{Palindrom}, falls $a_1 \dots a_n = a_n \dots a_1$
-        \end{definition}
-
-    \section{Laufzeit von Algorithmen}
-        \begin{definition}[Länge einer Zahl]
-            \[
-                |x| = |dya(abs(x))| 
-            \] 
-        \end{definition}
+\section{Entscheidbarkeit und Aufzählbarkeit}
+\begin{definition}[Entscheidungsalgorithmus]
+    Entscheidungsalgorithmus für eine Menge A: \\
+    \indent Eingabe x $\Rightarrow$ Ausgabe
+    $ 
+    \begin{cases}
+        1 \text{ (ja),} & \text{falls } x \in A \\
+        0 \text{ (nein),} & \text{falls } x \notin A
+      \end{cases}   
+    $ \\
+    Dies ist die berechnung der \textbf{charakteristischen Funktion}
+    von A ($c_A(x)$).
+\end{definition}
+\textbf{Semicharakteristische Funktion}: \\
+Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
+\begin{definition}[Entscheidbarkeit]
+    Seien $n \geq 0$ und $t: \mathbb{N} \rightarrow \mathbb{N}$ eine 
+    totale Funktion:
+    \begin{itemize}
+        \item $A \subseteq \mathbb{N}^n$ heißt \textbf{entscheidbar}
+        $\Leftrightarrow$ $c_A$ ist berechenbar
+        \item $A \subseteq \mathbb{N}^n$ heißt \textbf{semientscheidbar}
+        $\Leftrightarrow$ $\chi_A(x)$ ist berechenbar
+        \item \textbf{REC} $= \{ A | \exists n\geq 0 \text{ mit } A 
+        \subseteq \mathbb{N}^n \text{ und A ist entscheidbar}\}$ 
+        (recursive languages), also alle berechenbaren Mengen
+        \item Ein Algorithmus \textbf{M entscheidet A} $\subseteq 
+        \mathbb{N}^n$ \textbf{in der Zeit t (bzw. O(t))} $\Leftrightarrow$
+        M berechnet $c_A$ in der Zeit t (bzw. O(t))
+    \end{itemize}
+\end{definition}
+\begin{eigenschaft}
+    Fär $A \subseteq \mathbb{N}^n$ gilt: \\
+    \begin{center}
+        A entscheidbar $\Leftrightarrow$ A und $\bar{A}$ semientscheidbar
+    \end{center}
+\end{eigenschaft}
+\begin{definition}[Aufzählbarkeit]
+    $A \subseteq \mathbb{N}^n$ mit $n \geq 0$ heißt \textbf{rekursiv aufzählbar}
+    (kurz: aufzählbar) $\Leftrightarrow$ $A = \emptyset$ oder es gibt ein
+    berechenbares, totales $f: \mathbb{N} \rightarrow \mathbb{N}^n$ mit 
+    $W_f = A$ \\
+    \textbf{RE} Alle Mengen die Aufzählbar sind
+\end{definition}
+\begin{eigenschaft}
+    Für $m, n \geq 0$ gilt: \\
+    \indent $f: \mathbb{N}^m \rightarrow \mathbb{N}^n$ berechenbar, total
+    $\Rightarrow$ $W_F$ ist aufzählbar
+\end{eigenschaft}
 \end{document}
