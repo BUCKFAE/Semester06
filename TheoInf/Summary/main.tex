@@ -316,7 +316,10 @@ Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
 \begin{eigenschaft}
     Fär $A \subseteq \mathbb{N}^n$ gilt: \\
     \begin{center}
-        A entscheidbar $\Leftrightarrow$ A und $\bar{A}$ semientscheidbar
+        A entscheidbar $\Leftrightarrow$ A und $\bar{A}$ semientscheidbar \\
+        A entscheidbar $\Leftrightarrow$ A und $\bar{A}$ aufzählbar \\
+        A aufzählbar $\Leftrightarrow$ $B \subseteq \mathbb{N}^n \times \mathbb{N}$
+        mit $A = Pr(B)$
     \end{center}
 \end{eigenschaft}
 \begin{definition}[Aufzählbarkeit]
@@ -331,4 +334,21 @@ Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
     \indent $f: \mathbb{N}^m \rightarrow \mathbb{N}^n$ berechenbar, total
     $\Rightarrow$ $W_F$ ist aufzählbar
 \end{eigenschaft}
+\begin{eigenschaft}
+    Für A $\subseteq \mathbb{N}^n$ sind folgende Aussagen äquivalent
+    \begin{enumerate}
+        \item A ist aufzählbar
+        \item A ist semientscheidbar
+        \item A ist Definitionsbereich einer berechenbaren Funktion
+        $f: \mathbb{N}^n \rightarrow \mathbb{N}^m$ mit $m \geq 0$
+        \item A ist Wertebereich einer berechenbaren Funktion
+        $g: \mathbb{N}^m \rightarrow \mathbb{N}^n$ mit $m \geq 0$
+    \end{enumerate}
+\end{eigenschaft}
+\begin{definition}[Projektion]
+    Die \textbf{Projektion} einer Menge \\
+    $B \subseteq \mathbb{N}^n \times \mathbb{N}$ ist definiert als $Pr(B) =
+    \{ x \in \mathbb{N}^n | \exists y \in \mathbb{N}[(x, y) \in B ]\}$
+\end{definition}
+
 \end{document}
