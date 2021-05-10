@@ -1,0 +1,150 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[german,vlined,longend]{algorithm2e}
+\usepackage{graphicx}
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}  
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata}
+\usepackage{listings}
+
+% --- math operators ---
+\usepackage{mathtools}
+\DeclarePairedDelimiter\set{\{}{\}} % use $\set*{1, 2, 3}$ 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceils{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\angles{\langle}{\rangle}
+\def\Oh{\ensuremath{\mathcal{O}}} % big O like $\Oh(n)$
+\def\oh{\ensuremath{\scriptstyle{\mathcal{O}}}} % small O
+% ---
+
+\begin{document}
+
+\begin{small}
+    \noindent
+    Schubert Julian, Gruppe 4 \\
+    Philipp Wahl, Gruppe 4
+\end{small}
+\bigskip
+
+\begin{center}
+    \LARGE Abgabe zum 4. Übungsblatt (AGT 21)
+\end{center}
+\smallskip
+
+\subsection*{Aufgabe 2:}
+
+\paragraph{b)}
+Wir modellieren das Problem wie folgt: Wir erstellen zunächst einen Knoten s und einen Knoten
+t. Dann erstellen wir wie in der Skizze für n = 5 gezeigt jeden Knoten zwei mal (einmal mit
+Index 1 und einmal mit index zwei). Dann Verbinen wir s mit jeden Knoten in der Ersten Spalte,
+die Kantenkapazitäten sind dabei die entsprechenden Werte aus a. Dann wird jeder Knoten aus
+der zweiten Spalte mit t verbunden, die Kantenkapazitäten sind hierbei die entsprechenden
+Werte aus e. \\
+Im letzen Schritt erstellen wir eine Kante von jedem Knoten aus der ersten Reihe zu jedem
+Knoten aus der zweiten Reihe (außer wie an der Skizze gezeigt zu sich selbst). Die
+Kapazität dieser Kanten ist dabe immer 1. In der Skizze haben wir dies zur Übersicht
+nur für den Ersten Knoten durchgeführt. \\
+Nun sucht man einen maximalen s-t-Fluss. Wenn
+\[
+    \sum_{a_i \in a} a_i = \textbf{ Wert des maximalen s-t-Flusses}
+\]
+gilt, so kann man einen Graphen mit der geforderten Eigenschaft konstruieren. \\
+Die Korrektheit ergibt sich wie folgt: \\
+Aus dem Knoten $v_i$ müssen genau $a_i$ Kanten rausführen. Wenn der Graph vollständig ist
+ergibt sich $a_i = n - 1$, also werden alle Kantenkapazitäten voll ausgeschöpft. Wenn eine
+Kante nicht benötigt wird (um die Flusserhaltung zu gewährleisten) wird die Kante im
+s-t-Fluss nicht benutzt (0 / 1). Unser Konstrukt sorgt ebenfalls dafür, dass in dem Knoten
+$v_i$ genau $e_i$ Kanten hinein führen (da $e_i$-viele Kanten die volle Kapazität nutzen). \\
+Den entsprechenden Graphen kann man also Bilden, indem man für jede Kante von $v_{i1}$ nach
+$v_{j2}$ schaut, ob diese die volle Kapazität (also 1) benutzt. Ist dies der Fall, wird
+sie zum Graphen hinzugefügt. Da die Flusserhaltung nicht verletzt ist werden auch die
+geforderten Eingangs- / Ausgangsgrade eingehalten.
+\begin{figure}
+    \begin{centering}
+
+        \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                               {s};
+
+            \node[state]          (v3)    [right =of s]     {$v3_1$};
+            \node[state]          (v2)    [above =of v3]     {$v2_1$};
+            \node[state]          (v1)    [above =of v2]     {$v1_1$};
+            \node[state]          (v4)    [below =of v3]     {$v4_1$};
+            \node[state]          (v5)    [below =of v4]     {$v5_1$};
+
+            \node[state]          (v31)    [right =of v3]     {$v3_2$};
+            \node[state]          (v21)    [right =of v2]     {$v2_2$};
+            \node[state]          (v11)    [right =of v1]     {$v1_2$};
+            \node[state]          (v41)    [right =of v4]     {$v4_2$};
+            \node[state]          (v51)    [right =of v5]     {$v5_2$};
+
+            \node[state]          (t)      [right =of v31]     {t};
+            \tikzset{mystyle/.style={->,double=orange}}
+            \tikzset{every node/.style={fill=white}}
+            \tikzset{mystyle/.style={->,double=black}}
+
+            \path (s)     edge [mystyle]   node   {$a_1$} (v1);
+            \path (s)     edge [mystyle]   node   {$a_2$} (v2);
+            \path (s)     edge [mystyle]   node   {$a_3$} (v3);
+            \path (s)     edge [mystyle]   node   {$a_4$} (v4);
+            \path (s)     edge [mystyle]   node   {$a_5$} (v5);
+
+            \path (v1)     edge [mystyle]   node   {$1$} (v21);
+            \path (v1)     edge [mystyle]   node   {$1$} (v31);
+            \path (v1)     edge [mystyle]   node   {$1$} (v41);
+            \path (v1)     edge [mystyle]   node   {$1$} (v51);
+
+            \path (v11)     edge [mystyle]   node   {$e_1$} (t);
+            \path (v21)     edge [mystyle]   node   {$e_2$} (t);
+            \path (v31)     edge [mystyle]   node   {$e_3$} (t);
+            \path (v41)     edge [mystyle]   node   {$e_4$} (t);
+            \path (v51)     edge [mystyle]   node   {$e_5$} (t);
+
+        \end{tikzpicture}
+    \end{centering}
+    \caption{Skizze für n = 5}
+\end{figure}
+\section*{Aufgabe 3}
+\paragraph{a)}
+\begin{figure}
+    \begin{centering}
+        \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                               {s};
+
+            \node[state]          (v1)    [right =of s]     {$0$};
+            \node[state]          (v2)    [below =of v1]     {$-10$};
+            \node[state]          (v3)    [above =of v1]     {$10$};
+
+
+            \node[state]          (t)      [right =of v1]     {t};
+            \tikzset{mystyle/.style={->,double=orange}}
+            \tikzset{every node/.style={fill=white}}
+            \tikzset{mystyle/.style={->,double=black}}
+
+            \path (s)     edge [mystyle]   node   {$10/10$} (v2);
+            \path (v3)     edge [mystyle]   node   {$10/10$} (t);
+            \path (v2)     edge [mystyle]   node   {$10/20$} (v1);
+            \path (v1)     edge [mystyle]   node   {$10/20$} (v3);
+
+
+
+        \end{tikzpicture}
+        \caption{Skizze für zwei Knoten die sich ausgleichen}
+    \end{centering}
+\end{figure}
+Ein Knoten mit negativem Bedarf bedeutet, dass er im Graphen G mehr abgeben kann als er aufnimmt.
+Wir fügen zu unserem bestehenden Graphen G noch die Knoten s und t hinzu. Hat ein Knoten einen 
+negativen Bearf, fügen wir eine Kante von s zu diesem Knoten hinzu. die Kapatzität der Kante 
+ist dabei abs(bedarf). Hat ein Knoten einen positiven Bedarf fügen wir eine Kante von diesem 
+Knoten zum Knoten t hinzu, die Kapazität ist hierbei wieder der Bedarf des Knotens. Gibt es 
+nun einen s-t-Fluss mit Wert gleich der Summe aller Knotenkapazitäten so können alle Knoten 
+mit negativem Bedarf die Knoten mit positivem Bedarf ausgleichen.
+\paragraph{b)}
+Unsere Lösung ist korrekt da wenn es einen wie oben konstruierten s-t-Fluss gibt, dann 
+gibt es einen b-fluss. Die Kapatzitäten aller Kanten ist dabei genau die des orgeinalen Graphen
+aus der Skizze.
+\end{document}
