@@ -350,5 +350,40 @@ Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
     $B \subseteq \mathbb{N}^n \times \mathbb{N}$ ist definiert als $Pr(B) =
     \{ x \in \mathbb{N}^n | \exists y \in \mathbb{N}[(x, y) \in B ]\}$
 \end{definition}
-
+\begin{definition}[Reduzierbarkeit]
+    Seien $A \subseteq \mathbb{N}^n$ und $B \subseteq \mathbb{N}^n$. \\
+    \textbf{A ist reduzierbar auf B} $\Leftrightarrow$ es gibt ein totales,
+    berechenbares $f: \mathbb{N}^m \rightarrow \mathbb{N}^n$ sodass für 
+    alle $x \in \mathbb{N}^m$ gilt: 
+    \[
+        x \in A \Leftrightarrow f(x) \in B  
+    \]
+    Die Äquivalenz ist gleichbedeutend mit den Aussagen $c_A = c_b \circ
+    f$ und $\chi_A = \chi_B \circ f$ 
+\end{definition}
+\begin{eigenschaft}
+    Seien $A \subseteq \mathbb{N}^m$ und $B \subseteq \mathbb{N}^n$. Falls
+    A reduzierbar auf B ist, so gelten folgende Implikationen: 
+    \\
+    $
+        B \in REC \Rightarrow B \in REC \\  
+        B \in RE \Rightarrow A \in RE
+    $
+\end{eigenschaft}
+\begin{definition}[Gödelisierung]
+    Skritp ab Seite 172, Rams werden als Liste codiert.
+\end{definition}
+\begin{definition}[Halteproblem]
+    $K_0 = \{ x | M_x \text{ hält bei Eingabe x}\}$ 
+        \textbf{spezielles Halteproblem} \\
+    $K = \{ (x, y) | M_x \text{ hält bei Eingabe y}\}$ 
+        \textbf{allgemeines Halteproblem} \\
+    $\Rightarrow$ wir geben der Maschiene ihren eigenen Quellcode 
+    als Eingabe \\
+    $K_0$ ist aufzählbar, aber nicht entscheidbar
+\end{definition}
+\begin{definition}[Satz von Rice]
+    Die Frage, ob die von einem gegebenen Quelltext berechnete Funktion
+    eine Eigenschaft S hat, lässt sich nicht algorithmisch lösen
+\end{definition}
 \end{document}
