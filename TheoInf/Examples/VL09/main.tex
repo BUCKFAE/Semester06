@@ -1,0 +1,28 @@
+\documentclass{article}
+% General document formatting
+\usepackage[margin=0.7in]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Related to math
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+\begin{document}
+Anwendung Satz von Rice: \\
+Sei $\varphi : \mathbb{N}^n \rightarrow \mathbb{N}$ berechenbar \\
+$A = \{ i | M_i \text{ berechnet } \varphi\}$ \\
+$A = \{ i | \text{ die von $M_i$ berechnete Funktion } \mathbb{N}^n
+\rightarrow \mathbb{N} \text{ ist } \varphi\}$ \\
+$A = \{ i | \text{ die von $M_i$ berechnete Funktion } \mathbb{N}^n
+\rightarrow \mathbb{N} \text{ liegt in } S \}$ \\
+$A = I(S)$, wobei $S = \{ \varphi \}$ \\
+Es gilt: $S \neq \emptyset$ und $S \subsetneq \{ \psi | \psi 
+\mathbb{N}^n \rightarrow \mathbb{N} \text{ berechenbar} \}$ \\
+$Rightarrow$ Satz von Rice zeigt I(S) ist unentscheidbar, und somit auch A \\
+
+Zweites Beispiel: VL 09 Minute 17
+\end{document}
+

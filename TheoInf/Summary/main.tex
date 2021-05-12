@@ -384,6 +384,33 @@ Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
 \end{definition}
 \begin{definition}[Satz von Rice]
     Die Frage, ob die von einem gegebenen Quelltext berechnete Funktion
-    eine Eigenschaft S hat, lässt sich nicht algorithmisch lösen
+    eine Eigenschaft S hat, lässt sich nicht Algorithmisch lösen
+\end{definition}
+\begin{definition}
+    Seien $\mathbb{G}$ eine Grundmenge, $A \subseteq \mathbb{G}$
+    und $t: \mathbb{N} \rightarrow \mathbb{N}$ eine totale Funktion
+    \begin{itemize}
+        \item A heißt \textbf{entscheidbar} $\Leftrightarrow$ $c_A :
+        \mathbb{G} \rightarrow \{ 0, 1\}$ ist berechenbar
+        \item A heißt \textbf{semientscheidbar} $\Leftrightarrow$ $\chi_A :
+        \mathbb{G} \rightarrow \{ 0, 1\}$ ist berechenbar 
+        \item A heißt \textbf{rekursiv aufzählbar} (kurz: aufzählbar) 
+        $\Leftrightarrow$ $A = \emptyset$ oder es gibt ein berechenbares,
+        totales $f: \mathbb{N} \rightarrow \mathbb{G}$ mit $W_f = A$
+    \end{itemize}
+\end{definition}
+
+\section{Endliche Automaten}
+\begin{definition}[Deterministischer endlicher Automat]
+    Ein \textbf{deterministischer endlicher Automat (DEA)} ist ein 
+    Quintupel $(\varSigma, Z, \delta, z_0, F)$ mit folgenden Eigenschaften:
+    \begin{itemize}
+        \item $\varSigma$ ist eine endliche, nichtleere Menge (Eingabealphabet)
+        \item $Z$ ist eine endliche Menge (Zustandsmenge)
+        \item $\delta$ ist eine totale Funktion $Z \times \varSigma \rightarrow Z$
+        (Überführungsfunktion)
+        \item $z_0 \in Z$ (Startzustand)
+        \item $F \subseteq Z$ (Menge der akzeptierenden Zustände)
+    \end{itemize}
 \end{definition}
 \end{document}
