@@ -52,154 +52,209 @@
 \begin{document}
 
 
-    \maketitle
-    \tableofcontents
+\maketitle
+\tableofcontents
 
-    \newpage
-    \section{Wichtige Begriffe}
-    \begin{definition}
-        Ein gerichteter Graph $G$ ist \textbf{schwach} zusammenhängend
-        wenn der darunterliegende ungerichtete Graph zusammenhängend 
-        ist \\
-        Ein gerichteter Graph $G$ ist \textbf{stark} zusammenhängend
-        wenn es für jedes Knotenpaar $(u, v)$ einen gerichteten Weg 
-        von $u$ nach $v$ gibt
-    \end{definition}
+\newpage
+\section{Wichtige Begriffe}
+\begin{definition}
+    Ein gerichteter Graph $G$ ist \textbf{schwach} zusammenhängend
+    wenn der darunterliegende ungerichtete Graph zusammenhängend
+    ist \\
+    Ein gerichteter Graph $G$ ist \textbf{stark} zusammenhängend
+    wenn es für jedes Knotenpaar $(u, v)$ einen gerichteten Weg
+    von $u$ nach $v$ gibt
+\end{definition}
+\begin{definition}[bipartiter Graph]
+    Ein Graph G wird as bipartit bezeichnet, wenn sich seine Knoten
+    in zwei disjunkte Teilmengen A und B aufteilen lassen. Zwischen
+    Den Knoten innerhalb dieser Teilmengen dürfen also keine Kanten
+    existieren.
+\end{definition}
+\section{Eulerkreise}
+\begin{definition}[Eulerkreis]
+    Sei $G$ ein (un-)gerichteter Grpah. \\
+    Ein Eulerkreis (-weg) in
+    $G$ ist ein Kreis (Weg), der jede \textbf{Kante} genau
+    einmal durchläuft. \\
+    Ein Graph heißt \textbf{eulersch}, falls er einen
+    Eulerkreis enthält
+\end{definition}
+Ein Graph der nur einen Eulerweg aber keinen Eulerkreis
+enthält, ist nicht eulersch!
+\begin{eigenschaft}[Satz von Euler]
+    Sei $G$ ein ungerichteter und zsh. Graph.  \\
+    Dann gilt:
+    $G$ eulersch $\Leftrightarrow$ alle Knoten haben geraden Grad
+\end{eigenschaft}
+Bei gerichteten Graphen: indeg($v$) = outdeg($v$)
+\subsection{Eulerkreis finden}
+Man kann in $O(E)$ testen on G eulersch ist (Knotengrade zählen) \\
+Eulerkreis finden: \\
+Verwalte in jedem Knoten $v$ eien zeiger curr[$v$], der auf
+den ersten unbenutzten Nachbarn $w$ zeigt
 
-    \section{Eulerkreise}
-    \begin{definition}[Eulerkreis]
-        Sei $G$ ein (un-)gerichteter Grpah. \\
-        Ein Eulerkreis (-weg) in 
-        $G$ ist ein Kreis (Weg), der jede \textbf{Kante} genau 
-        einmal durchläuft. \\
-        Ein Graph heißt \textbf{eulersch}, falls er einen 
-        Eulerkreis enthält
-    \end{definition}
-    Ein Graph der nur einen Eulerweg aber keinen Eulerkreis 
-    enthält, ist nicht eulersch!
-    \begin{eigenschaft}[Satz von Euler]
-        Sei $G$ ein ungerichteter und zsh. Graph.  \\
-        Dann gilt:
-        $G$ eulersch $\Leftrightarrow$ alle Knoten haben geraden Grad
-    \end{eigenschaft}
-    Bei gerichteten Graphen: indeg($v$) = outdeg($v$)
-    \subsection{Eulerkreis finden}
-        Man kann in $O(E)$ testen on G eulersch ist (Knotengrade zählen) \\
-        Eulerkreis finden: \\
-        Verwalte in jedem Knoten $v$ eien zeiger curr[$v$], der auf 
-        den ersten unbenutzten Nachbarn $w$ zeigt
-    
-    \section{Hamiltonkreise}
-    \begin{definition}[Hamiltonkreis NP-schwer]
-        Sei $G$ ein (un-)gerichteter Graph. Ein Hamiltonkreis (-weg)
-        in $G$ ist ein Kreis (Weg), der jeden \textbf{Knoten} genau
-        einmal durchläuft.
-    \end{definition}
-    \begin{eigenschaft}[Satz von Bondy und Chvátal]
-        Sei $G = (V, E)$ ein ungerichteter Graph mit $|V| \geq 3$ \\
-        Seien $u$ und $v$ nicht-adjazente Knoen von G mit deg($u$)
-        + deg($v$) $\geq n$ := |V|. Dann gilt: \\
-        \indent G hamiltons $\Leftrightarrow$ G + $uv$ hamitlonsch 
-    \end{eigenschaft}
-    \begin{eigenschaft}[Satz von Dirac]
-        Sei G = (V, E) ein ungerichteter Graph mit |V| $\geq$ 3.
-        Falls jeder Knoten von G Grad $\geq$ |V| / 2 hat, so ist 
-        G hamiltonsch
-    \end{eigenschaft}
-    TODO: Beweisen
+\section{Hamiltonkreise}
+\begin{definition}[Hamiltonkreis NP-schwer]
+    Sei $G$ ein (un-)gerichteter Graph. Ein Hamiltonkreis (-weg)
+    in $G$ ist ein Kreis (Weg), der jeden \textbf{Knoten} genau
+    einmal durchläuft.
+\end{definition}
+\begin{eigenschaft}[Satz von Bondy und Chvátal]
+    Sei $G = (V, E)$ ein ungerichteter Graph mit $|V| \geq 3$ \\
+    Seien $u$ und $v$ nicht-adjazente Knoen von G mit deg($u$)
+    + deg($v$) $\geq n$ := |V|. Dann gilt: \\
+    \indent G hamiltons $\Leftrightarrow$ G + $uv$ hamitlonsch
+\end{eigenschaft}
+\begin{eigenschaft}[Satz von Dirac]
+    Sei G = (V, E) ein ungerichteter Graph mit |V| $\geq$ 3.
+    Falls jeder Knoten von G Grad $\geq$ |V| / 2 hat, so ist
+    G hamiltonsch
+\end{eigenschaft}
+TODO: Beweisen
 
-    \section{Handlungsreisen (TSP)}
-    Lösbar mit Algorithmmus von Bellman \& Held-Karp
+\section{Handlungsreisen (TSP)}
+Lösbar mit Algorithmmus von Bellman \& Held-Karp
 
-    \section{Lineare Programmierung}
-        \begin{definition}[Knotenüberdeckung]
-            \textbf{Gegeben:} Graph $G = (V, E)$ \\
-            \textbf{Gesucht:} Knotenüberdeckung, d.h. $V' 
-            \subseteq V$, so dass jede Kante mindestens einen 
-            Endpunkt in $V'$ hat. \\
-            \textbf{Ziel:} $|V'|$ minimal
-        \end{definition}
-        \begin{definition}[Clique]
-            \textbf{Gegeben:} ungerichteter, ungewichteter Graph $G = (V, E)$ \\
-            \textbf{Gesucht:} Clique in $G$ \\
-            d.h. $V' \subseteq V$, so dass der von $V'$ induzierte Graph 
-            $G[V']$ vollständig ist (also jeder Knoten eine Verbindung 
-            zu jedem anderen Knoten hat) \\
-            Mit anderen Worten: $V' \subseteq V$, so dass für alle $\{u', v'\}
-            \in \binom{V'}{2}$ gilt $u'v' \in E$
-        \end{definition}
+\section{Lineare Programmierung}
+\begin{definition}[Knotenüberdeckung]
+    \textbf{Gegeben:} Graph $G = (V, E)$ \\
+    \textbf{Gesucht:} Knotenüberdeckung, d.h. $V'
+        \subseteq V$, so dass jede Kante mindestens einen
+    Endpunkt in $V'$ hat. \\
+    \textbf{Ziel:} $|V'|$ minimal
+\end{definition}
+\begin{definition}[Clique]
+    \textbf{Gegeben:} ungerichteter, ungewichteter Graph $G = (V, E)$ \\
+    \textbf{Gesucht:} Clique in $G$ \\
+    d.h. $V' \subseteq V$, so dass der von $V'$ induzierte Graph
+    $G[V']$ vollständig ist (also jeder Knoten eine Verbindung
+    zu jedem anderen Knoten hat) \\
+    Mit anderen Worten: $V' \subseteq V$, so dass für alle $\{u', v'\}
+        \in \binom{V'}{2}$ gilt $u'v' \in E$
+\end{definition}
 
-        \begin{definition}[Fluss]
-            Sei $G = (V, E)$ ein gerichteter Graph mit $s, t \in V$. 
-            Eine funktion $f : E \rightarrow \mathbb{R}_{\geq 0}$ heißt
-            s-t-Fluss (Fluss), wenn für jeden Knoten $v \in V \backslash
-            \{ s, t \}$ gilt: 
-            \[
-                \sum_{u \in V | uv \in E} f(uv) 
-                - \sum_{w \in V vw \in E} f(vw) = 0
-            \]
-            Zufluss zum knoten V = Abfluss vom Knoten v, also der 
-            Nettozufluss muss gleich Null sein.
-        \end{definition}
-        \begin{definition}
-            Sei $G = (V, E)$ ein gerichteter Graph mit $s, t \in V$. \\
-            Seien durch $c: E \rightarrow \mathbb{R}_{\geq 0}$ Kantenkapazitäten
-            gegeben. Ein Fluss f ist zulässig, wenn für jede Kante $e \in E$ gilt:
-            \[
-                0 \leq f(e) \leq c(e)  
-            \]
-        \end{definition}
-        Der \textbf{Wert} $|f|$ eines Flusses f ist der Nettozufluss 
-        zum Knoten t.
+\begin{definition}[Fluss]
+    Sei $G = (V, E)$ ein gerichteter Graph mit $s, t \in V$.
+    Eine funktion $f : E \rightarrow \mathbb{R}_{\geq 0}$ heißt
+    s-t-Fluss (Fluss), wenn für jeden Knoten $v \in V \backslash
+        \{ s, t \}$ gilt:
+    \[
+        \sum_{u \in V | uv \in E} f(uv)
+        - \sum_{w \in V vw \in E} f(vw) = 0
+    \]
+    Zufluss zum knoten V = Abfluss vom Knoten v, also der
+    Nettozufluss muss gleich Null sein.
+\end{definition}
+\begin{definition}
+    Sei $G = (V, E)$ ein gerichteter Graph mit $s, t \in V$. \\
+    Seien durch $c: E \rightarrow \mathbb{R}_{\geq 0}$ Kantenkapazitäten
+    gegeben. Ein Fluss f ist zulässig, wenn für jede Kante $e \in E$ gilt:
+    \[
+        0 \leq f(e) \leq c(e)
+    \]
+\end{definition}
+Der \textbf{Wert} $|f|$ eines Flusses f ist der Nettozufluss
+zum Knoten t.
 
-    \section{Flussalgorithmen}
-        \begin{definition}[Kapazität eines Schnittes]
-            G Graph mit Kap. c: $E \rightarrow \mathbb{R}_{> 0}$, (S, T) s-t-Schnitt. \\
-            Dann ist c(S) := c(Raus(S)) die \text{Kapazität} von (S, T)
-        \end{definition}
+\section{Flussalgorithmen}
+\begin{definition}[Kapazität eines Schnittes]
+    G Graph mit Kap. c: $E \rightarrow \mathbb{R}_{> 0}$, (S, T) s-t-Schnitt. \\
+    Dann ist c(S) := c(Raus(S)) die \text{Kapazität} von (S, T)
+\end{definition}
 
-        \subsection{Flussvergrößernde Wege}
-            \begin{enumerate}
-                \item Residualgraph G' bilden:
-                \begin{itemize}
-                    \item Hinrichtung: Benutzte Kapazität in G
-                    \item Rückrichtung: Übrige Kapazität der Kante
-                \end{itemize}
-            \end{enumerate}
-            \begin{definition}
-                Eins s-t-Weg W in G$_f$ heißt flussvergrößernder Weg für f. \\
-                Die Residualkapatziät von W ist 
-                \[
-                    \bigtriangleup_W  := min_{e \in W} c_f(e)  
-                \]
-            \end{definition}
-            Ein zulässiger s-t-Fluss in G ist maximal $\Leftrightarrow$ es gibt 
-            keinen Flussvergrößenderen Weg in G$_f$
-        
-            \begin{definition}[Max-Flow-Min-Cut-Theorem]
-                Sei f ein zulässiger s-t-Fluss in einem gerichteten Graphen 
-                G mit Kapazitäten $c : E \rightarrow \mathbb{R}_{\geq 0}$ \\
-                Dann sind folgende Bedingugnen äquivalent:
-                \begin{enumerate}
-                    \item f ist ein maximaler Fluss in G
-                    \item G$_f$ enthält keine augmentierenden Wege
-                    \item Es gibt einen s-t-Schnitt (S, T) mit $|f| = c(S)$
-                \end{enumerate}
-                Kurz \\
-                \begin{centering}
-                    \[
-                        max_{\text{f zulässiger s-t-Fluss}} |f| 
-                        = min_{\text{(S, T) s-t-Schnitt}} c(S)
-                    \]
-                \end{centering}
-            \end{definition}
+\subsection{Flussvergrößernde Wege}
+\begin{enumerate}
+    \item Residualgraph G' bilden:
+          \begin{itemize}
+              \item Hinrichtung: Benutzte Kapazität in G
+              \item Rückrichtung: Übrige Kapazität der Kante
+          \end{itemize}
+\end{enumerate}
+\begin{definition}
+    Eins s-t-Weg W in G$_f$ heißt flussvergrößernder Weg für f. \\
+    Die Residualkapatziät von W ist
+    \[
+        \bigtriangleup_W  := min_{e \in W} c_f(e)
+    \]
+\end{definition}
+Ein zulässiger s-t-Fluss in G ist maximal $\Leftrightarrow$ es gibt
+keinen Flussvergrößenderen Weg in G$_f$
 
-        \subsection{Algorithmen}
-            \begin{definition}[FordFulkerson / EdmonsKarp]
-                Suche s-t-weg in G$_f$ und füge das dann den 
-                Kanten hinzu. \\
-                Änderung von EdmonsKarp: Muss der Kürzeste s-t-Weg sein
-            \end{definition}
-            EdmonsKarp führt O(VE) Flussvergrößerungen durch \\
-            EdmonsKarp läuft in O(VE$^2$)
-\end{document} 
+\begin{definition}[Max-Flow-Min-Cut-Theorem]
+    Sei f ein zulässiger s-t-Fluss in einem gerichteten Graphen
+    G mit Kapazitäten $c : E \rightarrow \mathbb{R}_{\geq 0}$ \\
+    Dann sind folgende Bedingugnen äquivalent:
+    \begin{enumerate}
+        \item f ist ein maximaler Fluss in G
+        \item G$_f$ enthält keine augmentierenden Wege
+        \item Es gibt einen s-t-Schnitt (S, T) mit $|f| = c(S)$
+    \end{enumerate}
+    Kurz \\
+    \begin{centering}
+        \[
+            max_{\text{f zulässiger s-t-Fluss}} |f|
+            = min_{\text{(S, T) s-t-Schnitt}} c(S)
+        \]
+    \end{centering}
+\end{definition}
+
+\subsection{Algorithmen}
+\begin{definition}[FordFulkerson / EdmonsKarp]
+    Suche s-t-weg in G$_f$ und füge das dann den
+    Kanten hinzu. \\
+    Änderung von EdmonsKarp: Muss der Kürzeste s-t-Weg sein
+\end{definition}
+EdmonsKarp führt O(VE) Flussvergrößerungen durch \\
+EdmonsKarp läuft in O(VE$^2$)
+\section{Matchings}
+\begin{definition}[Matchings]
+    Sei $G = (V, E)$ ein ungerichteter Graph \\
+    $M \subseteq E$ ist eine \textbf{Paarung} (engl. matching), wenn je zwei 
+    Kanten in M keinen gleichen Endpunkt haben \\
+    Falls für jede Kante $e \in M$ gilt, dass $M \cup \{ e \}$ keine 
+    Paarung ist, so ist M \textbf{nicht erweiterbar} (engl. maximal) \\
+    Falls für alle Parrungen $M'$ in $G$ gilt, dass $|M'| \leq |M|$,
+    so ist $M$ eine \textbf{größte Paarung} (engl. maximum) \\
+    Falls jeder Knoten in $G$ durch $M$ gepaart ist, so ist M eine 
+    \textbf{perfekte Paarung} (engl. perfect matching)
+\end{definition}
+\begin{definition}[Ganzzahligkeitssatz]
+    Sind alle Kapazitäten ganzzahlig, d.h. $c: E \rightarrow \mathbb{N}$, 
+    so existiert ein maximaler Fluss, der ganzzahlig ist.
+\end{definition}
+\begin{eigenschaft}[Satz von Menger]
+    Sei $G = (V, E)$ ein gerichteter Graph und $s, t \in V$. Dann ist 
+    die maximale Anzahl kantendisjunkter s-t-Wege gleich der minimalen
+    Kardinalität eines s-t-Schnittes
+\end{eigenschaft}
+\textbf{Kardinalität eines s-t-Schnittes}: Anzahl an Kanten die von 
+S nach T Laufen. \\
+$\Rightarrow$ minimale Kardinalität eines s-t-Schnitts = maximale 
+Anzahl an kantendisjunkter s-t-Wege (die Kapazität aller möglichen
+s-t-Schnitte ist genau so groß wie die Anzahl an möglichen s-t-Wegen)
+\begin{eigenschaft}[Auch von Menger]
+    Sei $G = (V, E)$ ein gerichteter Graph, $s, t \in V, st \notin E$.
+    Dann ist die maximale Anzahl \textbf{knotendisjunkter} s-t-Wege gleich
+    der Kardinalität einer kleinsten Knotenmenge, die s und t trennt.
+\end{eigenschaft}
+\begin{definition}[Nachbarschaft]
+    Nachbarschaft von $v \in V$ ist \\
+    \[
+        N(v) := \{ u \in V | uv \in E\}  
+    \]
+    Nachbarschaft von $V' \subseteq V$ ist
+    \[
+        N(V') := \bigcup_{v' \in V'} N(v')
+    \]
+\end{definition}
+\begin{definition}[Heiratssatz (bewiesen von Philip Hall)]
+    Es existiert ein perfektes Matching $\Leftrightarrow$ Für jedes 
+    $D' \subseteq D$ gilt: $|D'| \leq |N(D')|$
+\end{definition}
+\begin{eigenschaft}
+    Sei $G = (V, E)$ ein bipartiter Graph \\
+    Dann lässt sich eine größte Parrung in G in $O(VE^2)$ Zeit bestimmen
+\end{eigenschaft}
+In $G'$ können wir $|V|$ s-t-wege in je $O(E)$ zeit berechnen
+\end{document}

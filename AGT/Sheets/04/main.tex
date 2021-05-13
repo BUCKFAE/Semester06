@@ -35,9 +35,39 @@
     \LARGE Abgabe zum 4. Übungsblatt (AGT 21)
 \end{center}
 \smallskip
+\subsection*{Aufgabe 1:}
+$G_f$ = Residual Graph durch Ford  und  Fulkerson\\
+${\displaystyle S\leftarrow \emptyset }$
+  
+T $\leftarrow \emptyset $
 
+//möglich durch Breitensuche von s aus \\
+
+Für jeden knoten $v \in V$ der von s in $G_f$ erreichbar ist:\\
+\noindent\hspace*{10mm}füge v zu S hinzu \\
+Für jeden weiteren Knoten $u \in V$:\\
+\noindent\hspace*{10mm}
+füge u zu T hinzu\\
+C $\leftarrow \emptyset$\\
+Für jede Kante uv $in$ E:\\
+\noindent\hspace*{10mm} Wenn u $in$ S und v $in$ T ist, dann uv zu C hinzufügen\\
+C ist die Menge der Kanten für einen minimalen Schnitt
+
+
+Korrektheit: Ein minimaler Schnitt hat genau den Wert des Maximalen Flusses.
+Das bedeutet, das wir einen maximalen Fluss f finden können, und dann jede Kante, bei welcher die Kapazität voll ausgelastet ist, als Kante für den Schnitt nehmen.\\
+Eine Kante, bei der die Kapazität nicht voll ausgelastet ist, zählt mehr in f, als die Kapazität der Kante in den Schnitt zählt.\\
+Da es aber ein maximaler Fluss ist, muss es eine für jede Kante, welche nicht voll ausgenutzt sein, irgendwann eine Kante folgen, welche komplett ausgenutzt ist, spätestens wenn wir zu t gehen.\\
+Wenn eine Kante nun eine ungenutzte Kapazität hat, ist der Endknoten von s in $G_f$ erreichbar, also wissen wir, dass diese Kante keine Schnittkante sein kann.\\
+Jede Kante, welche jedoch eine voll ausgenutzte Kapazität hat, zählt genau so in f, wie sie auch im Schnitt zählt. Der Endknoten einer solchen Kante ist nicht in $G_f$ erreichbar, und wird dementsprechend in unserem Algorithmus so hinzugefügt, dass die Kante ein Schnittkante wird.\\
+\\
+Laufzeit: wir benutzen sowohl den Algorithmus von Ford und Fulkerson, als auch die Breitensuche einmal. Dann gehen wir ein letztes mal durch alle Kanten durch. Das resultiert in:\\
+O(V*$E^2$+V+E)
 \subsection*{Aufgabe 2:}
-
+\paragraph{a)}
+"Da wir insgesamt 11 Knoten haben, und einer davon 10 Kanten hat, und wir einen einfachen Graphen haben, muss dieser Knoten eine Kante zu jedem anderem Knoten haben.
+Weiterhin haben wir einen Knoten mit 9 Kanten, das heißt, dieser Knoten hat zu jedem anderem Knoten außer einem eine Kante.
+Durch diese beiden Knoten haben alle außer einem Knoten im Graphen  mindestens 2 Kanten. Da wir jedoch vorgegeben haben, dass es 2 Knoten mit Grad 1 gibt, ist dieser Graph nicht möglich"
 \paragraph{b)}
 Wir modellieren das Problem wie folgt: Wir erstellen zunächst einen Knoten s und einen Knoten
 t. Dann erstellen wir wie in der Skizze für n = 5 gezeigt jeden Knoten zwei mal (einmal mit
