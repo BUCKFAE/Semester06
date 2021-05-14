@@ -1,0 +1,8 @@
+
+Es gilt dya(2n + a) = day(n) + 1
+Unser Programm muss also nur eine 1 an die Eingabe anhängen
+
+Programm:
+(z0,1)->(z0,1,R) // 1 gelesen, weiter nach rechts
+(z0,2)->(z0,2,R) // 2 gelesen, weiter nach rechts
+(z0,_)->(z1,1,O) // 1 anhängen, stopp zustand
