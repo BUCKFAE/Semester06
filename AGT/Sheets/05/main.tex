@@ -1,0 +1,110 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[german,vlined,longend]{algorithm2e}
+\usepackage{graphicx}
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}  
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata}
+\usepackage{listings}
+
+% --- math operators ---
+\usepackage{mathtools}
+\DeclarePairedDelimiter\set{\{}{\}} % use $\set*{1, 2, 3}$ 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceils{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\angles{\langle}{\rangle}
+\def\Oh{\ensuremath{\mathcal{O}}} % big O like $\Oh(n)$
+\def\oh{\ensuremath{\scriptstyle{\mathcal{O}}}} % small O
+% ---
+
+\begin{document}
+
+\begin{small}
+    \noindent
+    Schubert Julian, Gruppe 4 \\
+    Philipp Wahl, Gruppe 4
+\end{small}
+\bigskip
+
+\begin{center}
+    \LARGE Abgabe zum 5. Übungsblatt (AGT 21)
+\end{center}
+\smallskip
+\subsection*{Aufgabe 1:}
+\paragraph{a)}
+Wir betrachten zunächst alle Blätter im Baum. gibt es ein perfektes Matching, so 
+sind alle Knoten (also auch Blätter) teil dieses Matchings (bzw es gibt Kanten
+zu diesen Knoten). Es muss also, wenn es ein perfektes Matching gibt, jede Kante
+die einen Elternknoten mit einem Blatt verbindet im Matching enthalten sein (sonst
+wäre das Blatt ja nicht Teil des Matchings). Das bedeutet aber auch, dass eine Kante,
+die einen Knoten $v$ mit einem Knoten $u$ verbindet, wobei der Knoten $u$ Elternknoten
+eines Blattes $b$ ist, nicht im Matching enthalten sein darf (da sonst zwei Kanten
+den Start/Endpunkt $u$ hätten). Da $v$ aber auch im Matching enthalten sein muss, 
+kann man nun diesen Knoten als Blatt betrachten (man lässt den Teilbaum unter 
+selbigem Knoten einfach wegfallen). Gibt es ein perfektes Matching, kann als 
+einzige Kante wieder nur die Kante die $u$ mit seinem Elternknoten verbindet gewählt
+werden. Gibt es im Baum also ein perfektes Matching, muss dieses Eindeutig sein da 
+es immer nur eine Möglichkeit gibt einen Knoten zum Matching hinzuzufügen.
+\paragraph{b)}
+Wir benutzen folgenden Algorighmus \\ \\
+\noindent BerechneMatching($G$)\\
+\begin{algorithm}[H]
+    blätter = new Queue
+    matching = $\emptyset$ \\
+    \ForEach(Alle Blätter zur Liste hinzufügen){$v \in V$}{
+        \If(Wenn der aktuelle Knoten $v$ ein Blatt ist, wird er
+        zur Liste hinzugefügt){$v$ is Leaf}{
+            blätter.Enqueue($v$)
+        }
+    }
+    \While(Matching für alle Blätter bilden){not blätter.Empty()}{
+        curr = blätter.Dequeue() \\
+        parent = curr.parent \\
+        // Kante vom Parent zum aktuellen Knoten zum matching hinzufügen \\
+        matching = matching $\cup$ \{curr, parent\} \\
+        // Parent vom Parent wird nun zur Blätter-Liste hinzugefügt \\
+        blätter.Enqueue(parent.parent) \\
+    }
+    \Return matching \\
+\end{algorithm}
+\noindent\textbf{Laufzeit:} Das finden aller initialen Blätter im Graphen benötigt \Oh(V) (da wir
+über alle Knoten iterieren und für jeden Knoten prüfen ob er ein Blatt ist). \\
+Dann wird jeder Knoten maximal ein mal in der zweiten While-Schleife behandelt (es wird
+jeder Zweite Knoten als curr ausgewählt). Die Operationen in der zweiten Schleife haben jeweils
+Eine Laufzeit von \Oh(1). Die zweite Schleife hat somit also einen Laufzeit von \Oh(V). 
+Insgesamt ergibt sich so für unseren Algorighmus eine Laufzeit von \Oh(V) (Da \Oh(V + V) = \Oh(V)) \\
+\textbf{Korrektheit:}
+Wir haben in Aufgabe a gezeigt, dass es für ein perfektes Matching immer nur eine Möglichkeit
+gibt einen Knoten hinzuzufügen, da unser algorithmus nach genau dieser Vorgehensweise arbeitet,
+ist unser algorithmus für perfekte Matchings korrekt. \\
+Im falle eines nicht-perfekten-matchings findet unser Algorithmus ein größtes Matching. Dies
+ist gegeben da wir so viele Blätter wie möglich auswählen (und somit auch so viele Knoten
+wie möglich). 
+\paragraph{c)}
+Wir betrachten jeden Knoten sowie alle Kanten die zu diesem Knoten führen (bzw auch diese die
+von dem Knoten weg führen). Wir können uns nun für jeden dieser Knoten die Kanten nach 
+Gewicht sortieren (Das geht in \Oh(E log E) da wir jede Kante maximal zwei mal behandeln und das 
+einfügen in die Liste an die richtige Stelle in \Oh(log E) funktioniert). Wir wählen dann die 
+Kanten wie folgt aus: Ist eine Kante für zwei Knoten direkt die beste Kante für beide Knoten so 
+wählen wir diese Kante. Sonst nehmen wir einfach die beste Übereinstimmende Kante. Das sorgt 
+dafür, das jeder Knoten die beste Kante für sich wählt, außer wenn wir dadurch eine bessere 
+Kombination kaputt machen würden, dann wählen wir die bessere Kombination. Dieses Vorgehen 
+dauert \Oh($E^2$), insgesamt haben wir also eine Laufzeit von \Oh($E^2$)
+\subsection*{Aufgabe 2:}
+\paragraph{a)}
+Wenn es drei Knoten gibt muss gelten: Der Knoten $v_2$ muss vom Knoten $v_1$ aus erreichbar sein 
+(dies ist gegeben da der Graph stark zusammenhängend ist). Ebenso muss $v_3$ vom Knoten $v_2$
+erreichbar sein und $v_1$ vom Knoten $v_4$. Es gibt also einen Kreis der Länge größer gleich 
+3, der von $v_1$ (über k andere Knoten) nach $v_2$, von dort aus nach $v_3$ und zum Schluss wieder
+nach $v_1$ führt. 
+\paragraph{b)}
+Wir gehen alle Knoten im Kreis durch der Entfernt werden kann ohne das die 
+Bedingung verletzt wird, das können wir machen bis nur noch 3 Übrig.
+Der Knoten muss existieren weil wegen Tunier und andere Bedingung
+\paragraph{c)}
+\end{document}
