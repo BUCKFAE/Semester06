@@ -203,4 +203,14 @@ Regelinterpreter \\
     Falls Parameter der Vorbedinugn unbekannt sind, werden sie mit anderen 
     Regeln hergeleitet oder vom Benutzer erfragt
 \end{itemize}
+\textbf{Ripple Down Rules (RDR):} \\
+Zu jeder Regel können Ausnahmen (except) geschrieben werden, um ein 
+inkrementelles Erstellen einer Regelmenge zu ermöglichen. \\
+\begin{itemize}
+    \item \textbf{except:} es wird eine Ausnahme zu der Regel geprüft: Wenn
+    die Regel gilt und die Ausnahme nicht zutrifft, dann wird der Aktionsteil
+    der Regel nicht ausgeführt, sonst die Ausnahme
+    \item \textbf{else:} Es wird mit einer anderen Regel weitergearbeitet,
+    wenn die Regel nicht gilt
+\end{itemize}
 \end{document}
