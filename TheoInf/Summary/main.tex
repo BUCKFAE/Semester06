@@ -286,11 +286,11 @@ $\Rightarrow$ Alle Loop-berechenbaren Funktionen sind total.
 \begin{definition}[Entscheidungsalgorithmus]
     Entscheidungsalgorithmus für eine Menge A: \\
     \indent Eingabe x $\Rightarrow$ Ausgabe
-    $ 
-    \begin{cases}
-        1 \text{ (ja),} & \text{falls } x \in A \\
-        0 \text{ (nein),} & \text{falls } x \notin A
-      \end{cases}   
+    $
+        \begin{cases}
+            1 \text{ (ja),}   & \text{falls } x \in A    \\
+            0 \text{ (nein),} & \text{falls } x \notin A
+        \end{cases}
     $ \\
     Dies ist die berechnung der \textbf{charakteristischen Funktion}
     von A ($c_A(x)$).
@@ -298,19 +298,19 @@ $\Rightarrow$ Alle Loop-berechenbaren Funktionen sind total.
 \textbf{Semicharakteristische Funktion}: \\
 Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
 \begin{definition}[Entscheidbarkeit]
-    Seien $n \geq 0$ und $t: \mathbb{N} \rightarrow \mathbb{N}$ eine 
+    Seien $n \geq 0$ und $t: \mathbb{N} \rightarrow \mathbb{N}$ eine
     totale Funktion:
     \begin{itemize}
         \item $A \subseteq \mathbb{N}^n$ heißt \textbf{entscheidbar}
-        $\Leftrightarrow$ $c_A$ ist berechenbar
+              $\Leftrightarrow$ $c_A$ ist berechenbar
         \item $A \subseteq \mathbb{N}^n$ heißt \textbf{semientscheidbar}
-        $\Leftrightarrow$ $\chi_A(x)$ ist berechenbar
-        \item \textbf{REC} $= \{ A | \exists n\geq 0 \text{ mit } A 
-        \subseteq \mathbb{N}^n \text{ und A ist entscheidbar}\}$ 
-        (recursive languages), also alle berechenbaren Mengen
-        \item Ein Algorithmus \textbf{M entscheidet A} $\subseteq 
-        \mathbb{N}^n$ \textbf{in der Zeit t (bzw. O(t))} $\Leftrightarrow$
-        M berechnet $c_A$ in der Zeit t (bzw. O(t))
+              $\Leftrightarrow$ $\chi_A(x)$ ist berechenbar
+        \item \textbf{REC} $= \{ A | \exists n\geq 0 \text{ mit } A
+                  \subseteq \mathbb{N}^n \text{ und A ist entscheidbar}\}$
+              (recursive languages), also alle berechenbaren Mengen
+        \item Ein Algorithmus \textbf{M entscheidet A} $\subseteq
+                  \mathbb{N}^n$ \textbf{in der Zeit t (bzw. O(t))} $\Leftrightarrow$
+              M berechnet $c_A$ in der Zeit t (bzw. O(t))
     \end{itemize}
 \end{definition}
 \begin{eigenschaft}
@@ -325,7 +325,7 @@ Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
 \begin{definition}[Aufzählbarkeit]
     $A \subseteq \mathbb{N}^n$ mit $n \geq 0$ heißt \textbf{rekursiv aufzählbar}
     (kurz: aufzählbar) $\Leftrightarrow$ $A = \emptyset$ oder es gibt ein
-    berechenbares, totales $f: \mathbb{N} \rightarrow \mathbb{N}^n$ mit 
+    berechenbares, totales $f: \mathbb{N} \rightarrow \mathbb{N}^n$ mit
     $W_f = A$ \\
     \textbf{RE} Alle Mengen die Aufzählbar sind
 \end{definition}
@@ -340,33 +340,33 @@ Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
         \item A ist aufzählbar
         \item A ist semientscheidbar
         \item A ist Definitionsbereich einer berechenbaren Funktion
-        $f: \mathbb{N}^n \rightarrow \mathbb{N}^m$ mit $m \geq 0$
+              $f: \mathbb{N}^n \rightarrow \mathbb{N}^m$ mit $m \geq 0$
         \item A ist Wertebereich einer berechenbaren Funktion
-        $g: \mathbb{N}^m \rightarrow \mathbb{N}^n$ mit $m \geq 0$
+              $g: \mathbb{N}^m \rightarrow \mathbb{N}^n$ mit $m \geq 0$
     \end{enumerate}
 \end{eigenschaft}
 \begin{definition}[Projektion]
     Die \textbf{Projektion} einer Menge \\
     $B \subseteq \mathbb{N}^n \times \mathbb{N}$ ist definiert als $Pr(B) =
-    \{ x \in \mathbb{N}^n | \exists y \in \mathbb{N}[(x, y) \in B ]\}$
+        \{ x \in \mathbb{N}^n | \exists y \in \mathbb{N}[(x, y) \in B ]\}$
 \end{definition}
 \begin{definition}[Reduzierbarkeit]
     Seien $A \subseteq \mathbb{N}^n$ und $B \subseteq \mathbb{N}^n$. \\
     \textbf{A ist reduzierbar auf B} $\Leftrightarrow$ es gibt ein totales,
-    berechenbares $f: \mathbb{N}^m \rightarrow \mathbb{N}^n$ sodass für 
-    alle $x \in \mathbb{N}^m$ gilt: 
+    berechenbares $f: \mathbb{N}^m \rightarrow \mathbb{N}^n$ sodass für
+    alle $x \in \mathbb{N}^m$ gilt:
     \[
-        x \in A \Leftrightarrow f(x) \in B  
+        x \in A \Leftrightarrow f(x) \in B
     \]
     Die Äquivalenz ist gleichbedeutend mit den Aussagen $c_A = c_b \circ
-    f$ und $\chi_A = \chi_B \circ f$ 
+        f$ und $\chi_A = \chi_B \circ f$
 \end{definition}
 \begin{eigenschaft}
     Seien $A \subseteq \mathbb{N}^m$ und $B \subseteq \mathbb{N}^n$. Falls
-    A reduzierbar auf B ist, so gelten folgende Implikationen: 
+    A reduzierbar auf B ist, so gelten folgende Implikationen:
     \\
     $
-        B \in REC \Rightarrow B \in REC \\  
+        B \in REC \Rightarrow B \in REC \\
         B \in RE \Rightarrow A \in RE
     $
 \end{eigenschaft}
@@ -374,11 +374,11 @@ Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
     Skritp ab Seite 172, Rams werden als Liste codiert.
 \end{definition}
 \begin{definition}[Halteproblem]
-    $K_0 = \{ x | M_x \text{ hält bei Eingabe x}\}$ 
-        \textbf{spezielles Halteproblem} \\
-    $K = \{ (x, y) | M_x \text{ hält bei Eingabe y}\}$ 
-        \textbf{allgemeines Halteproblem} \\
-    $\Rightarrow$ wir geben der Maschiene ihren eigenen Quellcode 
+    $K_0 = \{ x | M_x \text{ hält bei Eingabe x}\}$
+    \textbf{spezielles Halteproblem} \\
+    $K = \{ (x, y) | M_x \text{ hält bei Eingabe y}\}$
+    \textbf{allgemeines Halteproblem} \\
+    $\Rightarrow$ wir geben der Maschiene ihren eigenen Quellcode
     als Eingabe \\
     $K_0$ ist aufzählbar, aber nicht entscheidbar
 \end{definition}
@@ -391,26 +391,63 @@ Wie characteristische Funktion, nur n.d. falls $x \notin A$ ($\chi_A(x)$)
     und $t: \mathbb{N} \rightarrow \mathbb{N}$ eine totale Funktion
     \begin{itemize}
         \item A heißt \textbf{entscheidbar} $\Leftrightarrow$ $c_A :
-        \mathbb{G} \rightarrow \{ 0, 1\}$ ist berechenbar
+                  \mathbb{G} \rightarrow \{ 0, 1\}$ ist berechenbar
         \item A heißt \textbf{semientscheidbar} $\Leftrightarrow$ $\chi_A :
-        \mathbb{G} \rightarrow \{ 0, 1\}$ ist berechenbar 
-        \item A heißt \textbf{rekursiv aufzählbar} (kurz: aufzählbar) 
-        $\Leftrightarrow$ $A = \emptyset$ oder es gibt ein berechenbares,
-        totales $f: \mathbb{N} \rightarrow \mathbb{G}$ mit $W_f = A$
+                  \mathbb{G} \rightarrow \{ 0, 1\}$ ist berechenbar
+        \item A heißt \textbf{rekursiv aufzählbar} (kurz: aufzählbar)
+              $\Leftrightarrow$ $A = \emptyset$ oder es gibt ein berechenbares,
+              totales $f: \mathbb{N} \rightarrow \mathbb{G}$ mit $W_f = A$
     \end{itemize}
 \end{definition}
 
 \section{Endliche Automaten}
 \begin{definition}[Deterministischer endlicher Automat]
-    Ein \textbf{deterministischer endlicher Automat (DEA)} ist ein 
+    Ein \textbf{deterministischer endlicher Automat (DEA)} ist ein
     Quintupel $(\varSigma, Z, \delta, z_0, F)$ mit folgenden Eigenschaften:
     \begin{itemize}
         \item $\varSigma$ ist eine endliche, nichtleere Menge (Eingabealphabet)
         \item $Z$ ist eine endliche Menge (Zustandsmenge)
         \item $\delta$ ist eine totale Funktion $Z \times \varSigma \rightarrow Z$
-        (Überführungsfunktion)
+              (Überführungsfunktion)
         \item $z_0 \in Z$ (Startzustand)
         \item $F \subseteq Z$ (Menge der akzeptierenden Zustände)
     \end{itemize}
 \end{definition}
+\begin{definition}[Erweiterte Überführungsfunktion]
+    Die \textbf{erweiterte Überführungsfunktion} eines DEA A = $(\varSigma, Z, \delta,
+        z_0, F)$ ist die wie folg definierte Abbildung $\bar{\delta} : Z \times
+        \varSigma^* \rightarrow Z$. \\
+    (IA) $\bar{\delta}(z, \epsilon) = z$ für alle $z \in Z$ \\
+    (IS) $\bar{\delta} = \delta(\bar{\delta}(z, w), a)$ für alle $z \in Z, w \in
+        \varSigma^*, a \in \varSigma$ \\
+    \\
+    Damit gilt: $\bar{\delta}(z, w) = $ Zustand, den der DEA erreicht wenn er in
+    z startet und das Wort w einliest.
+\end{definition}
+\begin{definition}[Akzeptierung von Sprachen durch DEAs]
+    \begin{itemize}
+        \item Ein wort $w \in \varSigma^*$ heißt \textbf{von A akzeptiert} $\Leftrightarrow
+                  \bar{\delta}(z_0, w) \in F$
+        \item Die von \textbf{A akzeptierte Sprache} ist
+              \[
+                  \text{\textbf{L(A)}} = \{ w \in \varSigma^* | \text{ w wird von
+                      A akzeptiert}\}
+              \]
+        \item Die \textbf{Menge der von DEAs akzeptierten Sprachen ist}
+              \[
+                  \text{\textbf{EA}} = \{ L(A) | \text{ A ist ein DEA}\}
+              \]
+    \end{itemize}
+\end{definition}
+$\Rightarrow$ eine $L \in EA$ sind \textbf{entscheidbar}
+\section{Nichtdeterministische endliche Automaten}
+Unterschied DEA: \\
+$\delta$ ist eine totale Funktion $Z \times \varSigma \rightarrow P(Z)$, also
+eine Abbildung auf die Potenzmenge. \\
+Kann in mehreren Zuständen gleichzeitig sein. \\
+\\
+Erweiterte Überführungsfunktion: $\bar{\delta}(z, w)$ = Menge der Zustände, die der NEA
+gleichzeitig erreicht, wenn er in z startet und das Wort w einliest. \\
+\\
+Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
 \end{document}
