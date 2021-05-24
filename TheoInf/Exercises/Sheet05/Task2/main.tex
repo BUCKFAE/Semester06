@@ -51,12 +51,13 @@
 
 
 \begin{document}
-\section*{Aufgabe 1}
-Wir benötigen eine Möglichkeit, um jedes $x \in \mathbb{N}$ in f als auch in g einzusetzen. \\
-Wir lösen das Problem wie folgt: \\
-Wir iterieren über alle natürlichen zahlen,gür x = 0 oder $\lfloor x / 2\rfloor$ setzen wir 
-$\lfloor x / 2\rfloor$ in f ein, sonst setzen wir $\lfloor x / 2\rfloor$ in g ein. \\
-Damit ergibt sich für die Funktion h: \\
+\section*{Aufgabe 2}
+\textbf{RE} bezeichnet alle Mengen die Aufzählbar sind, also Mengen A, für die
+eine Funktion $h: \mathbb{N} \rightarrow \mathbb{N}^n$ mit $W_h$ = A existiert. \\
+Da A und B in \textbf{RE} liegen, bedeutet dies, dass zwei Funktionen \\
+$f(x) = \mathbb{N} \rightarrow \mathbb{N}^n$ mit $W_f = A$ und \\
+$g(x) = \mathbb{N} \rightarrow \mathbb{N}^n$ mit $W_g = B$ existieren \\
+Wir bilden damit nun wieder wie in Aufgabe 1 unsere Funktion h: \\
 \begin{equation*}
     h(x) =
     \begin{cases}
@@ -65,9 +66,9 @@ Damit ergibt sich für die Funktion h: \\
         g(\lfloor x / 2\rfloor)                 & \text{sonst}             
     \end{cases}
 \end{equation*}
-Damit gilt $W_h = W_f \cup W_g$ und somit auch $W_h \subseteq W_f \cup W_g$ und
-$W_h \supseteq W_f \cup W_g$. \\
-$W_h = W_f \cup W_g$ ist gegeben da alle Elemente aus dem Wertebereich von f in
-in h liegen (da für jedes $x \in \mathbb{N}$ f(x) gebildet wird), und selbiges für alle 
-x im Wertebereich von g.
+Da wir eine Funktion $h: \mathbb{N} \rightarrow \mathbb{N}^n$ mit $W_h = A \cup B$
+angeben können, folgt: 
+\[
+    A, B \in RE \Rightarrow A \cup B \in RE 
+\] 
 \end{document}

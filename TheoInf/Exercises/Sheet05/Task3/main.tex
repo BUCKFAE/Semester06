@@ -51,23 +51,16 @@
 
 
 \begin{document}
-\section*{Aufgabe 1}
-Wir benötigen eine Möglichkeit, um jedes $x \in \mathbb{N}$ in f als auch in g einzusetzen. \\
-Wir lösen das Problem wie folgt: \\
-Wir iterieren über alle natürlichen zahlen,gür x = 0 oder $\lfloor x / 2\rfloor$ setzen wir 
-$\lfloor x / 2\rfloor$ in f ein, sonst setzen wir $\lfloor x / 2\rfloor$ in g ein. \\
-Damit ergibt sich für die Funktion h: \\
+\section*{Aufgabe 3}
+Wir können die Menge B nicht trivial entscheiden da wir unendlich viele
+Primzahlkombinationen durchgehen müssen um für eine Zahl sicher sagen zu
+können das sie nicht in B liegt. \\
+Wir definieren zunächst eine Hilfsfunktion $h'(x, t)$: 
 \begin{equation*}
     h(x) =
     \begin{cases}
-        f(\lfloor x / 2\rfloor)                 & \text{falls $x = 0$ oder $x$ eine 
-        gerade Zahl ist} \\
+        h(x, t))                 & \text{falls $x = 0$ oder $x$ eine gerade Zahl ist} \\
         g(\lfloor x / 2\rfloor)                 & \text{sonst}             
     \end{cases}
 \end{equation*}
-Damit gilt $W_h = W_f \cup W_g$ und somit auch $W_h \subseteq W_f \cup W_g$ und
-$W_h \supseteq W_f \cup W_g$. \\
-$W_h = W_f \cup W_g$ ist gegeben da alle Elemente aus dem Wertebereich von f in
-in h liegen (da für jedes $x \in \mathbb{N}$ f(x) gebildet wird), und selbiges für alle 
-x im Wertebereich von g.
 \end{document}
