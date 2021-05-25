@@ -257,4 +257,42 @@ s-t-Schnitte ist genau so groß wie die Anzahl an möglichen s-t-Wegen)
     Dann lässt sich eine größte Parrung in G in $O(VE^2)$ Zeit bestimmen
 \end{eigenschaft}
 In $G'$ können wir $|V|$ s-t-wege in je $O(E)$ zeit berechnen
+\section{Alternierende und augmentierende Wege}
+\begin{definition}[Augmentierender Weg]
+    Ein Weg ist \textbf{augmentierend}, wenn die Kanten immer Abwechselnd im
+    Matching und nicht im Matching liegen. Starten und Enden mit einer Kante
+    die nicht im Matching liegt.
+\end{definition}
+\textbf{Alternierend:} Wechselt zwischen im Matching und nicht im Matching
+\begin{definition}[Satz von Berge]
+    Sei $G = (V, E)$ Grpah, $M \subseteq E$ Matching in G. \\
+    M ist ein größtes Matching in G $\Leftrightarrow$ es gibt keinen
+    M-augmentierenden Weg.
+\end{definition}
+\begin{eigenschaft}
+    In einem bipartiten Graphen $G = (V, E)$ lässt sich in $O(VE)$ ein größtes
+    Matching bestimmen
+\end{eigenschaft}
+\textbf{Ansatz:} Knoten S erstelen mit Kante zu allen Knoten im einen Teil, dann BFS 
+$|V| / 2$ mal ausführen (oder bis kein freier Knoten in B mehr gefunden wird). 
+\begin{definition}[Christofides Alfogrithmus]
+    \begin{itemize}
+        \item Ermittle einen minimalen Spannbaum B für G
+        \item Sei U die Menge der Knoten ungeraden Grades in B
+        \item Ermittle kostenminimales perfektes Matching M für G[U]
+        \begin{itemize}
+            \item G[u] ist der von U induzierte Graph
+            \item $(U, \{ vw \in E(g): v \in U, w \in U\})$
+        \end{itemize}
+        \item Berechne im eulerschen Grpahen $B \cup M$ erst Eulertour und dann 
+        Rundtour $T$ wie beim Tree-Doubling
+    \end{itemize}
+    $\Rightarrow$ liefert eine 3/2-Approximation für $\varDelta$-TSP
+\end{definition}
+\begin{definition}[Kostenminimales perfektes Matching]
+    Gegeben: vollständiger Graph $G = (V, E)$, mit Kantenkosten $c: E \rightarrow 
+    \mathbb{R}_{\geq 0}$ \\
+    Gesucht: Perfektes Matching M mit minimalen Kosten $c(M) = \sum_{e \in M} c(e)$ \\
+    $\Rightarrow$ kann in O($V^3$) berechnet werden (ist aber ziemlich kompliziert :(
+\end{definition}
 \end{document}
