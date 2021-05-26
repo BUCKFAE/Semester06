@@ -295,4 +295,48 @@ $|V| / 2$ mal ausführen (oder bis kein freier Knoten in B mehr gefunden wird).
     Gesucht: Perfektes Matching M mit minimalen Kosten $c(M) = \sum_{e \in M} c(e)$ \\
     $\Rightarrow$ kann in O($V^3$) berechnet werden (ist aber ziemlich kompliziert :(
 \end{definition}
+\section{Wurzelspannbäume}
+\begin{definition}[Wurzelbaum]
+    Ein gerichteter Graph $T = (V, E)$ mit Knoten $s \in V$ heißt 
+    s-\textbf{Wurzelbaum}, wenn
+    \begin{itemize}
+        \item T azyklisch
+        \item indeg(s) = 0
+        \item indeg(v) = 1 für jeden Knoten $ v \in V \backslash \{s\}$
+    \end{itemize}
+\end{definition}
+\begin{definition}[Wurzelspannbaum]
+    Sei $G = (V, E)$ ein gerichteter (Multi-) Graph mit Knoten $s \in V$.
+    Ein Teilgraph T von G mit Knotenmenge V heißt s-\textbf{Wurzelspannbaum}
+    von G, wenn T ein s-Wurzelbaum ist.
+\end{definition}
+\begin{eigenschaft}
+    Sei G ein gerichteter (Multi-) Graph mit Knoten s \\
+    G besitzt einen s-Wurzelspannbaum $\Leftrightarrow$ jeder Knoten $v \in V$
+    ist von s in G erreichbar. \\
+    DFS(s) liefert s-Wurzelspannbaum (falls es einen gibt)
+\end{eigenschaft}
+\begin{eigenschaft}
+    Sei K Kreis in F und $\tilde{T}$ s-Wurzellspannbaum von G/K. \\
+    Dann gibt es einen s-Wurzelspannbaum T von G mit \\
+    \[
+        c'(T) \leq c'(\tilde{T})  
+    \]
+    G/K: K sie Teilmenge von G. Alle Knoten in K werden durch einen einzigen 
+    Ersetzt.
+\end{eigenschaft}
+Algorithmus zur berechnung von s-Wurzelspannbäumen:
+\begin{itemize}
+    \item Berechne modifizierte Kantenkosten $c'$
+    \item Bestimme Teilgraph F
+    \item Falls F azyklisch, gib F zurück
+    \item Ansonsten ermittle Kreis K in F
+    \item Kontrahiere G zu G / K
+    \item Wende Algo rekursiv auf (G/K, c') and
+    \begin{itemize}
+        \item s-Wurzelspannbaum für $\tilde{T}$ für G/K
+    \end{itemize}
+    \item Expandiere $\tilde{T}$ zu s-Wurzelspannbaum T von G
+    \item Gibt T zurück
+\end{itemize}
 \end{document}
