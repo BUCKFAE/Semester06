@@ -1,0 +1,40 @@
+int numNodes = ...;
+int numEdges = ...;
+
+// Represents an edge in the graphe
+tuple Edge {
+    int node1;
+    int node2;
+}
+
+// Loads all edges present in the graph
+{Edge} edges = ...;
+
+// Stores the solution for all nodes
+dvar float+ nodeSolution[1..numNodes];
+
+// Minimize the sum of all nodes
+minimize sum (i in 1..numNodes) nodeSolution[i];
+
+// Each edge needs to be adjacent to at least one node with a value of 1
+subject to {
+    forall (edge in edges) {
+        // Each edge >= 1
+        nodeSolution[edge.node1] + nodeSolution[edge.node2] >= 1;
+
+        // Each Node <= 1
+        nodeSolution[edge.node1] <= 1;
+        nodeSolution[edge.node2] <= 1;
+
+    }
+
+}
+
+
+// Printing solution
+execute {
+    for(var i = 1; i <= numNodes; i++) {
+        writeln("Knoten ", i, ": ", nodeSolution[i]);
+
+    }
+}

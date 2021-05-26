@@ -1,4 +1,4 @@
-"""This program shows how to compute f"""
+"""This program shows how to compute h'"""
 
 def is_prime(x):
     return False if x < 2 else all([x % i != 0 for i in range(2, x - 1)])
@@ -27,5 +27,5 @@ def h(x, t):
             q += 1
     return 2
 
-for curr in range(3000):
-    print(f" {curr}: {h(curr, 10000)}")
+for curr in range(100):
+    print(f" {curr}: {h(curr, 1000)}")
