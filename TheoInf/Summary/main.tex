@@ -468,4 +468,26 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         L, L' \in EA \Rightarrow \bar{L}, L \cup L', L \cap L', L \cdot L', L^* \in EA  
     \]
 \end{definition}
+\section{Reguläre Ausdrücke}
+\begin{definition}[Syntax und Semantik regulärer Ausdrücke]
+    Sei $\varSigma$ ein Alphabet. Wir definieren \textbf{reguläre Ausdrücke} $\gamma$ und
+    die durch sie beschriebenen Sprachen $L(\gamma)$. \\
+    \begin{itemize}
+        \item (IA) $\emptyset, \epsilon$ und \textbf{a} sind reguläre Ausdrücke (wobei $
+        a \in \varSigma$). \\
+        Semantik: $L(\emptyset) = \emptyset, L(\epsilon) = \{\epsilon\}, L(a) =\{a\}$
+        \item (IS) sind $\alpha, \beta$ reguläre ausdrücke, so auch $(\alpha + \beta), 
+        (\alpha \cdot \beta), \alpha^*$ \\
+        Semantik: \\
+        $L(\alpha + \beta) = L(\alpha) \cup L(\beta)$ \\
+        $L(\alpha \cdot \beta) = L(\alpha) \cdot L(\beta)$ \\
+        $L(\alpha^*) = L(\alpha)^*$
+    \end{itemize} 
+    \begin{enumerate}
+        \item Unnötige Klammern un $\cdot$ können weggelassen werden
+        \item Bindungsreihensfolge: * -> $\cdot$ -> + \\
+        $0 + 01^*$ steht also für $(0 + (0 \cdot (1^*)))$
+        \item Bezeichnung reg. Ausdrücke durch griechische Kleinbuchstaben
+    \end{enumerate}
+\end{definition}
 \end{document}
