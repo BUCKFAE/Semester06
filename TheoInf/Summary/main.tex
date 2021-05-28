@@ -450,4 +450,22 @@ Erweiterte Überführungsfunktion: $\bar{\delta}(z, w)$ = Menge der Zustände, d
 gleichzeitig erreicht, wenn er in z startet und das Wort w einliest. \\
 \\
 Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
+\begin{definition}[Potenzmengenkonstruktion]
+    Aus DEA einen NEA machen
+\end{definition}
+\begin{definition}[Konkatenation von Sprachen]
+    Seien L, L' $\subseteq \varSigma^*$
+    \begin{align*}
+        L \cdot L' & = \{ uv | u \in L \text{ und } v \in L' \} \\
+        L^0         & = \{ \epsilon \} \\
+        L^{k + 1} &= L \cdot L^k \text{ für } k \geq 0 \\
+        L^* &= \bigcup_{k \geq 0} L^k = \{ u_1u_2 \dots u_m 
+        | m \geq 0 \text{ und } u_1, \dots u_m \in L \}
+    \end{align*}
+\end{definition}
+\begin{definition}[Abschlusseigenschaften von EA]
+    \[
+        L, L' \in EA \Rightarrow \bar{L}, L \cup L', L \cap L', L \cdot L', L^* \in EA  
+    \]
+\end{definition}
 \end{document}
