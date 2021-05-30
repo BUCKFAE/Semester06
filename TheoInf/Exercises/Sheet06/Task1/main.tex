@@ -1,0 +1,155 @@
+\documentclass[14pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{mathabx}
+\usepackage{listings}
+
+\title{Theoretische Informatik}
+\author{Julian Schubert}
+
+% Definition
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!20,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\begin{document}
+\section*{Aufgabe 1}
+\subsection*{a}
+Wir zeigen zunächst das die Menge A nicht leer ist: \\
+\[
+    3^1 \cdot 5^1 = 15  
+\]
+$\Rightarrow$ die Zahl 15 liegt in der Menge A, damit ist die
+Menge A nicht leer. \\
+Allerdings ist A keine echte Teilmene der berechenbaren Funktionen, A
+ist also berechenbar. Dies ist gegeben da wir für jedes n ein größtes
+mögliches p und ein größtes mögliches q finden können da gelten muss: \\
+\[
+    p \leq n \land q \leq n  
+\]
+Wir können also endlich viele p-q-kombinationen durchprobieren. Auch 
+für die Potenzen können wir immer eine obere Schranke finden da mit 
+erhöhung der Potenzen auch der resultierende Wert von $p^iq^j$ steigt \\
+Folgender Algorithmus zeigt die Berechenbarkeit von A
+\begin{lstlisting}[language=Python]
+def is_prime(x):
+    return False if x < 2 else all([x % i != 0 for i in range(2, x - 1)])
+
+
+def check(n):
+
+
+    for p in range(2, n):
+
+        # Skipping if p is not a prime
+        if not is_prime(p):
+            continue
+
+        for q in range(2, n):
+            
+            # Skipping if q is not a prime
+            if not is_prime(q):
+                continue
+
+            i = 1  
+            j = 1
+
+            # Increasing i and j until the result gets to big
+            while (p ** i) * (q **j) <= n:
+
+                # Checking if we found a valid solution
+                if (p ** i) * (q ** j) == n:
+                    return (p, q, i, j)  
+
+                i += 1
+
+                # Ensuring we test every valid combination of i and j
+                if j == i:
+                    j += 1
+                    i = 1
+
+    return None
+
+
+# Valdiating results
+for i in range(50):
+    res = check(i)
+    sol = (res[0] ** res[2]) * (res[1] ** res[3]) if not res is None else ""
+    print(f"{i}: {res}: {sol}")
+\end{lstlisting}
+\subsection*{b}
+Wir zeigen zunächst das die Menge B nicht leer ist: \\
+Die Funktion $f: \mathbb{N} \rightarrow \mathbb{N}$ mit $f(x) = x$ liegt
+in $M_i$ und ist entscheidbar. Daher ist B nicht leer. \\
+Die Funktion 
+\begin{equation*}
+    g(x) =
+    \begin{cases}
+        2                 & \text{falls $x = 3$}             \\
+        x                   & \text{sonst}
+    \end{cases}
+\end{equation*}
+ist berechenbar, liegt also in $M_i$, jedoch nicht in B, da $3$ zwar 
+in $D_g$ liegt, aber nicht in $W_g$. Dadurch
+ist B eine echte Teilmenge der berechenbaren Funktionen $\mathbb{N}^n
+\rightarrow \mathbb{N}$ und ist somit laut dem Satz von Rice
+unentscheidbar.
+\subsection*{c}
+Die Menge C ist nicht leer, da die Maschiene $M_k$ mit der Eigenschaft,
+dass sie für keine Eingabe hält in $M_i$ und somit in C liegt. \\
+Ebenso liegt die Maschiene die einfach die Eingabe wieder ausgibt
+($f(x) = x$) in $M_i$, jedoch nicht in C (da diese Maschiene auf
+geraden Eingaben hält). \\
+Damit ist C laut satz von Rice untentscheidbar.
+\subsection*{d}
+Eine Maschiene $M_i$ liegt genau dann in i, wenn sie das spezielle
+Halteproblem löst. Das spezielle Halteproblem ist nicht entscheidbar,
+daher ist die Menge D auch nicht entscheidbar (da für kein Element
+in der Menge entschieden werden kann, ob sie das spezielle Halteproblem
+löst)
+\subsection*{e}
+Die Menge E ist keine echte Teilmenge aller berechenbaren Funktionen.
+Dies ist gegeben da wenn eine Funktion auf $D = \mathbb{N}^n$ berechenbar 
+ist, dann enthält der Definitionsbereich mehr als 2020 Eingaben, die
+TM hält also auf mehr als $2020$ Eingaben. Durch den Satz von Rice
+ist diese Menge somit entscheidbar.
+\end{document}

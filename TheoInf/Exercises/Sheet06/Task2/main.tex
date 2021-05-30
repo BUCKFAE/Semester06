@@ -1,0 +1,69 @@
+\documentclass[14pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{mathabx}
+\usepackage{listings}
+
+\title{Theoretische Informatik}
+\author{Julian Schubert}
+
+% Definition
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!20,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\begin{document}
+\section*{Aufgabe 2}
+Wenn A semientscheidbar ist, dann muss A aufzählbar sein.
+Die semicharakteristische Funktion ist berechenbar:
+\begin{equation*}
+    \chi (x) =
+    \begin{cases}
+        1                 & \text{falls eine Primzahle $p \in \mathbb{P}$
+        existiert, mit $f(p) = y$}             \\
+        \text{n.d}                   & \text{sonst}
+    \end{cases}
+\end{equation*}
+Dies ist gegeben da wenn eine solche Zahl existiert, wir sie in 
+endlicher Zeit finden, sonst laufen wir unendlich lang was die 
+semientscheidbarkeit nicht verletzt.
+\end{document}
