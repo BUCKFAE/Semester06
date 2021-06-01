@@ -490,4 +490,15 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         \item Bezeichnung reg. Ausdrücke durch griechische Kleinbuchstaben
     \end{enumerate}
 \end{definition}
+\begin{definition}[Reguläre Sprachen]
+    \begin{itemize}
+        \item Eine Sprache L heißt \textbf{regulär} $\Leftrightarrow$ es 
+        existiert ein regulärer Ausdruck $\alpha$ mit $L = L(\alpha)$
+        \item \textbf{REG} = $\{ L | L \text{ ist regulär}\}$
+    \end{itemize}
+\end{definition}
+\begin{eigenschaft}
+    Seien $L, A, B \subseteq \varSigma^*$ mit $\epsilon \notin A$. Falls
+    $L = A \cdot L \cup B$, so gilt $L = A^* B$
+\end{eigenschaft}
 \end{document}

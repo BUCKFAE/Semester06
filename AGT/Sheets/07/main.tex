@@ -1,0 +1,223 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[german,vlined,longend]{algorithm2e}
+\usepackage{graphicx}
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}  
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata}
+\usepackage{listings}
+\usepackage{float}
+
+% --- math operators ---
+\usepackage{mathtools}
+\DeclarePairedDelimiter\set{\{}{\}} % use $\set*{1, 2, 3}$ 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceils{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\angles{\langle}{\rangle}
+\def\Oh{\ensuremath{\mathcal{O}}} % big O like $\Oh(n)$
+\def\oh{\ensuremath{\scriptstyle{\mathcal{O}}}} % small O
+% ---
+
+\begin{document}
+
+\begin{small}
+    \noindent
+    Schubert Julian, Gruppe 4 \\
+    Philipp Wahl, Gruppe 4
+\end{small}
+\bigskip
+
+\begin{center}
+    \LARGE Abgabe zum 7. Übungsblatt (AGT 21)
+\end{center}
+\smallskip
+\subsection*{Aufgabe 1:}
+\paragraph*{a)}
+In einem s-Wurzelspannbaum ist jeder Knoten im Graphen
+vom Knoten s aus erreichbar. Damit gilt $E(s) = V$
+\paragraph*{b)}
+Die Tiefensuche durchläuft einen Pfad immer so weit 
+wie möglich, und springt dann erst zu einem Knoten zurück
+der noch Nachbarn hat, die noch nicht besucht wurden.
+So entsteht ein s-Wurzelspannbaum (falls $E(s) = V$ gilt) 
+und man die Tiefensuche am Knoten s startet.
+\paragraph*{c)}
+Angenommen G ist Kreisfrei und es existieren $s_1, s_2$ mit 
+$s_1 \neq s_2$ und es gibt zwei verschiedene Wurzelspannbäume,
+einen mit $s_1$ als Wurzel und einen mit $s_2$ als Wurzel.
+Dies bedeutet dann das es in G einen gerichteten Weg
+von $s_1$ nach $s_2$ \textbf{und} einen gerichteten Weg
+von $s_2$ nach $s_1$ gibt. Damit ist G nicht kreisfrei. \\
+$\Rightarrow$ Die Aussage ist korrekt.
+\paragraph*{d)}
+Für den Graphen in G lassen sich die zwei skizzierten (unterschiedlichen)
+Wurzellspannbäume bilden, die Aussage ist also falsch.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                        {s};
+            \node[state]          (a) [below left =of s]    {a};
+            \node[state]          (b) [below right  =of s]    {b};
+            \node[state]          (c) [below left =of b]    {c};
+
+            \tikzset{mystyle/.style={->,double=black}}   
+            \path (s)     edge [mystyle]  node  {} (a);
+            \path (s)     edge [mystyle]  node  {} (b);
+            \path (a)     edge [mystyle]  node  {} (c);
+            \path (b)     edge [mystyle]  node  {} (c);
+        \end{tikzpicture}
+\caption{Graph G=(V, E)}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                        {s};
+            \node[state]          (a) [below left =of s]    {a};
+            \node[state]          (b) [below right  =of s]    {b};
+            \node[state]          (c) [below left =of b]    {c};
+
+            \tikzset{mystyle/.style={->,double=orange}}   
+            \path (s)     edge [mystyle]  node  {} (a);
+            \path (s)     edge [mystyle]  node  {} (b);
+            \path (a)     edge [mystyle]  node  {} (c);
+        \end{tikzpicture}
+\caption{Möglicher Wurzelspannbaum 1}
+\end{figure}
+\begin{figure}[H]
+\centering
+        \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                        {s};
+            \node[state]          (a) [below left =of s]    {a};
+            \node[state]          (b) [below right  =of s]    {b};
+            \node[state]          (c) [below left =of b]    {c};
+
+            \tikzset{mystyle/.style={->,double=orange}}   
+            \path (s)     edge [mystyle]  node  {} (a);
+            \path (s)     edge [mystyle]  node  {} (b);
+            \path (b)     edge [mystyle]  node  {} (c);
+        \end{tikzpicture}
+\caption{Möglicher Wurzelspannbaum 2}
+\end{figure}
+\subsection*{Aufgabe 2:}
+Hinrichtung $\Rightarrow$: \\
+Wenn der zugrunde liegende ungerichtete Graph ein Baum ist und indeg($v$) = 1 
+für $v \neq s$ und indeg($s$) = 0 gilt, dann muss damit der Graph ein s-Wurzelspannbaum
+ist nur noch gezeigt werden, dass der Graph Azyklisch ist, und er alle Knoten $v \in V  \backslash \{s\}$
+enthält: \\
+Jeder Knoten ist in dem neuen Graphen enthalten, dies ist gegeben da der indeg($v$) = 1
+für jeden Knoten $v \in V  \backslash \{s\}$ ist, jeder Knoten wird also genau ein mal besucht. \\
+Ebenso ist der neue Grpah azyklisch aufgrund dieser Eigenschaft. Würde der neue
+Graph einen Kreis enthalten müsste entweder indeg($s$) $\geq 1$ oder indeg($v$) $geq 2$
+für mindestens einen Knoten $v \in V \backslash \{s\}$ gelten (anders kann kein Kreis entstehen). \\
+\\
+Rückrichtung $\Leftarrow$: \\
+Wenn G ein Wurzelspannbaum ist, dann ist er ein Wurzelbaum der alle Knoten enthält. \\
+Demnach Gilt also das G (und damit der zugrunde liegende Graph) azyklisch ist und
+für jeden Knoten $v \in V \backslash \{s\}$ gilt indeg($v$) = 1 (gegeben durch Definition
+Wurzelbaum), und indeg($s$) = 0.
+\subsection*{Aufgabe 3:}
+\paragraph*{a)}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                        {s};
+            \node[state]          (a) [below left =of s]    {a};
+            \node[state]          (b) [below right  =of s]    {b};
+            \node[state]          (c) [below left =of b]    {c};
+
+            \tikzset{mystyle/.style={->,double=black}}   
+            \path (s)     edge [mystyle]  node  {} (a);
+            \path (s)     edge [mystyle]  node  {} (b);
+            \path (a)     edge [mystyle]  node  {} (c);
+            \path (b)     edge [mystyle]  node  {} (c);
+        \end{tikzpicture}
+\caption{Hier schlägt Kruskal fehl}
+\end{figure}
+Die Zeichung zeigt einen Graphen in dem Kruskal fehlschlägt. Hier könnte Kruskal beim Knoten c starten,
+da c aber keine ausgehenden Kanten hat kann c nicht root-element eines s-Wurzelspannbaums sein.
+\paragraph*{b)}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                           {s};
+            \node[state]          (1) [below left =of s]        {1};
+            \node[state]          (2) [below right  =of s]      {2};
+            \node[state]          (3) [below =of 1]        {3};
+            \node[state]          (4) [below  =of 2]        {4};
+
+            \tikzset{mystyle/.style={->,double=orange}}
+            \tikzset{every node/.style={fill=white}}
+            \tikzset{mystyle/.style={->,double=black}}   
+            \path (s)     edge [mystyle]  node  {4} (1);
+            \path (s)     edge [mystyle]  node  {1} (2);
+            \path (1)     edge [mystyle]  node  {2} (3);
+            \path (1)     edge [mystyle]  node  {1} (4);
+            \path (4)     edge [mystyle]  node  {3} (3);
+            \path (2)     edge [mystyle]  node  {2} (4);
+
+    \end{tikzpicture}
+    \caption{Graph G = (V, E)}
+\end{figure}
+Hier findet Prim folgenden s-Wurzelspannbaum (ausgehend von s)
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                           {s};
+            \node[state]          (1) [below left =of s]        {1};
+            \node[state]          (2) [below right  =of s]      {2};
+            \node[state]          (3) [below =of 1]        {3};
+            \node[state]          (4) [below  =of 2]        {4};
+
+            \tikzset{mystyle/.style={->,double=orange}}
+            \tikzset{every node/.style={fill=white}}
+            \tikzset{mystyle/.style={->,double=orange}}   
+            \path (s)     edge [mystyle]  node  {4} (1);
+            \path (s)     edge [mystyle]  node  {1} (2);
+            \path (4)     edge [mystyle]  node  {3} (3);
+            \path (2)     edge [mystyle]  node  {2} (4);
+
+    \end{tikzpicture}
+    \caption{s-Wurzelspannbaum mit Prim}
+\end{figure}
+Jedoch gibt es einen günstigeren s-Wuzrelspannbaum:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style    ={}]
+            \node[state]          (s)                           {s};
+            \node[state]          (1) [below left =of s]        {1};
+            \node[state]          (2) [below right  =of s]      {2};
+            \node[state]          (3) [below =of 1]        {3};
+            \node[state]          (4) [below  =of 2]        {4};
+
+            \tikzset{mystyle/.style={->,double=orange}}
+            \tikzset{every node/.style={fill=white}}
+            \tikzset{mystyle/.style={->,double=orange}}   
+            \path (s)     edge [mystyle]  node  {4} (1);
+            \path (s)     edge [mystyle]  node  {1} (2);
+            \path (1)     edge [mystyle]  node  {2} (3);
+            \path (1)     edge [mystyle]  node  {1} (4);
+
+    \end{tikzpicture}
+    \caption{kleinerer s-Wurzelspannbaum}
+\end{figure}
+Prim findet also selbst unter gegebenen Anweisungen nicht immer einen minimalen s-Wurzelspannbaum
+\paragraph*{c)}
+Der Gegebene Graph ist kreisfrei, wir müssen also nur noch zeigen das indeg($s$) = 0 und 
+indeg($v$) = 1 für jeden Knoten $v \in V \backslash \{s\}$ gilt: \\
+Der Algorithmus fügt in jeder Iteration eine Kante hinzu, die zum aktuellen Knoten $v$
+hinführt. Da dies für jeden Knoten $v \in V \backslash \{s\}$ genau eingmal gemacht wird ist 
+indeg($v$) = 1 für jeden Knoten $v \in V \backslash \{s\}$. Da keine Kante vom zum Knoten 
+$s$ hin hinzugefügt wird (nur eventuell Kanten die von $s$ weg gehen) ist indeg($s$) = 0
+ebenfalls erfüllt.
+\paragraph*{d)}  
+Der Wurzelspannbaum ist minimal. Dies muss gelten da wir für jeden Knoten die billigste Kante 
+wählen die den Knoten zum Baum hinzufügt. Da wir wenn wir die billigste Kante für einen Knoten
+wählen wir uns keine andere, bessere, Lösung verbauen können muss die Lösung optimal sein (da 
+wir für jeden Knoten die beste Möglichkeit wählen und die Wahl für einen Knoten die Wahl für
+keinen anderen Knoten einschränkt).
+\end{document}
