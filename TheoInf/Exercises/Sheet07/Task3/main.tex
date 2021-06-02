@@ -52,13 +52,33 @@
 
 
 \begin{document}
-\section*{Aufgabe 3}
+\section*{Aufgabe 1}
 \subsection*{a}
 
+\includegraphics[width=0.7\columnwidth]{"automat.png"}
 \subsection*{b}
-DEA $N = (\varSigma, Z, \delta', z_k, F')$ mit
+DEA $A_5 = (\varSigma, Z, \delta, z_0, F)$ mit
 \begin{itemize}
-    \item $\varSigma_N = \varSigma_A$, $Z_N = Z_A \cup \{z_k\}$, $F' = \{ z_0 \}$
-    \item $\delta'(z, a)) = \bigcup_{z_i \in Z_N} \{ z_i | \delta(z_i, a) = z \}$
+    \item $\varSigma = \{0, 1\}$, $Z = \{ z_0, z_1, z_2, z_3, z_4\}$, $F = \{ z_ 2 \}$
+    \item $
+        \delta(z, a)) =
+        \begin{cases}
+            z_0     & \text{falls $z = z_0$ und $a = 0$}             \\
+            z_1     & \text{falls $z = z_0$ und $a = 1$}             \\
+
+            z_2     & \text{falls $z = z_1$ und $a = 0$}             \\
+            z_3     & \text{falls $z = z_1$ und $a = 1$}             \\
+
+            z_4     & \text{falls $z = z_2$ und $a = 0$}             \\
+            z_0     & \text{falls $z = z_2$ und $a = 1$}             \\
+
+            z_1     & \text{falls $z = z_3$ und $a = 0$}             \\
+            z_2     & \text{falls $z = z_3$ und $a = 1$}             \\
+
+            z_4     & \text{falls $z = z_4$ und $a = 0$}             \\
+            z_2     & \text{falls $z = z_4$ und $a = 1$}             \\
+
+        \end{cases}
+    $
 \end{itemize}
 \end{document}
