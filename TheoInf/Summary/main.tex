@@ -501,4 +501,32 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
     Seien $L, A, B \subseteq \varSigma^*$ mit $\epsilon \notin A$. Falls
     $L = A \cdot L \cup B$, so gilt $L = A^* B$
 \end{eigenschaft}
+\section{Pumping-Lemma}
+\begin{eigenschaft}
+    Für jede reguläre Sprache L existiert ein $n \in \mathbb{N}^+$ mit folgender
+    Eigenschaft: \\
+    Jedes Wort $w \in L$ mit $|w| \geq n$ lässt sich zerlegen in $w = xyz$, sodass
+    $y \neq \epsilon, |xy| \leq n$ und $\forall_{i \geq 0} xy^iz \in L$
+\end{eigenschaft}
+\begin{definition}[Äquivalenz von Zuständen]
+    Sei $A = (\varSigma, Z, \delta, z_0, F)$ ein DEA. Zwei Zustände $z_1, z_2 \in Z$
+    heißen \textbf{äquivalent}, falls für alle $w \in \varSigma^*$ gilt:
+    \[
+        \bar{\delta}(z_1, w) \in F \Leftrightarrow \bar{\delta}(z_2, w) \in F   
+    \]
+\end{definition}
+\begin{definition}[entscheidbare Zustandspaare]
+    Sei $A = (\varSigma, Z, \delta, z_0, F)$ ein DEA.
+    \begin{itemize}
+        \item (IA) falls $z_1 \in F \Leftrightarrow z_2 \in F$ so sind $z_1$ und $z_2$
+        \textbf{unterscheidbar}
+        \item (IS) Sind $a \in \varSigma$, $\delta(z_1, a) = z'_1, \delta(z_2, a) = z'_2$
+        sowie $z'_1$ und $z'_2$ unterscheidbare Zustände, so sind $z_1$ und $z_2$ 
+        \textbf{unterscheidbar}
+    \end{itemize}
+\end{definition}
+\begin{eigenschaft}
+    Sei $A = (\varSigma, Z, \delta, z_0, F)$ ein DEA. 
+    Sind zwei Zustände $z_1, z_2 \in Z$ nicht unterscheidbar $\Leftrightarrow$ so sind sie äquivalent
+\end{eigenschaft}
 \end{document}
