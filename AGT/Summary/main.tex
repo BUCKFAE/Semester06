@@ -339,4 +339,17 @@ Algorithmus zur berechnung von s-Wurzelspannbäumen:
     \item Expandiere $\tilde{T}$ zu s-Wurzelspannbaum T von G
     \item Gibt T zurück
 \end{itemize}
+\section{MinCut - Kleinste Schnitte}
+\begin{definition}
+    Gegeben sei ein ungerichteter Multigraph $G = (V, E)$. \\
+    Gesucht ist eine Zerlegung $(S, T)$ von $V$ mit $S, T \neq
+    \emptyset$, so dass die Anzahl der Kanten $uv \in E$ mit 
+    $u \in S$ und $v \in T$ möglichst klein ist
+\end{definition}
+\textbf{Beachte}: Im Gegensatz zu $s-t$-Schnitten ist hier kein
+trennednes Knotenpaar $(s, t)$ vorgegeben 
+\subsection*{Contract}
+Sei $(S, T)$ ein kleinster Schnitt. Die Wahrscheinlichkeit das
+CONTRACT diesen Schnitt findet ist $\geq \frac{2}{n(n - 1)}$ \\
+FastCut: Für kleine n BruteForce
 \end{document}
