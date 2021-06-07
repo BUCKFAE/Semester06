@@ -1,0 +1,162 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[german,vlined,longend]{algorithm2e}
+\usepackage{graphicx}
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}  
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata}
+\usetikzlibrary{calc}
+\usepackage{listings}
+\usepackage{float}
+
+% --- math operators ---
+\usepackage{mathtools}
+\DeclarePairedDelimiter\set{\{}{\}} % use $\set*{1, 2, 3}$ 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceils{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\angles{\langle}{\rangle}
+\def\Oh{\ensuremath{\mathcal{O}}} % big O like $\Oh(n)$
+\def\oh{\ensuremath{\scriptstyle{\mathcal{O}}}} % small O
+% ---
+
+\begin{document}
+
+\begin{small}
+    \noindent
+    Schubert Julian, Gruppe 4 \\
+    Philipp Wahl, Gruppe 4
+\end{small}
+\bigskip
+
+\begin{center}
+    \LARGE Abgabe zum 8. Übungsblatt (AGT 21)
+\end{center}
+\smallskip
+\subsection*{Aufgabe 1:}
+\paragraph*{a)}
+Wir widerlegen die Behauptung unseres Kommikitonen mit einem Beispiel:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=2cm,on grid,initial/.style,     ={}]
+            \node[state]          (1)                  {1};
+            \node[state]          (2) [right =of 1]    {2};
+
+            % Left cluster
+            \node[state]          (3) [above left =of 1]    {3};
+            \node[state]          (4) [below left =of 1]    {4};
+            \node[state]          (5) [above left =of 4]    {5};
+
+            % Right cluster
+            \node[state]          (6) [above right =of 2]    {6};
+            \node[state]          (7) [below right =of 2]    {7};
+            \node[state]          (8) [above right =of 7]    {8};
+
+            \tikzset{mystyle/.style={-,double=black}}   
+            \path (1)     edge [mystyle]  node  {} (2);
+
+            % Left cluster
+            \path (1)     edge [mystyle]  node  {} (3);
+            \path (1)     edge [mystyle]  node  {} (4);
+            \path (1)     edge [mystyle]  node  {} (5);
+            \path (3)     edge [mystyle]  node  {} (4);
+            \path (5)     edge [mystyle]  node  {} (3);
+            \path (5)     edge [mystyle]  node  {} (4);
+
+            % Right cluster
+            \path (2)     edge [mystyle]  node  {} (6);
+            \path (2)     edge [mystyle]  node  {} (7);
+            \path (2)     edge [mystyle]  node  {} (8);
+            \path (6)     edge [mystyle]  node  {} (7);
+            \path (8)     edge [mystyle]  node  {} (6);
+            \path (8)     edge [mystyle]  node  {} (7);
+
+    \end{tikzpicture}
+\caption{Graph G=(V, E)}
+\end{figure}
+Der Ansatzt von unserem Kommilitonen würde in diesem Beispiel als Schnitt entweder $(\{1\}, V \backslash \{1\})$ oder
+$(\{2\}, V \backslash \{2\})$ liefern (da dies die beiden Knoten mit höchstem Grad sind). In diesem
+Beispiel gibt es jedoch einen kleineren (minimalen) möglichen Schnitt: $(\{1, 3, 4, 5\}, \{2, 6, 8, 7\})$ \\
+Damit ist die Behauptung des Kommilitonen widerlegt.
+\paragraph*{b)}
+\subsection*{Aufgabe 2:}
+Zunächst zeigen wir, wie man eine Zufällige Kante in \Oh(V) wählen kann: \\
+\noindent GetRandomEdge($G = (V, E)$)\\
+\begin{algorithm}[H]
+    total = $\sum_{v \in V} deg(v)$ \\
+    rdm = Zufallszahl zwischen 1 und total (beides inklusive) \\
+	sum = 0 \;
+    \For(){$v \in V$}{
+        \If(Kante zurück geben){sum + v.deg() $\geq$ rdm}{
+            \Return v.adj[rdm - (sum + v.deg())]
+        } \Else(sum um den Grad vom Knoten v erhöhen){
+            sum = sum + v.deg()
+        }
+    }
+
+	\Return nil\;
+\end{algorithm}
+Dieser Algorithmus für das Zufällige auswählen einer Kante dauert \Oh(V) da wir zwei mal über alle Knoten 
+iterieren (einmal um total zu bestimmen und einmal für die Kante). \\
+Nun müssen wir nur noch den Graphen fertig Kontrahieren: \\
+Unsere neue Kante verbindet die Knoten $v_i$ und $v_j$. Nun iterieren wir über alle Einträge
+in der Adjazenzliste von $v_i$ und ändern für jeden Knoten $v_k$ in der Adjazenzliste von $v_i$
+den Eintrag $v_i$ in $v_j$ um. Wir ersetzen also alle Kanten von $v_k$ nach $v_i$ zu Kanten die 
+von (bzw zu, selbes Prinzip) $v_k$ zu $v_j$ gehen. \\
+Wir wählen weiterhin Kanten gleichverteilt aus da jede Kante mit unserem Algorithmus die selbe chance
+hat ausgewählt zu werden (da Knoten mit höhterem Grad nun eine höhere Chance haben ausgewählt zu werden)
+\subsection*{Aufgabe 3:}
+\paragraph*{a)}
+Wir widerlegen wieder durch ein Gegenbeispiel:
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=2cm,on grid,initial/.style,     ={}]
+            \node[state]          (1)                  {1};
+            \node[state]          (2) [right =of 1]    {2};
+            \node[state]          (3) [above right =of 1]    {3};
+            \node[state]          (4) [below right =of 1]    {4};
+            \node[state]          (5) [right =of 2]    {5};
+
+            \tikzset{mystyle/.style={-,double=black}}   
+            \path (1)     edge [mystyle]  node  {} (2);
+            \path (1)     edge [mystyle]  node  {} (3);
+            \path (1)     edge [mystyle]  node  {} (4);
+            \path (2)     edge [mystyle]  node  {} (5);
+
+
+    \end{tikzpicture}
+\caption{Graph G=(V, E)}
+\end{figure}
+Der Vorschlag unseres Kommilitonen würde den Schnitt  $(\{1\}, \{2, 3, 4, 5\})$ liefern, größer
+ist jedoch Beispielsweise der Schnitt  $(\{1, 5\}, \{2, 3, 4\})$
+\paragraph*{b)}
+Wenn eine Kante e auf dem Schnitt liegt, dürfen ihre beiden Endpunkte nicht beide in S bzw. nicht
+beide in T liegen. Ist der eine Endpunkt nun in S (oder T), so ist die Wahrscheinlicheit dass der 
+andere Endpunkt in T (bzw. S) liegt gleich 0.5. \\
+$\Rightarrow$ die Wahrscheinlicheit liegt bei 0.5
+\paragraph*{c)}
+Für einen festen Schnitt ist für jeden Knoten vorgegeben, ob er in S oder in T liegen muss. 
+Bedeutet jeder Knoten liegt mit einer WSK von 0.5 im richtigen Schnitt. Dadurch
+ergibt sich 
+\[
+    P(E) = 0.5 \cdot |V|  
+\]
+Da jedoch wenn ALLE Knoten in der Falschen Menge liegen ebenfalls der Korrekte Schnitt
+geliefert wird (S, T) = (T, S), gilt insgesamt:
+\[
+    P(E) = (0.5 \cdot |V|) \cdot 2
+\]
+\paragraph*{d)}
+Wir zeigen zunächst das die Erwartete Anzahl an Kanten die auf dem Schnitt liegen, exakt
+$|E| / 2$ ist: \\
+Es existieren $|E|$ viele Kanten, für jede dieser Kanten ist laut Teilaufgabe b die WSK
+das sie auf dem Schnitt liegt gleich 0.5. Damit liegen erwartet $|E| * 0.5 = |E| / 2$ viele
+Kanten auf dem Schnitt. \\
+Eine maximale Optimale Lösung ist die, in der ALLE Kanten auf dem Schnitt liegen. Das ist
+$|E|$, also doppelt so groß wie die Anzahl an Kanten die unser Algorithmus zurück gibt.
+Damit ergibt sich eine Güte von $\frac{1}{2}$
+\end{document}
