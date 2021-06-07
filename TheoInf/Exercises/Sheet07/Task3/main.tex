@@ -52,33 +52,32 @@
 
 
 \begin{document}
-\section*{Aufgabe 1}
+\section*{Aufgabe 3}
 \subsection*{a}
-
-\includegraphics[width=0.7\columnwidth]{"automat.png"}
+Wenn eine Wort $w$ vom Automaten A akzeptiert wird, dann befindet sich der
+Automat am ende in einem akzeptierendem Zustand $z_k \in F$. Wenn wir das 
+Wort $w^R$ akzeptieren möchten, so müssen wir in diesem akzeptierten 
+Zustand $z_k$ starten und dann alle Pfeile umdrehen. Sprich, wenn man 
+im Automaten $A$ vom Zustand $z_i$ bei Eingabe $e$ in $z_j$ landet, so
+muss man in unserem Spiegelautomaten vom Zustand $z_j$ bei Eingabe $e$
+in $z_i$ landen. Unser neuer Spiegelautomat hat nur einen akzeptierenden
+Zustand, und zwar $z_0$ des Uhrsprünglichen Automatens da wenn wir im
+Spiegelautomaten von einem akzeptierenden Zustand starten und wieder bei
+$z_0$ von $A$ landen haben wir ein Wort aus $L(A)$ rückwährts eingelesen.
+Zuletzt muss beachtet werden, dass $A$ mehrere akzeptierte Zustände haben kann,
+unser neuer Automat $N$ müsste also mehrere Startzustände haben, was per
+Definition nicht erlaubt ist. Wir müssen also einen neuen Startzustand $z_0'$
+einführen der alle akzeptieren Zustände aus A zusammenfasst, die Pfeile 
+von diesem Zustand weg sind wie oben beschrieben die aus A umgedrehten
+Übergänge. Die alten akzeptierenden Zustände aus A müssen in N entfernt
+werden. \\
+Die Überführungsfunktion von N muss also so aufgestellt werden, dass von einem 
+Zustand $z$ bei Eingabe $a$ in alle Zustände $z_i$ übergegangen wird, für 
+die der Automat A von $z_i$ bei Eingabe $a$ nach $z$ wechselt.
 \subsection*{b}
-DEA $A_5 = (\varSigma, Z, \delta, z_0, F)$ mit
+DEA $N = (\varSigma, Z, \delta', z_k, F')$ mit
 \begin{itemize}
-    \item $\varSigma = \{0, 1\}$, $Z = \{ z_0, z_1, z_2, z_3, z_4\}$, $F = \{ z_ 2 \}$
-    \item $
-        \delta(z, a)) =
-        \begin{cases}
-            z_0     & \text{falls $z = z_0$ und $a = 0$}             \\
-            z_1     & \text{falls $z = z_0$ und $a = 1$}             \\
-
-            z_2     & \text{falls $z = z_1$ und $a = 0$}             \\
-            z_3     & \text{falls $z = z_1$ und $a = 1$}             \\
-
-            z_4     & \text{falls $z = z_2$ und $a = 0$}             \\
-            z_0     & \text{falls $z = z_2$ und $a = 1$}             \\
-
-            z_1     & \text{falls $z = z_3$ und $a = 0$}             \\
-            z_2     & \text{falls $z = z_3$ und $a = 1$}             \\
-
-            z_4     & \text{falls $z = z_4$ und $a = 0$}             \\
-            z_2     & \text{falls $z = z_4$ und $a = 1$}             \\
-
-        \end{cases}
-    $
+    \item $\varSigma_N = \varSigma_A$, $Z_N = \{Z_A \cup \{z_0'\}\} \backslash F_A$, $F' = \{ z_0 \}$
+    \item $\delta'(z, a)) = \bigcup_{z_i \in Z_N} \{ z_i | \delta(z_i, a) = z \}$
 \end{itemize}
 \end{document}
