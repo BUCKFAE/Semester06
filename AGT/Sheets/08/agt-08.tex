@@ -78,11 +78,19 @@ Wir widerlegen die Behauptung unseres Kommikitonen mit einem Beispiel:
     \end{tikzpicture}
 \caption{Graph G=(V, E)}
 \end{figure}
-Der Ansatzt von unserem Kommilitonen würde in diesem Beispiel als Schnitt entweder $(\{1\}, V \backslash \{1\})$ oder
-$(\{2\}, V \backslash \{2\})$ liefern (da dies die beiden Knoten mit höchstem Grad sind). In diesem
+Der Ansatzt von unserem Kommilitonen würde in diesem Beispiel als Schnitt beispielsweise $(\{4\}, V \backslash \{4\})$ oder
+$(\{7\}, V \backslash \{7\})$ liefern (da dies die beiden Knoten mit höchstem Grad sind). In diesem
 Beispiel gibt es jedoch einen kleineren (minimalen) möglichen Schnitt: $(\{1, 3, 4, 5\}, \{2, 6, 8, 7\})$ \\
 Damit ist die Behauptung des Kommilitonen widerlegt.
 \paragraph*{b)}
+Die WSK das Contract einen festen (kleinsten) Schnitt findet ist $\geq \frac{2}{n (n - 1)}$. Wir nehmen nun an, dass 
+für $n \geq 2$ $V^2$ viele kleinste Schnitte existieren (und widerlegen die Aussage so per Kontraposition): 
+\[
+    \frac{2}{n(n - 1)} \cdot n^2 = \frac{2n^2}{n(n - 1)}  
+\]
+Da hier der Zähler des Bruchs für $n \in \mathbb{N}$ größer als der Nenner des Bruchs ist, würde sich dafür,
+dass Contract einen der kleinsten Schnitte von größer als 1 ergeben. Damit muss gelten, dass es höchstens
+\Oh($|V|^2$) viele verschiedenen kleinste Schnitte geben kann.
 \subsection*{Aufgabe 2:}
 Zunächst zeigen wir, wie man eine Zufällige Kante in \Oh(V) wählen kann: \\
 \noindent GetRandomEdge($G = (V, E)$)\\
@@ -116,23 +124,44 @@ Wir widerlegen wieder durch ein Gegenbeispiel:
     \centering
     \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=2cm,on grid,initial/.style,     ={}]
             \node[state]          (1)                  {1};
-            \node[state]          (2) [right =of 1]    {2};
-            \node[state]          (3) [above right =of 1]    {3};
-            \node[state]          (4) [below right =of 1]    {4};
-            \node[state]          (5) [right =of 2]    {5};
+            \node[state]          (2) [below =of 1]    {2};
+            \node[state]          (3) [below =of 2]    {3};
+            \node[state]          (4) [below =of 3]    {4};
+            \node[state]          (5) [below =of 4]    {5};
+            \node[state]          (6) [below =of 5]    {6};
+            \node[state]          (7) [below =of 6]    {7};
+            \node[state]          (8) [below =of 7]    {8};
+
+            \node[state]          (9) [right =of 1]    {9};
+            \node[state]          (10) [right =of 3]    {10};
+            \node[state]          (11) [right =of 5]    {11};
+            \node[state]          (12) [right =of 7]    {12};
+
+            \node[state]          (13) [right =of 9]    {13};
+
 
             \tikzset{mystyle/.style={-,double=black}}   
-            \path (1)     edge [mystyle]  node  {} (2);
-            \path (1)     edge [mystyle]  node  {} (3);
-            \path (1)     edge [mystyle]  node  {} (4);
-            \path (2)     edge [mystyle]  node  {} (5);
+            \path (1)     edge [mystyle]  node  {} (9);
+            \path (2)     edge [mystyle]  node  {} (9);
+            \path (3)     edge [mystyle]  node  {} (10);
+            \path (4)     edge [mystyle]  node  {} (10);
+            \path (5)     edge [mystyle]  node  {} (11);
+            \path (6)     edge [mystyle]  node  {} (11);
+            \path (7)     edge [mystyle]  node  {} (12);
+            \path (8)     edge [mystyle]  node  {} (12);
+
+            \path (9)     edge [mystyle]  node  {} (13);
+            \path (10)     edge [mystyle]  node  {} (13);
+            \path (11)     edge [mystyle]  node  {} (13);
+            \path (12)     edge [mystyle]  node  {} (13);
+
 
 
     \end{tikzpicture}
 \caption{Graph G=(V, E)}
 \end{figure}
-Der Vorschlag unseres Kommilitonen würde den Schnitt  $(\{1\}, \{2, 3, 4, 5\})$ liefern, größer
-ist jedoch Beispielsweise der Schnitt  $(\{1, 5\}, \{2, 3, 4\})$
+Der Vorschlag unseres Kommilitonen würde den Schnitt  $(\{13\}, \{V \backslash \{13\}\})$ liefern, größer
+ist jedoch Beispielsweise der Schnitt  $(\{1, 2, 3, 4, 5, 6, 7, 8\}, \{9 , 10, 11, 12, 13\})$
 \paragraph*{b)}
 Wenn eine Kante e auf dem Schnitt liegt, dürfen ihre beiden Endpunkte nicht beide in S bzw. nicht
 beide in T liegen. Ist der eine Endpunkt nun in S (oder T), so ist die Wahrscheinlicheit dass der 
@@ -143,12 +172,12 @@ Für einen festen Schnitt ist für jeden Knoten vorgegeben, ob er in S oder in T
 Bedeutet jeder Knoten liegt mit einer WSK von 0.5 im richtigen Schnitt. Dadurch
 ergibt sich 
 \[
-    P(E) = 0.5 \cdot |V|  
+    P(E) = 0.5^{|V|}  
 \]
 Da jedoch wenn ALLE Knoten in der Falschen Menge liegen ebenfalls der Korrekte Schnitt
 geliefert wird (S, T) = (T, S), gilt insgesamt:
 \[
-    P(E) = (0.5 \cdot |V|) \cdot 2
+    P(E) = (0.5^{|V|}) \cdot 2
 \]
 \paragraph*{d)}
 Wir zeigen zunächst das die Erwartete Anzahl an Kanten die auf dem Schnitt liegen, exakt
