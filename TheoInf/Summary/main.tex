@@ -515,7 +515,7 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         \bar{\delta}(z_1, w) \in F \Leftrightarrow \bar{\delta}(z_2, w) \in F   
     \]
 \end{definition}
-\begin{definition}[entscheidbare Zustandspaare]
+\begin{definition}[unterscheidbare Zustandspaare]
     Sei $A = (\varSigma, Z, \delta, z_0, F)$ ein DEA.
     \begin{itemize}
         \item (IA) falls $z_1 \in F \Leftrightarrow z_2 \in F$ so sind $z_1$ und $z_2$
@@ -529,4 +529,27 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
     Sei $A = (\varSigma, Z, \delta, z_0, F)$ ein DEA. 
     Sind zwei Zustände $z_1, z_2 \in Z$ nicht unterscheidbar $\Leftrightarrow$ so sind sie äquivalent
 \end{eigenschaft}
+\begin{definition}[Äquivalente DEA]
+    \text{EquivalentDEA} = $\{(A_1, A_2) | A_1, A_2$ sind DEAS mit gleichem
+    Eingabealphabet und $L(A_1) = L(A_2)\}$
+\end{definition}
+\begin{enumerate}
+    \item Wir fassen $A_1$ und $A_2$ als einen DEA auf, indem wir beide
+    Automaten nebeneinander zeichen und als Startzustand den von $A_1$ wählen
+    \item Bestimme die unterscheidbaren Zustände mit Hilfe des Algorithmus 
+    auf seite 234
+    \item $A_1$ und $A_2$ sind genau dann äquivalent, wenn die beiden Start-
+    zustände nicht unterscheidbar sind
+\end{enumerate}
+\begin{eigenschaft}
+    Sei $A = (\varSigma, Z, \delta, z_0, F)$ ein DEA. Die Äquivalenz von
+    Zuständen ist eine Äquivalenzrelation auf Z, d.h. es gilt:
+    \begin{enumerate}
+        \item Jeder Zustand ist sich selbst äquivalent (Reflexivität)
+        \item Ist p äquivalent zu q so auf q zu p (Symmetrie)
+        \item Ist p äquivalent zu q und q äquivalent zu r, so auf p zu r
+        (Transitivität)
+    \end{enumerate}
+\end{eigenschaft}
+TODO: S.246
 \end{document}

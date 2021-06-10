@@ -1,0 +1,38 @@
+\documentclass{article}
+% General document formatting
+\usepackage[margin=0.7in]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Related to math
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+\begin{document}
+\subsection*{Recap}
+\begin{itemize}
+    \item Pumping-Lemma: \\
+    Für jedes $L \in REG$ gilt: \\
+    $
+        \exists n \in \mathbb{N}^+ \\
+        \forall w \in L \text{ mit } |w| \geq n \\
+        \exists \text{ Zerlegunt } w = xyz \text{ mit } y \neq \epsilon
+        und |xy| \geq n \\
+        \forall i \geq 0 \\
+        xy^iz \in L
+    $
+    \item Äquivalenz von DEAs
+    \begin{itemize}
+        \item $z_1$ äquivalent zu $z_2$ $\Leftrightarrow$ gleiches 
+        Akzeptierungsverhalten für alle Wörter
+        \item $z_1$ und $z_2$ sind unterscheidbar $\Leftrightarrow$ wenn
+        sie unterschiedliches Akzeptierungsverhalten haben, oder wenn mit 
+        Buchstaben $a$ wir in zwei bereits bekannt unterscheidbare 
+        Zustände kommen.
+        \item unterscheidbar $\Leftrightarrow$ nicht äquivalent
+    \end{itemize}
+\end{itemize}
+Beispiel Äquivalenztest für DEAS: 0:12:00
+\end{document}
