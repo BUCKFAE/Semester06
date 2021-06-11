@@ -78,3 +78,6 @@ print(fast)
 print(deaRun(fast, '10110'))
 print(deaRun(fast, '10010'))
 print(deaRun(fast, '110010100'))
+
+A = {1: 0, 2: 9}
+A.
