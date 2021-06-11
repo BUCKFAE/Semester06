@@ -1,0 +1,61 @@
+\documentclass{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{mathabx}
+\usepackage{listings}
+
+\title{Theoretische Informatik}
+\author{Julian Schubert}
+
+% Definition
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!20,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\begin{document}
+Berechenbar: Nur Funktionen können Berechenbar sein, Mengen nicht! \\
+Entscheidbarkeit: Nur Mengen! \\
+
+Link: Eine Menge ist entscheidbar, wenn ihre charakteristische Funktion berechenbar ist. \\
+
+Rice: NUR wenn das und das, dann unentscheidbar, ZEIGT ABER NICHT DIE RÜCKRICHTUNG!
+\end{document}

@@ -10,11 +10,27 @@ def nea2dea(A):                         # liefert  ̈aquivalenten DEA (Potenzmen
     delta1 = {}                         # ̈Uberf ̈uhrungsfunktion
     for S in Z1:                        # Verwendung von frozenset statt set, da Mengen nur
         for a in Sigma:                 # nichtver ̈anderbare Objekte enthalten d ̈urfen.
+
+            for z in S:
+                print(f"z: {z}")
+
+                print(f"delta[{z}, {a}] = {delta[z, a]}")
+                for s in delta[z, a]:
+                    print(f"s: {s}")
+
             delta1[S,a] = frozenset({s for z in S for s in delta[z, a]})
-        F1 = {S for S in Z1 if (S & F) != set()}
+
+    F1 = {S for S in Z1 if (S & F) != set()}
     return [Sigma, Z1, delta1, frozenset({z0}), F1]
-    
-    
+        
+
+def dea2nea(A):
+    [Sigma, Z, delta, z0, F] = A 
+    NZ = [[z] for z in Z]
+    NF = [[f] for f in F]
+
+    return [Sigma, NZ, delta, [z0], NF]
+
 def neaKomplement(A):                   # liefert NEA, der das Komplement von L(A) akzeptiert,
     [Sigma, Z, delta, z0, F] = A        # wobei A ein NEA entsprechend Definition 3.12 ist
 
@@ -150,8 +166,8 @@ def printDEA(A):
     print(f"Start: {z0}")
     print(f"F:     {F}")
 
-a1 = createFastSearchDEA({'0', '1'}, '0')
-a2 = createFastSearchDEA({'0', '1'}, '1')
+a1 = dea2nea(createFastSearchDEA({'0', '1'}, '0'))
+a2 = dea2nea(createFastSearchDEA({'0', '1'}, '1'))
 
 a1_n = neaKomplement(a1)
 print(f"NEA 1:\n{a1}\nKomplement:\n{a1_n}")
@@ -163,10 +179,10 @@ print(f"NEA 1:\n{a1}\nNEA 1:\n{a2}\nVereinigung:\n{a1_a2_cup}")
 
 printDEA(a1_a2_cup)
 
-print(deaRun(a1_a2_cup, '1'))
-print(deaRun(a1_a2_cup, '0'))
-print(deaRun(a1_a2_cup, '11'))
-print(deaRun(a1_a2_cup, '00'))
+print(nea2dea(deaRun(a1_a2_cup, '1')))
+print(nea2dea(deaRun(a1_a2_cup, '0')))
+print(nea2dea(deaRun(a1_a2_cup, '11')))
+print(nea2dea(deaRun(a1_a2_cup, '00')))
 
-
+# TODO: Leeres Wort!!!
 print("\n\n--------------\n\n")
