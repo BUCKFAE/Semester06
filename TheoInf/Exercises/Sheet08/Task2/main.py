@@ -10,32 +10,30 @@ def nea2dea(A):                         # liefert  ̈aquivalenten DEA (Potenzmen
     delta1 = {}                         # ̈Uberf ̈uhrungsfunktion
     for S in Z1:                        # Verwendung von frozenset statt set, da Mengen nur
         for a in Sigma:                 # nichtver ̈anderbare Objekte enthalten d ̈urfen.
-
-            for z in S:
-                print(f"z: {z}")
-
-                print(f"delta[{z}, {a}] = {delta[z, a]}")
-                for s in delta[z, a]:
-                    print(f"s: {s}")
-
             delta1[S,a] = frozenset({s for z in S for s in delta[z, a]})
-
+    
     F1 = {S for S in Z1 if (S & F) != set()}
     return [Sigma, Z1, delta1, frozenset({z0}), F1]
         
+def neaKomplement(A):                   # liefert NEA, der das Komplement von L(A) akzeptiert,
+    [Sigma, Z, delta, z0, F] = nea2dea(A)
+
+    return dea2nea([Sigma, Z, delta, z0, Z - F])
 
 def dea2nea(A):
-    [Sigma, Z, delta, z0, F] = A 
-    NZ = [[z] for z in Z]
-    NF = [[f] for f in F]
+    [Sigma, Z, delta, z0, F] = A
 
-    return [Sigma, NZ, delta, [z0], NF]
+    newDelta = {}
+    for key in delta:
+        newDelta[key] = [delta[key]]
 
-def neaKomplement(A):                   # liefert NEA, der das Komplement von L(A) akzeptiert,
-    [Sigma, Z, delta, z0, F] = A        # wobei A ein NEA entsprechend Definition 3.12 ist
+    return [Sigma, set(Z), newDelta, z0, set(F)]
 
-    return [Sigma, Z, delta, z0, [z for z in Z if z not in F]]
-    
+def deaKomplement(A):
+    [Sigma, Z, delta, z0, F] = A
+
+    return [Sigma, Z, delta, z0, Z - F]
+
 def neaVereinigung(A,B):                # liefert NEA, der die Vereinigung von L(A) und L(B) akzeptiert,
     [Sigma, AZ, Adelta, Az0, AF] = A    # wobei A,B NEAs entsprechend Definition 3.12 sind
     [Sigma, BZ, Bdelta, Bz0, BF] = B
@@ -48,141 +46,152 @@ def neaVereinigung(A,B):                # liefert NEA, der die Vereinigung von L
     Az0 = (1, Az0)
     Bz0 = (2, Bz0)
 
+    # Startzustand für C
+    Cz0 = 0
+
     # Akzeptierte Zustaende umbenennen
     AF = [(1, z) for z in AF]
     BF = [(2, z) for z in BF]
+    CF = (AF + BF)
+
+    if Az0 in AF or Bz0 in BF:
+        CF += Cz0
 
     # Adelta anpassen
     newAdelta = {}
     for key in Adelta.keys():
-        newAdelta[((1, key[0]), key[1])] = (1, Adelta[key])
+        newAdelta[(1, key[0]), key[1]] = [(1, r) for r in Adelta[key]]
 
     # Bdelta anpassen
     newBdelta = {}
     for key in Bdelta.keys():
-        newBdelta[((2, key[0]), key[1])] = (2, Bdelta[key])
-
-    # Startzustand für C
-    Cz0 = 0
+        newBdelta[(2, key[0]), key[1]] = [(2, r) for r in Bdelta[key]]
 
     # Überführungsfunktion
-    Cdelta = {}
+    Cdelta = newAdelta.copy()
+    Cdelta.update(newBdelta)
 
-    print(f"Adelta: {newAdelta}")
-    print(f"Bdelta: {newBdelta}")
+    for a in Sigma:
+        Cdelta[Cz0, a] = []
 
-    sum = newAdelta.copy()
-    sum.update(newBdelta)
+    for key in newAdelta.keys():
+        if key[0] == Az0:
+            Cdelta[Cz0, key[1]] = Cdelta[Cz0, key[1]] + newAdelta[key]
 
-    print(f"Sum: {sum}")
+    for key in newBdelta.keys():
+        if key[0] == Bz0:
+            Cdelta[Cz0, key[1]] = Cdelta[Cz0, key[1]] + newBdelta[key]
 
-    print(f"Az0: {Az0}")
-    print(f"Bz0: {Bz0}")
-
-    CF = (AF + BF)
-
-    # Alten Überführungsfunktionen übernehmen
-    for key in sum.keys():
-        Cdelta[key] = sum[key]
-
-        # TODO: Leeres Wort!!
-
-        print(f"{key} -> {Cdelta[key]}")
-        if key[0] == Az0 or key[0] == Bz0:
-            Cdelta[(Cz0, key[1])] = Cdelta[key]
-            print(f"Start: {(Cz0, key[1])} -> {Cdelta[(Cz0, key[1])]}")
-
-
-    C = [Sigma, AZ + BZ, Cdelta, Cz0, CF]
-
-    return C
+    return [Sigma, set(AZ + BZ + [Cz0]), Cdelta, Cz0, set(CF)]
     
 def neaKonkatenation(A,B):              # liefert NEA, der L(A)L(B) akzeptiert,
     [Sigma, AZ, Adelta, Az0, AF] = A    # wobei A,B NEAs entsprechend Definition 3.12 sind
     [Sigma, BZ, Bdelta, Bz0, BF] = B
 
+    # Zustandsmenge umbenennen
+    AZ = [(1, z) for z in AZ]
+    BZ = [(2, z) for z in BZ]
+
+    # Startzustaende umbenennen
+    Az0 = (1, Az0)
+    Bz0 = (2, Bz0)
+
+    # Akzeptierte Zustaende umbenennen
+    AF = [(1, z) for z in AF]
+    BF = [(2, z) for z in BF]
+
+    Cdelta = Adelta.copy()
+    Cdelta.update(Bdelta)
+
     # TODO
     C = None
 
-    return C
+    return [Sigma, AZ + BZ, Cdelta, Az0, set(BF)]
 
 def deaErweiterteUEF(delta, z, w):  # erweiterte ̈Uberf ̈uhrungsfunktion eines DEA
     for a in w:
         z = delta[z, a]
-
-    print(f"Stopped: {z}")
     return z
     
 def deaRun(A, w):                   # testet, ob der DEA A das Wort w akzeptiert
     [Sigma, Z, delta, z0, F] = A
-    
     return deaErweiterteUEF(delta, z0, w) in F 
 
+def evalK(w):
 
-def createFastSearchDEA(Sigma, v):
+    if w == '':
+        return False
+    
+    if len(w) == 1 and w[0] == '1':
+        return True
 
-    Z = set([i for i in range(len(v) + 1)])
-    F = {len(v)}
+    if len(w) >= 2 and w[0] == '1' and w.count(1) == len(2) - 1 and w[-1] == '2':
+        return True
 
-    delta = {}
+    return False
 
-    # Iterating over the index of all chars
-    for i in range(len(v)):
-        
-        # Next char matches
-        delta[i, v[i]] = i + 1
+def evalNotK(w):
+    
+    if w == '2' or w == '':
+        return True
 
-        # Cases that don't match
-        for s in Sigma:
+    if w.count('1') == len(w) and len(w) > 1:
+        return True
 
-            if s == v[i]:
-                continue
+    if '2' in w and w[-1] != 2:
+        return True
 
-            delta[i, s] = findBiggestMatch(v, v[:i - 2] + s)
+    return False
 
+def evalL(w):
+    return w[0] == '1' and w[-1] == '2' if len(w) >= 2 else False
 
-    # Stay accepted
-    for s in Sigma:
-        delta[len(v), s] = len(v)
+def evalNotL(w):
 
-    return [Sigma, Z, delta, 0, F]
+    if len(w) < 2:
+        return True
 
-def findBiggestMatch(v, w):
+    if w[0] != '1' or w[-1] != '2':
+        return True
 
-    biggest = 1
+    return False
 
-    while w.endswith(v[:biggest]) and biggest < len(v):
-        biggest += 1
+def evalM(w):
+    return (w[-2] == '1' and len(w) >= 2) if len(w) > 1 else False
 
-    biggest -= 1
+def evalNotM(w):
+    if len(w) < 2:
+        return True
+    if w[-2] != '1':
+        return True
+    return False  
 
-    return biggest
+# Automaten aus Aufgabe 1
+K = [{'1', '2'}, [0, 1, 2], {(0, '1'): [1, 2], (0, '2'): [], (1, '1'): [1], (1, '2'): [2], (2, '1'): [], (2, '2'): []}, 0, {2}]
+L = [{'1', '2'}, [0, 1, 2], {(0, '1'): [1], (0, '2'): [], (1, '1'): [1], (1, '2'): [2], (2, '1'): [1], (2, '2'): [2]}, 0, {2}]
+M = [{'1', '2'}, [0, 1, 2], {(0, '1'): [0, 1], (0, '2'): [0], (1, '1'): [1, 2], (1, '2'): [0, 2], (2, '1'): [], (2, '2'): []}, 0, {2}]
 
-def printDEA(A):
-    [Sigma, Z, delta, z0, F] = A
-    print(f"Sigma: {Sigma}")
-    print(f"Z:     {Z}")
-    print(f"Delta: {delta}")
-    print(f"Start: {z0}")
-    print(f"F:     {F}")
+# Fälle zum Automaten testen
+test_cases = [''] + [str(bin(i))[2:].replace("0", "tmp").replace("1", "2").replace("tmp", "1") for i in range(500)]
 
-a1 = dea2nea(createFastSearchDEA({'0', '1'}, '0'))
-a2 = dea2nea(createFastSearchDEA({'0', '1'}, '1'))
+for curr in test_cases:
 
-a1_n = neaKomplement(a1)
-print(f"NEA 1:\n{a1}\nKomplement:\n{a1_n}")
+    print(f"Word: {curr}")
 
-print("\n\n--------------\n\n")
+    # Testet K, K-Komplement
+    assert deaRun(nea2dea(K), curr) == evalK(curr)
+    assert deaRun(nea2dea(neaKomplement(K)), curr) == evalNotK(curr)
 
-a1_a2_cup = neaVereinigung(a1, a2)
-print(f"NEA 1:\n{a1}\nNEA 1:\n{a2}\nVereinigung:\n{a1_a2_cup}")
+    # Testet L, L-Komplement
+    assert deaRun(nea2dea(L), curr) == evalL(curr)
+    assert deaRun(nea2dea(neaKomplement(L)), curr) == evalNotL(curr)
 
-printDEA(a1_a2_cup)
+    # Testet M, M-Komplement
+    assert deaRun(nea2dea(M), curr) == evalM(curr)
+    assert deaRun(nea2dea(neaKomplement(M)), curr) == evalNotM(curr)
 
-print(nea2dea(deaRun(a1_a2_cup, '1')))
-print(nea2dea(deaRun(a1_a2_cup, '0')))
-print(nea2dea(deaRun(a1_a2_cup, '11')))
-print(nea2dea(deaRun(a1_a2_cup, '00')))
-
-# TODO: Leeres Wort!!!
-print("\n\n--------------\n\n")
+    # Testet Vereinigung
+    assert deaRun(nea2dea(neaVereinigung(K, L)), curr) == (evalK(curr) or evalL(curr))
+    assert deaRun(nea2dea(neaVereinigung(L, K)), curr) == (evalK(curr) or evalL(curr))
+    assert deaRun(nea2dea(neaVereinigung(K, M)), curr) == (evalK(curr) or evalM(curr))
+    assert deaRun(nea2dea(neaVereinigung(L, K)), curr) == (evalL(curr) or evalK(curr))
