@@ -352,4 +352,72 @@ trennednes Knotenpaar $(s, t)$ vorgegeben
 Sei $(S, T)$ ein kleinster Schnitt. Die Wahrscheinlichkeit das
 CONTRACT diesen Schnitt findet ist $\geq \frac{2}{n(n - 1)}$ \\
 FastCut: Für kleine n BruteForce
-\end{document}
+\section{Färbungen und chromatische Zahl}
+\begin{definition}[k-Färbung]
+    Sei $G = (V, E)$ ein Graph \\
+    Eine k-Färbung ist eine Abbildung $f: V \rightarrow \{1, \dots, k\}$,
+    so dass für alle $uv \in E$ gilt $f(u) \neq f(v)$ \\
+    $\chi(G) = \min \{k | G \text{ hat eine k-Färbung }\}$ heißt
+    chromatische Zahl von G
+\end{definition}
+\begin{definition} [Clique]
+    Eine Clique ist eine Menge $C \subseteq V$, so dass für alle Paare
+    $\{u, v\} \in V$ gilt, dass $uv \in E$ \\
+    $\omega(G) = \max \{|C|: C \text{ ist Clique in G }\}$ heißt
+    Cliqzenzahl von G
+\end{definition}
+$\Rightarrow$ Vollständiger Teilgraph \\
+Es gitlt:  $\chi(G) \geq \omega(G)$
+\begin{definition}
+    Eine unabhängige (oder stabile) ist eine Menge $C \subseteq V$, so dass für 
+    alle Paare$\{u, v\} \in V$ gilt, dass $uv \notin E$ \\
+    $\alpha(G) = \max \{|C|: C \text{ ist unabhänige Menge in G }\}$ heißt
+    Unabhänigkeitszahl (o. Stabilitätszahl) von G
+\end{definition}
+Es gilt: \\
+$
+    \chi(G) \geq \max \{\omega(G), \frac{n}{\alpha(G)}\} \\
+    \chi(G) \leq \lfloor \frac{1}{2} + \sqrt{2 |E| + \frac{1}{4}} \rfloor
+$
+\begin{definition}[Komplementgraph]
+    Sei $G = (V, E)$ ein Graph. \\
+    Dann ist $\bar{G} = (V, E)$ mit $\bar{E} := \binom{V}{2} \backslash E$
+    der Komplementgraph von G
+\end{definition}
+\begin{definition}
+    Ein Graph $G = (V, E)$ heißt perfekt, wenn für jeden induzierten 
+    Teilgraphen von H Gilt: $\omega(H) = \chi(G)$
+\end{definition}
+\begin{eigenschaft}
+    $G$ ist genau dann perfekt, wenn $\bar{G}$ perfekt ist
+\end{eigenschaft}
+Loch: Kreis mit ungerader Knotenanzahl \\
+Antiloch: Komplement zum Loch. \\
+$G$ perfekt $\Leftrightarrow$ kein induzierter Teilgraph von g 
+ist ungerades Loch oder ungerades Antiloch (für $k \geq 2$)
+\begin{definition}[Chordal]
+    Ein Grpah $G = (V, E)$ heißt chordal, wenn jeder elementare Kreis
+    der Länge $\geq 4$ mindestens eine Sehne besitzt, d.h. eine Kante, die 
+    zwei nicht aufeinander folgende Knoten des Kreises verbindet
+\end{definition}
+\begin{definition}[simpliziale Knoten]
+    Ein Knoten $v$ heißt simplizial, falls $N(v)$ Clicque in G \\
+    Jeder chordale Graph enthält einen simplizialen Knoten
+\end{definition}
+\begin{definition}[Perfektes Eliminationsschema]
+    Eine Nummerierung $(v_1, \dots, v_n)$ der Knotenmenge $V$ heißt perfektes
+    Eliminationsschema, wenn für $i = 1, \dots, n$ gilt: $v_i$ ist simplizial
+    in $G[\{v_i, \dots, v_n\}]$
+\end{definition}
+\begin{eigenschaft}
+    G chordal $\Leftrightarrow$ G hat perfektes Eliminationsschema 
+\end{eigenschaft}
+\begin{eigenschaft}
+    Sei $v_1, \dots, v_n$ ein perfektes Eliminationsschema. Dann hat
+    jede nicht erweiterbare Clique $C$ in $G$ die Form 
+    $C = \{ v_i\} \cup (N(v_i) \cap \{ v_{i+ 1}, \dots, v_n \})$
+\end{eigenschaft}
+\begin{eigenschaft}
+    Jeder chordale Grpah ist perfekt.
+\end{eigenschaft}
+\end{document} 
