@@ -245,5 +245,3 @@ for curr in test_cases:
 
     # Testet (L or M) and (not K)
     assert deaRun(nea2dea(neaKonkatenation(neaVereinigung(L, M), neaKomplement(K))), curr) == concat_L_U_M_N_K
-
-    

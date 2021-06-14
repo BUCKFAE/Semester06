@@ -1,0 +1,59 @@
+\documentclass[14pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{mathabx}
+\usepackage{listings}
+
+\title{Theoretische Informatik}
+\author{Julian Schubert}
+
+% Definition
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!20,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\begin{document}
+\section*{Aufgabe 3}
+\includegraphics[width=0.8\columnwidth]{"31.png"}
+\newpage
+\includegraphics[width=0.8\columnwidth]{"32.png"}
+\end{document}
