@@ -551,5 +551,77 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         (Transitivität)
     \end{enumerate}
 \end{eigenschaft}
-TODO: S.246
+\begin{definition}
+    Es ist entscheidbar, ob ein DEA die leere Sprache bzw. eine endliche Sprache
+    akzeptiert. \\
+    \textbf{EmptyDEA} = $\{ A | A \text{ ist ein DEA mit } L(A) = \emptyset \}$ \\
+    \textbf{FiniteDEA} = $\{ A | A \text{ ist ein DEA mit und } L(A) \text{ ist endlich} \}$ \\
+    EmptyDEA und FiniteDEA sind entscheidbar.
+\end{definition}
+\section{Formale Sprachen}
+\begin{definition}[generative Grammatik]
+    Eine \textbf{generative Grammatik} ist ein Quadrupel $G = (\varSigma, N, S, R)$
+    mit folgenden Eigenschaften
+    \begin{itemize}
+        \item $\varSigma$ ist eine enldiche, nichtleere Menge (Terminalsymbole)
+        \item N ist eine endliche, nichtleere Menge mit $\varSigma \cap N = \emptyset$
+        (Nichtterminalsymbole)
+        \item $S \in N$ (Startsymbol)
+        \item $R \subseteq (\varSigma \cup N)^+ \times (\varSigma \cup N)^*$ ist 
+        eine endliche Menge (Menge der Erzeugungsregeln) \\
+        Für $(v, w) \in R$ schreiben wir auch $v \rightarrow w$
+    \end{itemize}
+    Konvention: 
+    \begin{itemize}
+        \item Terminale = Kleinbuchstaben
+        \item Nichtterminale = Großbuchstaben
+    \end{itemize}
+\end{definition}
+\begin{definition} [Erzeugung von Sprachen durch generative Grammatik]
+    Seien $G =  (\varSigma, N, S, R)$ eine Grammatik, $v, w \in (\varSigma \cup N)^*$
+    und $t \geq 0$
+    \begin{itemize}
+        \item $v \underset{G}{\Rightarrow} w$ $\Leftrightarrow$ es existieren $u_1, u_2, x, y$ 
+        mit $(x, y) \in R, v = u_1xu_2$ und $w = u_1yu_2$ \\
+        (G erzeugt $w$ aus $v$ in einem Schritt)
+        \item $v \underset{G} {\overset{t}{\Rightarrow}} w$ $\Leftrightarrow$
+        es existieren $w_0, \dots, w_t \in (\varSigma \cup N)^*$ mit \\
+        $v = w_0 \underset{G}{\Rightarrow} w_1 \underset{G}{\Rightarrow} \dots 
+        \underset{G}{\Rightarrow} w_t = w$ \\
+        (G erzeugt $w$ aus $v$ in $t$ Schritten)
+        \item $v \underset{G} {\overset{*}{\Rightarrow}} w$ $\Leftrightarrow$ 
+        es existiert $t' \geq 0$ mit $v \underset{G} {\overset{*}{\Rightarrow}} w$ \\
+        (G erzeugt $w$ aus $v$)
+        \item $L(G) = \{ z \in \varSigma^* | S \underset{G} {\overset{*}{\Rightarrow}} z\}$ \\
+        (Die von G erzeugte Sprache)
+    \end{itemize}
+    \textbf{Beachte:} \\
+    \begin{itemize}
+        \item $w \underset{G} {\overset{*}{\Rightarrow}} w$ gilt für alle $w \in (\varSigma \cup 
+        N)^*$
+        \item L(G) besteht nur aus Terminalsymbolwörtern
+        \item Nichtterminalsymbole sind Hilfszeiczhen, die für die Erzeugung eines $v \in 
+        \varSigma^*$ benötigt werden. Bis zum Ende der Erzeugung von $v$ müssen alle
+        Nichtterminalsymbole eliminiert sein
+    \end{itemize}
+\end{definition}
+\begin{definition} [Äquivalenz von Grammatiken]
+    Zei Grammatiken G und G' heißen äquivalent $\Leftrightarrow$ L(G) = L(G')
+\end{definition}
+\begin{definition}
+    Sei $G = (\varSigma, N, S, R)$ eine Grammatik
+    \begin{itemize}
+        \item G heißt \textbf{Grammatik vom Typ 0}
+        \item G heißt \textbf{Grammatik vom Typ 1} oder \textbf{kontextsensitive Grammatik}
+        $\Leftrightarrow$ jede Regel hat die Form $u_1Au_2 \rightarrow u_1wu_2$ \\ mit $A \in N,
+        u_1, u_2, w \in (\varSigma \cup N)^*$ und $w \neq \epsilon$
+        \item G heißt \textbf{Grammatik vom Typ 2} oder \textbf{kontextfreie Grammatik}
+        $\Leftrightarrow$ jede Regel hat die Form $A \rightarrow w$ mit $A \in N, 
+        w \in (\varSigma \cup N)^*$ und $w \neq \epsilon$ \\
+        (Ersetzung von $A$ durch $w$ ohne Beachtung des Kontextes)
+        \item G heißt \textbf{Grammatik vom Typ 3} oder \textbf{rechtslineare Grammatik}
+        $\Leftrightarrow$ jede Regel hat die Form $A \rightarrow aB$ oder $A \rightarrow a$
+        mit $A, B \in N$ und $a \in \varSigma$
+    \end{itemize}
+\end{definition}
 \end{document}
