@@ -608,7 +608,7 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
 \begin{definition} [Äquivalenz von Grammatiken]
     Zei Grammatiken G und G' heißen äquivalent $\Leftrightarrow$ L(G) = L(G')
 \end{definition}
-\begin{definition}
+\begin{definition} [Typen von Grammatik]
     Sei $G = (\varSigma, N, S, R)$ eine Grammatik
     \begin{itemize}
         \item G heißt \textbf{Grammatik vom Typ 0}
@@ -624,4 +624,26 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         mit $A, B \in N$ und $a \in \varSigma$
     \end{itemize}
 \end{definition}
+\begin{definition}
+    Seien $L \subset \varSigma^*$ und $i \in \{ 0, 1, 2, 3\}$
+    \begin{itemize}
+        \item L heißt \textbf{Sprache vom Typ i} $\Leftrightarrow$ es existiert eine 
+        Grammatik G vom Typ i mit $L = L(G)$ oder $L = L(G) \cup \{ \epsilon \}$
+        \item L heißt \textbf{kontextsensitiv} $\Leftrightarrow$ L ist vom Typ 1
+        \item L heißt \textbf{kontextfrei} $\Leftrightarrow$ L ist vom Typ 2
+        \item $L_i = \{ L | \text{ L ist vom Typ i}\}$
+        \item Die \textbf{Chomsky-Hiererachie} besteht aus $L_0, L_1, L_2, L_3$
+    \end{itemize}
+    Es gilt: 
+    \[
+        L_3 \subsetneq L_2 \subsetneq L_1 \subsetneq L_0  
+    \]
+\end{definition}
+\begin{eigenschaft}
+    Für $L \subseteq \varSigma^*$ sind folgende Aussagen äquivalent:
+    \begin{enumerate}
+        \item L ist Regulär
+        \item L ist vom Typ 3
+    \end{enumerate}
+\end{eigenschaft}
 \end{document}
