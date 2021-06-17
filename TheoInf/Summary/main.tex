@@ -618,7 +618,9 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         \item G heißt \textbf{Grammatik vom Typ 2} oder \textbf{kontextfreie Grammatik}
         $\Leftrightarrow$ jede Regel hat die Form $A \rightarrow w$ mit $A \in N, 
         w \in (\varSigma \cup N)^*$ und $w \neq \epsilon$ \\
-        (Ersetzung von $A$ durch $w$ ohne Beachtung des Kontextes)
+        (Ersetzung von $A$ durch $w$ ohne Beachtung des Kontextes) \\
+        Nimmt man das $\epsilon$ hinzu führt das nicht aus der Klasse hinaus, ist formal
+        dann jedoch keine kontextfreie sprache mehr.
         \item G heißt \textbf{Grammatik vom Typ 3} oder \textbf{rechtslineare Grammatik}
         $\Leftrightarrow$ jede Regel hat die Form $A \rightarrow aB$ oder $A \rightarrow a$
         mit $A, B \in N$ und $a \in \varSigma$
@@ -646,4 +648,42 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         \item L ist vom Typ 3
     \end{enumerate}
 \end{eigenschaft}
+\begin{definition} [Chomsky-Normalform]
+    Eine Grammatik $G = (\varSigma, N, S, R)$ ist in \textbf{Comsky-Normalform}
+    $\Leftrightarrow$ G hat nur Regelnd der Form $A \rightarrow BC$ oder
+    $A \rightarrow a$ mit $A, B, C \in N$ und $a \in \varSigma$ \\
+    Jede kontextfreie Grammatik besitzt eine äquivalente Grammatik in 
+    Chomsky-Normalform. 
+\end{definition}
+\textbf{Umwandlen einer kontextfreien Grammatik in Chomsky-Normalform}
+\begin{enumerate}
+    \item $G_1$ entsteht aus $G$ wie folgt
+    \begin{itemize}
+        \item wähle neues Nichtterminal $D_a$ für jedes $a \in \varSigma$
+        \item ersetze in allen Regeln $a$ durch $D_a$
+        \item füge neue Regel $D_a \rightarrow a$ hinzu
+    \end{itemize}
+    \item $G_2$ entsteht aus $G_1$ wie folgt
+    \begin{itemize}
+        \item wenn $A_1 \underset{G}{\Rightarrow} A_2 \underset{G}{\Rightarrow} 
+        \dots \underset{G}{\Rightarrow} A_k
+        \underset{G}{\Rightarrow} a$ mit $k \geq 2$, so füge $A_1 \rightarrow a$ hinzu
+        \item wenn $A_1 \underset{G}{\Rightarrow} A_2 \underset{G}{\Rightarrow}
+        \dots \underset{G}{\Rightarrow} B_1 \dots B_m$ mit $m, k \geq 2$ so füge
+        $A_1 \rightarrow B_1 \dots B_m$ hinzu
+        \item entferne alle Regeln der Form $A \rightarrow B$
+    \end{itemize}
+    \item $G_3$ entsteht aus $G_2$ wie folgt
+    \begin{itemize}
+        \item ersetze $A \rightarrow B_1 \dots B_m$ mit $m \geq 3$ durch \\
+        $A \rightarrow B_1E_2, E_2 \rightarrow B_2E_3, \dots , E_{m - 1} 
+        \rightarrow B_{m - 1}B_m$ (wobei $E_i$ neue Nichtterminale sind)
+    \end{itemize}
+\end{enumerate}
+\begin{definition}[Pumping-Lemma für kontextfreie Sprachen]
+    Für jede kontextfreie Sprache L existiert ein $n \in \mathbb{N}^+$ mit folgender
+    Eigenschaft: \\
+    Jedes Wort $z \in L$ mit $|z| \geq n$ lässt sich zerlegen in $z = uvwxy$, sodass
+    $vx \neq \epsilon$, $|vwx| \leq n$ und $\forall_{i \geq 0} uv^iwx^iy \in L$
+\end{definition}
 \end{document}
