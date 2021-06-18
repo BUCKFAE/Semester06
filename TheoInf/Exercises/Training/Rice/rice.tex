@@ -1,0 +1,91 @@
+\documentclass[14pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{mathabx}
+
+\title{Theoretische Informatik}
+\author{Julian Schubert}
+
+% Definition
+\mdfdefinestyle{theoremstyle}{
+    linecolor=blue!20,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=theoremstyle]{definition}{Definition}
+
+% Eigenschaft
+\mdfdefinestyle{eigenschaftstyle}{
+    linecolor=red!50,
+    linewidth=2pt,
+    frametitlerule=true,
+    frametitlebackgroundcolor=gray!20,
+    innertopmargin=\topskip
+}
+\mdtheorem[style=eigenschaftstyle]{eigenschaft}{Eigenschaft}
+
+
+% Kopf- / Fußzeile
+\makeatletter
+\let\runauthor\@author
+\let\runtitle\@title
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\runtitle}
+\lhead{\runauthor}
+\cfoot{\thepage}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\begin{document}
+
+
+\maketitle
+\tableofcontents
+
+\section*{Aufgabe 1}
+\subsection*{a}
+Wir können ein Programm angeben, das die characteristische Funktion $\chi_A$ berechnet. Damit
+ist die Menge A entscheidbar.
+\subsection*{b}
+Wir konstruieren zunächst eine Menge S für die gilt: \\
+\begin{center}
+    $I(S) = \{ i \in \mathbb{N} | \text{ die von $M_i$ berechnete Funktion erfüllt die
+    Eigenschaft } S\}$ \\
+    $S = B$
+\end{center}
+Wir zeigen zunächst $S \neq \emptyset$:
+\begin{center}
+    $f(x) = x \in S$
+\end{center}
+Nun zeigen wir, dass $S$ eine echte Teilmege aller berechenbaren Funktionen $\mathbb{N}^n
+\rightarrow \mathbb{N}$ ist:
+\begin{center}
+    $g(x) = n.d \notin S$
+\end{center}
+Mit dem Satzt von Rice folgt hiermit die unentscheidbarkeit von $B$
+\subsection*{c}
+Wir konstruieren erneut die Menge $S$. Wir zeigen $S \neq \emptyset$:
+\begin{center}
+    $f(x) = n.d \in S$
+\end{center}
+$S$ ist eine echte Teilmenge aller berechenbaren Funktionen $\mathbb{N}^n
+\rightarrow \mathbb{N}$:
+\begin{center}
+    $g(x) = 3 \notin S$
+\end{center}
+Mit dem Satzt von Rice folgt hiermit die unentscheidbarkeit von $C$
+\end{document}
