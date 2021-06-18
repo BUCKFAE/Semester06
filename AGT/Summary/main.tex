@@ -423,4 +423,27 @@ ist ungerades Loch oder ungerades Antiloch (für $k \geq 2$)
 \begin{eigenschaft}
     Jeder chordale Grpah ist perfekt.
 \end{eigenschaft}
+\section{Festparameter-Berechenbarkeit}
+\begin{definition} [Knotenüberdeckung / Vertex cover]
+    Sei $G = (V, E)$ ein ungereichter Graph. $C \subset V$ heißt Knotenüberdeckung
+    (vertex cover) von G, falls für alle $uv \in E$ gilt $\{u, v\} \cup C \neq \emptyset$
+\end{definition}
+\begin{definition} [Festparameterberechenbare Probleme]
+    Ein Problem das in $O(f(k) + |I|^C) =: O^*(f(k))$ gelöst werden kann, heißt festparameterberechenbar. \\
+    Die Laufzeit soll also abhängen:
+    \begin{itemize}
+        \item beliebig vom Paremeter k (Schwierigkeit der Instanz I)
+        \item polynomiell von der Größe $|I|$ der Instanz $I$
+    \end{itemize}
+    \textbf{FPT} = Klasse der festparameterberechenbaren Probleme \\
+    Bemerkung: Die Klasse FPT ändert sich nicht, wenn statt $+$ ein $\cdot$ benutzt wird.
+\end{definition}
+\begin{eigenschaft}
+    Falls $|E| > k^2$ und $\delta(G) := max_{v \in V}deg v \leq k$, so hat G kein 
+    k-VC
+\end{eigenschaft}
+\textbf{Fazit}
+\begin{itemize}
+    \item $k-VC$ kann in $O(nk + 1.38^kk^2)$ Zeit gelöst werden
+\end{itemize}
 \end{document} 
