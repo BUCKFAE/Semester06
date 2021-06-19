@@ -694,4 +694,19 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         \item $L_2$ ist nicht abgeschlossen unter $\cap$ bzw Komplement
     \end{enumerate}
 \end{eigenschaft}
+\begin{eigenschaft}
+    Jede kontextfreie Sprache kann durch ein Python-Programm in der
+    Zeit $O(n^3)$ entschieden werden
+\end{eigenschaft}
+\begin{definition}[Akzeptierung Nichtdeterministischer Algorithmus]
+    Sei M ein Nichtdeterministischer Algorithmus
+    \begin{itemize}
+        \item \textbf{M akzeptiert x} $\Leftrightarrow$ es gibt einen Rechenweg von M
+        bei eingabe x, der den Wert 1 berechnet
+        \item Die \textbf{von M akzeptierte Menge ist} 
+        \begin{center}
+            \textbf{L(M)} = $\{ x | M \text{ akzeptiert } x\}$
+        \end{center}
+    \end{itemize}
+\end{definition}
 \end{document}
