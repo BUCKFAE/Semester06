@@ -52,6 +52,25 @@
 
 
 \begin{document}
-\includegraphics[width=0.8\columnwidth]{"image.png"}
+\section*{Aufgabe 1}
+Es gilt 
+\begin{equation*}
+    L = \{ a^m | m \text{ ist eine Quadratzahl} \} = \{ a^{n \cdot n} \}, 
+    n \in \mathbb{N} 
+\end{equation*}
 
+\begin{itemize}
+    \item Sei $n$ eine beliebige Zahl aus $\mathbb{N}$ mit $n \geq 10$
+    \item Wir definieren $w = a^n \cdot a^n$ \\
+    (Damit liegt $w \in L$ und $|w| \geq n$)
+    \item Sei $w = xyz$ eine beliebige Zerlegung mit $y \neq \epsilon$ und
+    $|xy| \leq n$
+    \item Wir definieren $i = 0$ und zeigen $xy^iz \notin L$
+    \begin{itemize}
+        \item Aus $|xy| \leq n$ folgt: \\
+        $x = a^j$ und $y = a^k$ für $j, k \geq 0$ \\
+        aus $y \neq \epsilon$ folgt $k \geq 1$
+    \end{itemize}
+    \item Daraus folgt $w = xyz = a^ja^ka^{n - (j+k)}$
+\end{itemize}
 \end{document}
