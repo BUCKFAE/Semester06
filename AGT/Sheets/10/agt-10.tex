@@ -1,0 +1,120 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[german,vlined,longend]{algorithm2e}
+\usepackage{graphicx}
+\PassOptionsToPackage{usenames,dvipsnames,svgnames}{xcolor}  
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata}
+\usetikzlibrary{calc}
+\usepackage{listings}
+\usepackage{float}
+
+% --- math operators ---
+\usepackage{mathtools}
+\DeclarePairedDelimiter\set{\{}{\}} % use $\set*{1, 2, 3}$ 
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceils{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\angles{\langle}{\rangle}
+\def\Oh{\ensuremath{\mathcal{O}}} % big O like $\Oh(n)$
+\def\oh{\ensuremath{\scriptstyle{\mathcal{O}}}} % small O
+% ---
+
+\begin{document}
+
+\begin{small}
+    \noindent
+    Schubert Julian, Gruppe 4 \\
+    Philipp Wahl, Gruppe 4
+\end{small}
+\bigskip
+
+\begin{center}
+    \LARGE Abgabe zum 10. Übungsblatt (AGT 21)
+\end{center}
+\smallskip
+\subsection*{Aufgabe 3:}
+\paragraph*{a)}
+Wir zeigen das es keinen größeren Fluss geben kann als der von uns in Abbildung \ref{3a}
+gezeichnete.
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style,     ={}]
+            \node[state]          (v1)                          {1};
+            \node[state]          (v2) [below left  =of v1]     {2};
+            \node[state]          (v3) [below right =of v1]     {3};
+
+            \node[state]          (s1) [above left  =of v1]     {$s_1$};
+            \node[state]          (t2) [above right =of v1]     {$t_2$};
+
+            \node[state]          (t3) [left        =of v2]     {$t_3$};
+            \node[state]          (s3) [right       =of v3]     {$s_3$};
+
+            \node[state]          (s2) [below       =of v2]     {$s_2$};
+            \node[state]          (t1) [below       =of v3]     {$t_1$};
+
+            \tikzset{mystyle/.style={->,double=orange}}
+            \tikzset{every node/.style={fill=white}}
+            \tikzset{mystyle/.style={->,double=black}}
+ 
+            \path (s1)     edge [mystyle]  node  {1 / 1} (v1);
+            \path (v1)     edge [mystyle]  node  {1 / 1} (v2);
+            \path (v2)     edge [mystyle]  node  {1 / 1} (v3);
+            \path (v3)     edge [mystyle]  node  {1 / 1} (t1);
+
+            \path (v1)     edge [mystyle]  node  {0 / 1} (t2);
+            \path (v3)     edge [mystyle]  node  {0 / 1} (v1);
+            \path (v2)     edge [mystyle]  node  {0 / 1} (t3);
+            \path (s3)     edge [mystyle]  node  {0 / 1} (v3);
+            \path (s2)     edge [mystyle]  node  {0 / 1} (v2);
+
+
+
+    \end{tikzpicture}
+    \caption{Maximaler Gesamtflusswert: 1}
+    \label{3a}
+\end{figure}
+\paragraph*{b)}
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,initial/.style,     ={}]
+            \node[state]          (v1)                          {1};
+            \node[state]          (v2) [below left  =of v1]     {2};
+            \node[state]          (v3) [below right =of v1]     {3};
+
+            \node[state]          (s1) [above left  =of v1]     {$s_1$};
+            \node[state]          (t2) [above right =of v1]     {$t_2$};
+
+            \node[state]          (t3) [left        =of v2]     {$t_3$};
+            \node[state]          (s3) [right       =of v3]     {$s_3$};
+
+            \node[state]          (s2) [below       =of v2]     {$s_2$};
+            \node[state]          (t1) [below       =of v3]     {$t_1$};
+
+            \tikzset{mystyle/.style={->,double=orange}}
+            \tikzset{every node/.style={fill=white}}
+            \tikzset{mystyle/.style={->,double=black}}
+ 
+
+            \path (v1)     edge [mystyle]  node  {1 / 1} (v2);
+            \path (v2)     edge [mystyle]  node  {1 / 1} (v3);
+            \path (v3)     edge [mystyle]  node  {1 / 1} (v1);
+
+            \path (v3)     edge [mystyle]  node  {0.5 / 1} (t1);
+            \path (s1)     edge [mystyle]  node  {0.5 / 1} (v1);
+            \path (v1)     edge [mystyle]  node  {0.5 / 1} (t2);
+            \path (v2)     edge [mystyle]  node  {0.5 / 1} (t3);
+            \path (s3)     edge [mystyle]  node  {0.5 / 1} (v3);
+            \path (s2)     edge [mystyle]  node  {0.5 / 1} (v2);
+
+    \end{tikzpicture}
+    \caption{Maximaler Gesamtflusswert: 1.5}
+
+    \label{3b}
+\end{figure}
+
+\end{document}
