@@ -37,6 +37,48 @@
     \LARGE Abgabe zum 10. Übungsblatt (AGT 21)
 \end{center}
 \smallskip
+\subsection*{Aufgabe 1:}
+\paragraph*{a)}
+Angenommen eine Geradenüberdeckung enthält eine oder mehrere Geraden die jeweils
+nur einen Punkt enthalten. Gibt es zwei (oder mehr) Geraden die nur einen Punkt enthalten
+so können zwei Geraden die jeweils nur durch einen Punkt fürhren durch eine neue Gerade 
+ersetzt werden, die durch die beiden Punkte führt. Gibt es nur eine Gerade die nur 
+ein Punkt liegt dann kann man diese Gerade entfernen und durch eine neue Gerade ersetzen
+die durch den alten Punkt und einen beliebigen neuen Punkt definiert ist. Daher genügt es
+(für $n \geq 2$) Geraden zu betrachten, auf denen mindestens zwei Punkte liegen
+\paragraph*{b)}
+Dann muss diese Gerade in der Geradenüberdeckung enthalten sein, da wenn man zwei Punkte
+auf dieser Gerade verbindet automatisch alle anderen Punkte auf der Geraden liegen. Wäre
+diese Gerade dementsprechend nicht in der Überdeckung so müsste es für jeden der k Punkte
+auf der ursprünglichen Gerade eine neue Gerade existieren, es müssten also mehr als k 
+Geraden existieren würde man die Gerade auf der mehr als k Punkte liegen nicht mit aufnehmen.
+Daher müssen alle Geraden die mehr als k Punkte haben ins Matching aufgenommen werden.
+\paragraph*{c)}
+Wenn es keine Gerade gibt die mehr als k Punkte enthält folgt daraus, dass jede der 
+k vielen Geraden maximal k Punkte enthält. Insgesamt können wir so also mit k Geraden
+auf denen jeweils maximal k viele Punkte liegen $k^2$ viele Punkte Abdecken. \\
+Gilt also $k^2 < n$ und es gibt keine Gerade die mehr als k Punkte enthält, so kann
+es keine Geradenüberdeckung geben.
+\subsection*{Aufgabe 2:}
+\paragraph*{a)}
+In einem Graphen $G = (V, E)$ mit $n := |V|$ gibt es $2^n$ mögliche Knoten-Teilmengen.
+Wir generieren alle möglichen Teilmengen, Prüfen für jede Teilmenge ob sie eine Clique ist
+(indem wir für jeden Knoten in der Clique alle Nachbarn prüfen),
+und speichern uns immer die größte bisher gefundene Clique. Damit ergibt sich eine Laufzeit
+von $\Oh(2^n \cdot V^2)$
+\paragraph*{b)}
+Es kann keine Clique mit mehr als $\Delta$ vielen Knoten geben da in einer Clique alle
+Knoten zueinande Benachbart sind. Hätte eine Clique also mehr als $\Delta$ viele Knoten 
+so wäre der $\Delta$ ebenfalls größer \\
+Wir können nun also alle Knoten-Teilmengen bilden die höchstens $\Delta$ viele Knoten
+enthalten. Dann können wir ebenfalls wieder für jede dieser Teilmenge bestimmen ob 
+sie eine Clique ist und uns die größte Merken. Wir erhalten eine Laufzeit von 
+$\Oh(2^{\Delta} \cdot V^2)$ 
+\paragraph*{c)}
+Wir können nun für jeden Knoten annehmen das er Teil der Größten Clique ist. Dann bestimmen
+wir für jeden Nachbarn von diesem Knoten plus dem Knoten selbst den größten Grad und wenden
+dann den Algorithmus aus Teilaufgabe b an. Dadurch ergibt sich eine Laufzeit von 
+$\Oh(2^{\Delta} \cdot V^2)$
 \subsection*{Aufgabe 3:}
 \paragraph*{a)}
 Wir zeigen das es keinen größeren Fluss geben kann als der von uns in Abbildung \ref{3a}
@@ -78,6 +120,8 @@ gezeichnete.
     \caption{Maximaler Gesamtflusswert: 1}
     \label{3a}
 \end{figure}
+Setzt man eine der andern von einem s ausgehenden Knoten auf 1 so erhält man ebenfalls
+einen Maximalen Gesamtflusswert von 1 (da sich die Flüsse gegenseitig Blockieren)
 \paragraph*{b)}
 \begin{figure}[H]
     \centering
@@ -113,8 +157,8 @@ gezeichnete.
 
     \end{tikzpicture}
     \caption{Maximaler Gesamtflusswert: 1.5}
-
     \label{3b}
 \end{figure}
-
+Auch hier haben wir offensichtlich den maximalen Gesamtflusswert gefunden da die Kanten
+$\{1, 2\}, \{2, 3\}$ und $\{3, 1\}$ voll ausgelastet sind.
 \end{document}
