@@ -446,4 +446,88 @@ ist ungerades Loch oder ungerades Antiloch (für $k \geq 2$)
 \begin{itemize}
     \item $k-VC$ kann in $O(nk + 1.38^kk^2)$ Zeit gelöst werden
 \end{itemize}
+\section{Planare Graphen}
+\begin{definition} [offene Jordankurve]
+    Eine offene Jordankurve ist eine homöomorphe Einbettung
+    des Intervalls [0, 1] in einen topologischen Raum, also 
+    ohne Kreuzungen und Sprünge
+\end{definition}
+\begin{definition}[Zeichnung von Graphen]
+    Sei $G = (V, E)$ ein ungerichteter Graph, eine Abbildung $\zeta$
+    heißt Zeichung von G, falls
+    \begin{itemize}
+        \item für alle $w \in V$ gilt $\zeta(w) \in \mathbb{R}^2$ und 
+        Einschränkung von $\zeta$ auf V injektiv
+        \item für alle $uv \in E$ gilt $\zeta(uv) = \zeta_{uv}([0, 1])$
+        wobei $\zeta_{uv}$ Jordankufve mit $\zeta_{uv}(0) = \zeta(u)$ und
+        $\zeta_{uv}(1) = \zeta(v)$
+    \end{itemize} 
+    Knoten $\rightarrow$ Punkte in der Ebene \\
+    Kanten $\rightarrow$ J-Kurve
+\end{definition}
+\begin{definition} [Planar]
+    Ein Graph G ist planar (plättbar), falls er eine ebene zeichung hat
+    (d.h. falls sich die Zeichungen der Kanten höchstens in gemeinsamen
+    Endpunkten schneiden) \\
+    Eine Zeichung $\zeta$ von G heißt \textbf{geradlinig}, falls für
+    alle $e \in E$ gilt $\zeta_e$ ist linear (also eine Linie)
+\end{definition}
+\begin{definition}[Punkte und Facetten]
+    Für einen planaren Graphen $G = (V, E)$ und eine ebene zeichung $\zeta$ von 
+    G sei \\
+    \begin{center}
+        $G_{\zeta} = \zeta(V) \cup \bigcup_{e \in E} \zeta_e([0, 1])$
+    \end{center}
+    die Menge der Punkte von $\zeta$ \\
+    Die Zusammenhangskomponenten von $\mathbb{R}^2 \backslash G_{\zeta}$ heißen
+    Facetten von $\zeta$ \\
+    $\Rightarrow$ also die Menge aller Knoten und Linien zwischen Knoten
+\end{definition}
+\begin{eigenschaft}
+    G planar, $\pi$ ebene Zeichnung von G, F Innenfacette von $\pi$. Dann gibt es auch
+    eine Zeichung $\pi_F$ von von G, in der $E(F)$ den Rand der Außenfacette bildet
+\end{eigenschaft}
+\begin{eigenschaft}
+    Das Skelett (der Ecken-Adjazenzgraph) eines konvexen und beschränkten Polyeders ist planar
+\end{eigenschaft}
+\begin{definition}[Eulerscher Polyedersatz]
+    Sei $\pi$ eine ebene Zeichnung eines Graphen (möglicherweise mit Schleifen und
+    Mehrfachkanten) mit $n$ Knoten, $m$ Kanten, $f$ Facetten und $k$ Zusammenhangskomponenten.
+    Dann gilt:
+    \begin{center}
+        $LS_m := n - m + f = k + 1 =: RS_m$
+    \end{center}
+\end{definition}
+\begin{eigenschaft}
+    Für jeden einfachen planaren Graphen $G = (V, E)$ mit mindestens 3 Knoten gilt
+    $m \leq 3n - 6$ und $f \leq 2n - 4$ 
+\end{eigenschaft}
+\begin{eigenschaft}
+    Der durchschnittliche Knotengrad in einem einfachen planaren Graphen ist kleiner 6
+\end{eigenschaft}
+\begin{eigenschaft}
+    Ein einfacher planarer Graph hat mindestens einen (genauer: mindestens 3)
+    Knoten vom Grad höchstens 5
+\end{eigenschaft}
+\begin{definition}[Kontraktionen und Minoren]
+    Sei G ein einfacher Graph und sei $uv$ Kante von G \\
+    Der Graph $G \backslash uv$ entsteht aus G durch (Einfach-)
+    Kontraktion von $uv$ (wobei hier anders als bei Kontraktion bei Multigraphen
+    Mehrfachkanten verschmolzen werden) \\
+    Ein Graph H heißt Minor von G (schreibe $H \geq G$), falls er durch eine 
+    (evtl. leere) Folge von Kontraktionen aus einem Teilgraphen von G hervorgeht.
+\end{definition}
+\begin{eigenschaft}
+    \begin{center}
+        G Planar $\Leftrightarrow$ alle Minoren von G sind planar \\
+        Alle Graphen mit höchstens vier Knoten sind Planar.
+    \end{center}
+\end{eigenschaft}
+\begin{definition}[Satz von Kuratowski]
+    Sei G ein einfacher Graph. Dann gilt: \\
+    \begin{center}
+        G planar $\Leftrightarrow$ Weder $K_5$ noch $K_{3, 3}$ ist Minor von G
+    \end{center}
+    Wobei $K_5$ vollständiger Kreis mit 5 Knoten und $K_{3, 3}$ bipartit mit Seiten verbunden.
+\end{definition}
 \end{document} 
