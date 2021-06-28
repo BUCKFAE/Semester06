@@ -709,4 +709,45 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         \end{center}
     \end{itemize}
 \end{definition}
+\section{Kellerautomaten}
+\begin{definition}[nichtdeterministischer Kellerautomat]
+    Ein \textbf{nichtdeterministischer Kellerautomat} ist ein Quintupel 
+    $M = (\varSigma, \varDelta, Z, f, z_0)$ mit folgenden Eigenschaften
+    \begin{itemize}
+        \item $\varSigma$ ist endliche, nichtleere Menge mit $\square \notin \varSigma$
+        (Eingabealphabet)
+        \item $\varDelta$ ist endliche, nichtleere Menge mit $\square \notin \varDelta$
+        (Kelleralphabet)
+        \item $Z$ ist eine enliche Menge (Zustandsmenge)
+        \item $f$ ist eine totale Funktion $Z \times (\varSigma \cup \{ \epsilon \}) \times
+        \varDelta \rightarrow P_{fin}(Z \times \varDelta^*)$ (Überführungsfunktion) 
+        \begin{itemize}
+            \item $P_{fin}(A) = \{ B \subseteq A | B \text{ ist endlich }\} = $ Menge der
+            endlichen Teilmengen von A
+        \end{itemize}
+        \item $z_0 \in Z$ (Startzustand)
+    \end{itemize}
+    Schreibweise: statt $(z', u) \in f(z, a, A)$ schreiben wir auch $zaA \rightarrow z'u$ \\
+    \textbf{Akzeptierung von Wörtern}: \\
+    Ein Kellerautomat akzeptiert ein Wort falls am Ende eines Rechenweges der Keller leer ist
+    (und das gesamte Eingabewort gelesen wurde) \\
+    \textbf{L(M)} = $\{ w \in \varSigma^* | \text{ M akzeptiert w}\}$
+\end{definition}
+\textbf{Möglichkeiten für Nichtakzeptierung}
+\begin{itemize}
+    \item Keller leer bevor Eingabeende erreicht (Stopp)
+    \item kein Befehl für aktzellen Zustand / Eingabesymbol / Topsymbol vorhanden (Stopp)
+    \item Einabeende nicht erreicht und nor folgen von $\epsilon$-Befehelen möglich, d.h. 
+    keine Möglichkeit das nächste Zeichen zu lesen (Endlosschleife)
+    \item Eingabeende zwar erreicht, aber keine Möglichkeit den Keller zu leeren 
+    (Stopp oder Endlosschleife)
+\end{itemize}
+\begin{eigenschaft}
+    Für $L \subseteq \varSigma^*$ sind folgende Aussagen äquivalent:
+    \begin{enumerate}
+        \item L ist kontextfrei
+        \item L wird von einem Nichtdeterministischen Kellerautomaten
+        akzeptiert.
+    \end{enumerate}
+\end{eigenschaft}
 \end{document}
