@@ -750,4 +750,33 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         akzeptiert.
     \end{enumerate}
 \end{eigenschaft}
+\begin{definition} [Nichtverkürzende Grammatik]
+    Eine Grammatik von Typ 0 heißt \textbf{nichtverkürzend}, falls sie nur Regeln
+    der Form $v \rightarrow w$ mit $|v| \leq |w|$ besitzt
+\end{definition}
+\begin{eigenschaft}
+    Für $L \in \varSigma^*$ sind folgende Aussagen äquivalent
+    \begin{enumerate}
+        \item L kann von einer kontextsensitiven Grammatik erzeugt werden
+        \item L kann von einer nichtverkürzenden Grammatik erzeugt werden
+    \end{enumerate}
+\end{eigenschaft}
+\begin{definition}[Linear beschränkter Automat]
+    Ein \textbf{linear beschränkter Automat (LBA)} ist eine Nichtdeterministische
+    1-Band-TM, die während ihrer Arbeit nur die vom Eingabewort belegten Fekder
+    und deren Nachbarfelder benutzt
+\end{definition}
+\begin{eigenschaft}
+    Für $L \subseteq \varSigma^*$ sind folgende Aussagen äquivalent:
+    \begin{enumerate}
+        \item L ist kontextsensitiv
+        \item L kann von einem LBA akzeptiert werden
+    \end{enumerate}
+\end{eigenschaft}
+\begin{eigenschaft}
+    Jede kontextsensitive Sprache ist in der Zeit $2^{O(n)}$ entscheidbar
+\end{eigenschaft}
+\begin{eigenschaft}
+    $L_1$ ist abgeschlossen unter $\cup, \cap, \cdot,*$ und Komplement 
+\end{eigenschaft}
 \end{document}
