@@ -1,67 +1,98 @@
-def run(word):
+from typing import SupportsRound
 
+
+def run(word):
+    """Runs the pda
+    
+    e -> epsilon
+    t -> top symbol 
+    """
     states = ["0"]
-    stacks = [["s"]]
+    stacks = [["t"]]
 
     # X needs to be replaced by e, A, B
     rules = {
         "0aX": "0AX",
         "0bX": "0BX",
-        "0aX": "1eX",
-        "0bX": "1eX",
-        "0eX": "1eX",
-        "1aA": "1es",
-        "1bB": "1es",
-        "1sd": "1es"
+        "0aX": "1X",
+        "0bX": "1X",
+        "0eX": "1X",
+        "1aA": "1",
+        "1bB": "1",
+        "1et": "1"
     }
 
     # Iterating over the word
     for c in word:
-        
-        print(f"Current char: {c}")
+        print(f"{stacks=}\n{states=}")
 
-        newStates = []
-        newStacks = []
+        states, stacks, _ = execute_rules(states, stacks, c, rules)
 
-        for currentState in range(len(states)):
+    print("Finished the word!")
 
-            print(f"State: {currentState}")
+    changed = True
+    while changed and not  any([len(s) == 0 or (s.count("t") == len(s)) for s in stacks]):
+        states, stacks, changed = execute_rules(states, stacks, None, rules)
+        print(f"{stacks=}\n{states=}")
 
-            for rule in rules.keys():
-                print(f"\n\nCurrent rule: {rule} -> {rules[rule]}")
 
-                for currentRule in set([(rule.replace("X", r), rules[rule].replace("X", r)) for r in ["s", "A", "B"]]):
-                    print(f"Rule adjusted: {currentRule}")
+    print(f"{stacks=}\n{states=}")
 
-                    print(f"{states[currentState]=} == {currentRule[0][0]=}")
-                    if states[currentState] == currentRule[0][0]:
-                        print(f"{c=} == {currentRule[0][1]=}")
-                        if c == currentRule[0][1]:
+    return any([len(s) == 0 or (len(set(s)) == 1 and s[0] == "t") for s in stacks])
 
-                            print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+def execute_rules(states, stacks, c, rules):
 
-                            print(f"{stacks[currentState]=} == {currentRule[0][2]=}")
-                            if stacks[currentState] == currentRule[0][2]:
+    newStates = []
+    newStacks = []
+    changed = False
+
+    # Stepping for each state we are in right now
+    for currentState in range(len(states)):
+
+        newStacks.append(stacks[currentState])
+        newStates.append(states[currentState])
+
+        # Applying all rules
+        for rule in rules.keys():
+
+            # Exchaning X for t, A, B
+            for currentRule in set([(rule.replace("X", r), rules[rule].replace("X", r)) for r in ["t", "A", "B"]]):
+
+                # Checking if we are in the correct start state
+                if states[currentState] == currentRule[0][0]:
+
+                    # Checking if the input symbol matches
+                    if c == currentRule[0][1] or currentRule[0][1] == "e":
+
+                        if len(stacks[currentState]) == 0:
+       
+                            continue
+
+                        # Checking if the symbol in sthe stack matches
+                        if stacks[currentState][-1] == currentRule[0][2]:
                                 
-                                print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-                                newStates.append(currentRule[1][0])
+                            # Removing old 
+                            newStacks.pop()
+                            newStates.pop()
 
-                                currentStack = stacks[currentState]
-                                currentStack, _ = pop(currentStack)
-                                push(currentStack, currentRule[1][1])
-                                push(currentStack, currentRule[1][2])
-                                newStacks.append(currentStack)
+                            # Appending new state
+                            newStates.append(currentRule[1][0])
+
+                            currentStack = stacks[currentState].copy()
+                            currentStack, _ = pop(currentStack)
+
+                            for f in currentRule[1][1:]:
+                                
+                                currentStack = push(currentStack, f)
 
 
+                            newStacks.append(currentStack)
 
-        stacks = newStacks
-        states = newStates
+                            changed = True
 
-    print(f"{stacks=}")
-    print(f"{states=}")
+       
 
-    return any([len(s) == 0 or (len(set(s)) == 1 and s[0] == "s") for s in stacks])
-                
+    return newStates.copy(), newStacks.copy(), changed                 
 
 
 def push(stack, w):
@@ -100,5 +131,7 @@ assert is_symmetric("bab") == True
 assert is_symmetric("bba") == False
 assert is_symmetric("baa") == False
 
-print(f"{run('abba')=}")
+print(f"{run('aabaa')=}")
+print(f"{run('abaa')=}")
+
 #print(f"{run('abaa')=}")
