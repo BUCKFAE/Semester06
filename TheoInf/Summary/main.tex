@@ -846,4 +846,48 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         \item $|f(x)| \leq p(|x|)$
     \end{itemize}
 \end{eigenschaft}
+\begin{eigenschaft}[Abschlusseigenschaften von P und FP]
+    Für $f, g : \mathbb{N} \rightarrow \mathbb{N}$ und $A, B \subseteq \mathbb{N}^n$ gilt:
+    \begin{enumerate}
+        \item $f, g \in FP \Rightarrow f + g, f - g, f \cdot g, f : g, f \circ g \in FP$
+        \item $A, B \in P \Rightarrow A \cup B, A \cap B, \bar{A} = (\mathbb{N}^n \backslash A) \in P$
+    \end{enumerate}
+\end{eigenschaft}
+\subsection*{Graphen}
+\begin{definition}[Graph]
+    \begin{itemize}
+        \item Ein \textbf{gerichteter Graph} ist ein Paar $G = (V, E)$, wobei $V$ 
+        eine Menge und $E \subseteq V \times V$ ist
+        \item Ein \textbf{ungerichteter Graph} ist ein Paar $G = (V, E)$, wobei $V$ 
+        eine Menge und $E \subseteq \{ \{ v_1, v_2\} \bar v_1, v_2 \in V$ und $v_1 \neq v_2$ \} ist
+    \end{itemize}
+    Wir stellen Graphen für Ein-/Ausgaben als Liste der Einträge in der 
+    Adjazentmatrix da.
+\end{definition}
+\begin{definition} [NP = Nichtdeterministische Polynomialzeit]
+    Probleme in \textbf{NP} haben wichtige Gemeinsamkeiten:
+    \begin{itemize}
+        \item Frage nach der \textbf{Existenz bestimmter Lösungen}
+        \item Lösungen sind \textbf{kurz} (|potentielle Lösung| $\leq$ p(|Eingabe|))
+        \item Lösungen sind \textbf{leicht überprüfbar} (Polynomialzeit)
+    \end{itemize}
+    \begin{equation*}
+        \begin{split}
+            \langle m, K, b \rangle \in TSP \Leftrightarrow & \exists 
+            \text{Rundreise mit Gesamtkosten } \leq b \\
+            \langle k, b, a_1, \dots, a_m \rangle \in BP \Leftrightarrow & \exists
+            \text{Aufteilung der Güter auf die Container} \\
+            \langle P, r, b \rangle \in DC \Leftrightarrow & \exists
+            \text{Platzierung der b Statioen} \\ &
+            \text{sodass alle Städte abgedeckt sind} \\
+            \langle G \rangle \in HK \Leftrightarrow & \exists
+            \text{Tischplatzierung ohne Streit} \\
+            \langle G, k \rangle \in CLIQUE \Leftrightarrow & \exists
+            \text{k Personen, die sich gegenseitig kennen} \\
+        \end{split}        
+    \end{equation*}
+    $\Rightarrow NP = \{ A | A \subseteq \mathbb{N}^m$ und es gibt ein Polynom p und eine Menge 
+    $B \in P$, sodass für alle $x \in \mathbb{N}^n$\ gilt $x \in A \Leftrightarrow 
+    \exists y(|y| \leq p(|x|) \land (x, y) \in B)$ \}
+\end{definition}
 \end{document}
