@@ -853,7 +853,6 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
         \item $A, B \in P \Rightarrow A \cup B, A \cap B, \bar{A} = (\mathbb{N}^n \backslash A) \in P$
     \end{enumerate}
 \end{eigenschaft}
-\subsection*{Graphen}
 \begin{definition}[Graph]
     \begin{itemize}
         \item Ein \textbf{gerichteter Graph} ist ein Paar $G = (V, E)$, wobei $V$ 
@@ -890,4 +889,22 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
     $B \in P$, sodass für alle $x \in \mathbb{N}^n$\ gilt $x \in A \Leftrightarrow 
     \exists y(|y| \leq p(|x|) \land (x, y) \in B)$ \}
 \end{definition}
+\begin{eigenschaft}
+    Für $A, B \subseteq \mathbb{N}^n$ gilt:
+    \begin{center}
+        $A, B \in NP \Rightarrow A \cup B, A \cap B \in NP$
+    \end{center}
+    Offnennes Problem: Gilt $A \in NP \Rightarrow \bar{A} \in NP$? \\
+    Vermutung: Nein
+\end{eigenschaft}
+\begin{eigenschaft}
+    \begin{center}
+        $NP \subseteq EXP$
+    \end{center}
+    Offnennes Problem: Gilt $NP = EXP$? \\
+    Vermutung: $NP \neq EXP$
+\end{eigenschaft}
+\begin{eigenschaft}
+    Es gilt $P \neq EXP$
+\end{eigenschaft}
 \end{document}
