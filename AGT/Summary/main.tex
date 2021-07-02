@@ -616,4 +616,45 @@ ist ungerades Loch oder ungerades Antiloch (für $k \geq 2$)
     Nicht jeder planare Graph ist 4-listenfärbbar \\
     Jeder planare Graph ist 5-listenfärbbar
 \end{eigenschaft}
+\begin{eigenschaft}
+    Sei $G$ ein einfacher Graph mit $n$ Knoten. Dann kann man in 
+    $O(n)$ Zeit entscheiden, obb G planar ist. \\
+    Wir behandeln in der Vorlesung jedoch einen Algorithmus in 
+    $O(n^3)$, der sowohl leichter als auch in der Praxis schneller
+    ist
+\end{eigenschaft}
+\begin{eigenschaft}
+    G planar $\Leftrightarrow$ jede Zusammenhangskomponente von G is planar \\
+    G planar $\Leftrightarrow$ jede Zweifachzusammenhangskomponente (ZZK) von
+    G is planar.
+\end{eigenschaft}
+\begin{definition}[Teilstück]
+    Sei C ein Kreis und seien $e, e' \notin C$ Kanten. $e und e'$ heißen
+    äquivalent (bezüglich C), wenn sie durch einen Pfad verbunden sind,
+    der C nicht berührt. Die resultierenden Äquivalenzkalssen heißen
+    Teilstücke (bezüglich C). \\
+    Jedes Teilstück hat $\geq 2$ Anknüpfpunkte
+\end{definition}
+\begin{definition}[Separierender Kreis]
+    Ein Kreis heißt separierend, wenn er mindestens zwei
+    Teilstücke induziert
+\end{definition}
+\begin{eigenschaft}
+    Sei C ein nicht-separierender Kreis mit Teilstück P.
+    Falls P kein Pfad ist, dann besitzt G einen separierenden Kreis
+    in $C'$, der aus einem Teilpfan von V und einem Pfad in P 
+    zwischen zwei Anknüpfpungspunkten von P besteht.
+\end{eigenschaft}
+\begin{definition}[Einander störende Teilstücke]
+    G planar $\Rightarrow$ jedes Teilstück wird entweder komplett im Inneren oder
+    Äuperen von C eingebettet. \\
+    \\
+    Zwei Teilstücke $P \neq Q$ können auf der gleichen Seite von C 
+    eingebettet werden $\Leftrightarrow$ es existiert ein Teilpfad $\gamma$ von C,
+    sodass $\gamma$ alle Anknüpfpunkte von Q enthält, aber kein innerer 
+    Knoten von $\gamma$ Anknüpfpunkt von P ist. \\
+    \\
+    Zwei Teilstücke, die nicht auf der gleichen Seite von C
+    eingebettet werden können, \textbf{stören} einander
+\end{definition}
 \end{document}  
