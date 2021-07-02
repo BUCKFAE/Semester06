@@ -514,7 +514,7 @@ ist ungerades Loch oder ungerades Antiloch (für $k \geq 2$)
     Der Graph $G \backslash uv$ entsteht aus G durch (Einfach-)
     Kontraktion von $uv$ (wobei hier anders als bei Kontraktion bei Multigraphen
     Mehrfachkanten verschmolzen werden) \\
-    Ein Graph H heißt Minor von G (schreibe $H \geq G$), falls er durch eine 
+    Ein Graph H heißt Minor von G (schreibe $H \leq G$), falls er durch eine 
     (evtl. leere) Folge von Kontraktionen aus einem Teilgraphen von G hervorgeht.
 \end{definition}
 \begin{eigenschaft}
@@ -530,4 +530,90 @@ ist ungerades Loch oder ungerades Antiloch (für $k \geq 2$)
     \end{center}
     Wobei $K_5$ vollständiger Kreis mit 5 Knoten und $K_{3, 3}$ bipartit mit Seiten verbunden.
 \end{definition}
-\end{document} 
+\begin{definition}[Minoren]
+    Eine Klasse $\mathcal{G}$ von Grpahen heißt minorenabgeschlossen, 
+    wenn für alle $ G \in \mathcal{G}$ und alle $H \leq G$ gilt 
+    $H \in \mathcal{G}$ \\
+    Ein Grpah $G$ einer Grpahenklasse $\mathcal{G}$ heißt 
+    minorenminimal, wenn für jeden Minor $h$ von $G$ mit 
+    $H \in \mathcal{G}$ gitl $H = G$ \\
+    $\bar{\mathcal{G}_{\text{plan}}}$ = Klasse der einfachen
+    nicht-planaren Graphen
+\end{definition}
+\begin{definition}[Obstruktionsmenge]
+    Es gilt $\{ K_5, K_{3, 3}\}$ ist Obstruktionsmenge für 
+    $\mathcal{G}_{\text{plan}}$
+\end{definition}
+\begin{eigenschaft}
+    \begin{itemize}
+        \item Jede minorenabgeschlossene Graphklasse besitzt eine
+        endliche Obstruktionsmenge
+        \item Für jeden festen Grpahen H existiert ein effizienter
+        Algorithmus, der testet, ob für einen gegebenen (größeren)
+        Graphen G gilt, dass $H \leq G$
+        \item Wir können effizient testen, ob ein gegebener Graph G
+        planar ist
+        \item Jeder planare Graph lässt sich geradlinig zeichnen
+        \item Jeder planage Graph lässt sich als Berührgraph von 
+        Kreisscheiben (con graph) repräsentieren
+        \item Ein planarer Graph mit $n \geq 3$ Knoten lässt sich in
+        linearzeit geradlinig zeichnen, so dass die Knoten auf
+        Punkte des $(n - 2) \times (n - 2)$ Gitters abgebildet werden
+        \item Sei G ein 3-fach zsh. planarer Graph mit $f$ Facetten \\
+        Dann lässt sich $G$ auf einem $(f - 1) \times (f - 1)$ Gitter
+        geradlinig und konvex zeichnen.
+        \item Jede streng konvexe Zeichnung des $C_n$ benötigt
+        $\Omega(n^3)$ Platz
+        \item Jeder 3-fach zsh. planare Graph hat eine streng
+        konvexe Zeichung auf dem $O(n^2) \times O(n^2)$ Gitter
+    \end{itemize}
+    Zeichnungen hierzu Skript VL 11 ab Seite 15.
+\end{eigenschaft}
+\begin{eigenschaft}[Planar Seperator Theorem]
+    Sei $G$ ein planarer Graph mit $n \geq 5$ Knoten. \\
+    Dann existiert eine Zerlegung der Knotenmenge \\
+    $V = L \dot{\cup} S \dot{\cup} R$ von $G$, so dass
+    \begin{itemize}
+        \item Keine Kante zwischen $L$ und $R$ verläuft
+        \item $|L|, |R| \leq \frac{2}{3}n$ und
+        \item $|S| \leq 2 \sqrt{2n}$
+    \end{itemize}
+    Eine solche Zerlegung kann in $O(n)$ Zeit berechnet werden.
+\end{eigenschaft}
+\begin{eigenschaft}
+    Sie $G = (V, E)$ ein ungerichteter Graph, sei $v \in V$ und sei 
+    $M$ größtes Matching in $G - v$
+    \begin{itemize}
+        \item Falls $G$ keinen augmentierenden Weg mit Endknoten $v$
+        enthält, so ist $M$ größtes Matching in $G$
+        \item Ansonsten sei $W$ ein augemtierender Weg. Dann ist
+        $M \varDelta E(W)$ größtes Matching in G
+    \end{itemize}
+    Mit einer passenden Repräsentation eines Matchings in $G - v$
+    kann man in $O(E)$ Zeit ein größtes Matching in $G$ finden.
+\end{eigenschaft}
+\section{Färbbarkeit Planare Graphen}
+\begin{eigenschaft}
+    Jeder planare Graph ist 4-färbbar
+\end{eigenschaft}
+\begin{definition}[Listenfärbung]
+    Gegenen ein Graph $G$ und für jeden Knoten $v$ von $G$ eine Liste $L_v$
+    von Farben, so ist eine Listenfärbung von $G$ eine Abbildung
+    \begin{equation*}
+        \lambda: V \rightarrow \bigcup_v L_v \text{ mit } 
+        \begin{cases}
+            \lambda(v) \in L_v \\
+            \lambda(u) \neq \lambda(v) \forall uv \in E(G)
+        \end{cases}
+    \end{equation*}
+\end{definition}
+\begin{definition}[Listenfärbbarkeit]
+    Ein Graph $G = (V, E)$ ist k-listenfärbbar, wenn G für jede Wahl
+    von Listen der Länge k eine Listenfärbung hat
+\end{definition}
+\begin{eigenschaft}
+    G k-listenfärbbar $\Rightarrow$ k-färbbar \\
+    Nicht jeder planare Graph ist 4-listenfärbbar \\
+    Jeder planare Graph ist 5-listenfärbbar
+\end{eigenschaft}
+\end{document}  
