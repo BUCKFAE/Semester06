@@ -34,12 +34,9 @@ def CYK(w, rules):
                             tables[key][i][i + k] = 1
 
     # Returning the result
-    return tables["S"][0][len(w) - 1]
+    return tables["S"][0][len(w) - 1] > 0
 
 # Testing
-rules = [("S", "CA"), ("A", "CA"), ("B", "AC"), ("C", "BA"), ("A", "a"), ("B", "b"), ("C", "b")]
-w1 = "abbaa"
-w2 = "abba"
+rules = [("S", "AB"), ("S", "AC"), ("B", "AB"), ("B", "BB"), ("C", "BC"), ("C", "SB"), ("A", "a"), ("B", "b")]
 
-print(f"Result: {CYK(w1, rules)}")
-print(f"Result: {CYK(w2, rules)}")
+print("\n".join([f"{w} -> {CYK(w, rules)}" for w in ["bbaaabb", "abaaabb"]]))
