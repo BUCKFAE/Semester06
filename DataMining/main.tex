@@ -60,7 +60,7 @@
         Güte innerhalb des Clusters $C_i$ 
             & $S_i \sqrt[q]{\frac{1}{|C_i|} \sum_{x \in C_i}\text{dist}(x, \mu_i)^q}$ \\
         \hline
-        Güte der Trennung der Cluster $C_i$ und $C_j$
+        Güte Trennung $C_i$ und $C_j$
             & $M_{i,j} = $dist$(\mu_i, \mu_j)$ \\
         \hline
         $R_{i,j}$ für $i \neq j$
@@ -68,6 +68,20 @@
         \hline
         Davis-Bouldin Index
             & $DB = \frac{1}{k} \sum_{i = 1}^k D_i$ mit $D_i = \max_{i \neq j} R_{i,j}$ \\
+        \hline
+    \end{tabular}
+\section{Distanzfunktionen}
+\subsection{Distanzfunktionen für Clsuter}
+    \begin{tabular}{| c | c |}
+        \hline
+        Single Link 
+            & dist - sl(X, Y) = $\min_{x \in X, y \in Y}$ dist(x, y) \\
+        \hline
+        Complete Link
+            & dist - cl(X, Y) = $\max_{x \in X, y \in Y}$ dist(x, y) \\
+        \hline
+        Average Link
+            & dist - al(X, Y) = $\frac{1}{|X| \cdot |Y|} \cdot \sum_{x \in X, y\in Y}$ dist(x, y) \\
         \hline
     \end{tabular}
 \end{document}
