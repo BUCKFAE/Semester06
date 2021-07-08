@@ -7,6 +7,7 @@
 \usepackage{fancyhdr}
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{amsthm}
+\usepackage[german,vlined,longend]{algorithm2e}
 \usepackage{amsmath}
 \usepackage[T1]{fontenc}
 \usepackage{mathabx}
@@ -84,4 +85,19 @@
             & dist - al(X, Y) = $\frac{1}{|X| \cdot |Y|} \cdot \sum_{x \in X, y\in Y}$ dist(x, y) \\
         \hline
     \end{tabular}
+
+\section{OPTICS}
+Beschreibung in Worten: 
+\begin{enumerate}
+    \item Über alle Punkte iterieren
+    \item Wenn Punkte im Umkreis vom aktuellen Punkt liegen Distanzen updaten
+    \item Alle Nachbarn vom Punkt abarbeiten
+    \item Sortiert in die Liste einfügen
+\end{enumerate}
+\section{Assoziationsregeln}
+\begin{itemize}
+    \item \textbf{Support}: $supp_D(X) = \frac{|\{ T \in D |X \subseteq T\}|}{|D|}$
+    \item \textbf{Frequency:} $supp_X(D) \cdot |D|$
+    \item \textbf{Confidence:} $conf_D(X \rightarrow Y) = \frac{supp_D(X \cup Y)}{supp_D(X)}$
+\end{itemize}
 \end{document}
