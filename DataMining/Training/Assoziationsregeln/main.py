@@ -36,6 +36,7 @@ def apriori(I, D, minsup):
                 count[frozenset(c)] = 0
 
         for T in D:
+            # Candidates that are in T
             CT = [k for k in CK if all([s in T for s in k])]
 
             for c in CT:
