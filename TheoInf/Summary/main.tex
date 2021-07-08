@@ -907,4 +907,17 @@ Die von NEAS akzeptierte Sprache heißt \textbf{L(A)}
 \begin{eigenschaft}
     Es gilt $P \neq EXP$
 \end{eigenschaft}
+\begin{definition}[Teilsummenproblem, sum of subset]
+    \textbf{SOS} = $\{ \langle a_1, \dots, a_m, b \rangle |
+    m, a_1 \dots,a_m, b \in \mathbb{N}$ und es existiert ein $I 
+    \subseteq \{1, \dots, m\}$ mit $\sum_{i \in I} a_i = b$ \}
+\end{definition}
+\begin{definition}[Akzeptierung in Zeit t]
+    Sei $t: \mathbb{N} \rightarrow \mathbb{N}$ total und M ein nichtdeterministischer Algorithmus \\
+    \textbf{M akzeptiert die Menge A in der Zeit t} $\Leftrightarrow$
+    \begin{enumerate}
+        \item $L(M) = A$
+        \item die rechenzeit jedes Rechenweges von M auf $x$ ist $\leq t(|x|)$
+    \end{enumerate}
+\end{definition}
 \end{document}
