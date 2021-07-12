@@ -1,4 +1,4 @@
-\documentclass[14pt]{article}
+\documentclass{article}
 
 % Packages
 \usepackage[utf8]{inputenc}
@@ -109,4 +109,62 @@ Beschreibung in Worten:
 \end{center}
 Um wie viel steigt die Wahrscheinlichkeit von B, wenn die Bedingung A
 Hinzugefügt wird?
+\subsection{Kriterien für Interessantheitsmaße}
+\begin{enumerate}
+    \item Conciseness: \\
+    Kürzere Regeln sind besser (weniger Items)
+    \item Generality: \\
+    Generelle Regeln sind besser (mehr Fälle abgedeckt)
+    \item Reliability: \\
+    Hohe confidence / accuracy ist besser
+    \item Diversity: \\
+    Regeln sollten untereinander unähnlich sein
+    \item Novelty: \\
+    Vorher unbekannt, nicht aus anderen Regeln ableitbar
+    \item Surprisingness / Unexpectedness: \\
+    Gute Regeln widersprechen Vorwissen / Erwartungen
+    \item Applicability: \\ 
+    Kann praktisch (in der Anwendung) umgesetzt werden
+\end{enumerate}
+\subsection{Monotonie}
+\begin{itemize}
+    \item \textbf{Monotonie}: If a set S violates C, its supersets
+    \textbf{might not} violate C, while its subsets \textbf{must}
+    violate C
+    \item \textbf{Anti-Monotonie}: If a set S violates C, its supersets
+    \textbf{must} violate C, while its subsets \textbf{might not}
+    violate C
+\end{itemize}
+\section{Hierarchische Assoziationsregeln}
+\begin{itemize}
+    \item \textbf{Definition} Hierarchische Assoziationsregel: \\
+    $X \Rightarrow Y$, mit $X \subseteq I, Y \subseteq I, X \cap Y = \emptyset$ \\
+    Kein Item in Y ist sVorfahre eines Items in X (bezüglich H)
+    \item \textbf{Support s} einer hierarchischen Assoziationsregel
+    $X \Rightarrow Y$ in D: \\
+    Support der Menge $X \cup Y$
+    \item \textbf{Konfidenz c} einer hierarchischen Assoziationsregel
+    $X \Rightarrow Y$ in D: \\
+    Prozentsatz der Transaktionen, die auch die Menge Y unterstützen,
+    in der Teilmenge aller Transaktionen, welche die Menge X unterstützen
+\end{itemize}
+\section{Gütemaße für Klassifikation}
+\textbf{K}: Klassifikator, \textbf{TR} Trainingsmenge, \textbf{TE} 
+Testmenge
+\begin{itemize}
+    \item \textbf{Klassifikationsgenauigkeit} $G_{TE}$: \\
+    Alles was aus dem Testset richig klassifiziert wurde
+    \item \textbf{Tatsächlicher Klassifikationsfehler} $F_{TE}$: \\
+    Alles was aus dem Testset falsch klassifiziert wurde
+    \item \textbf{Beobachteter Klassifikationsfehler} $F_{TR}$: \\
+    Alles was aus dem Trainingsset falsch klassifiziert wurde
+\end{itemize}
+\section{Precision und Recall}
+\textbf{Precision}: $\frac{\text{True positive}}{\text{True Positive} + 
+\text{false Positive}}$ \\
+Wenn die klasse vorhergesagt wird, wie sicher ist die Vorhersage \\
+\\
+\textbf{Recall}: $\frac{\text{True positive}}{\text{True Positive} + 
+\text{False Negative}}$ \\
+Wie oft wird die Klasse c wieder gefunden
 \end{document}

@@ -658,6 +658,18 @@ ist ungerades Loch oder ungerades Antiloch (für $k \geq 2$)
     Zwei Teilstücke, die nicht auf der gleichen Seite von C
     eingebettet werden können, \textbf{stören} einander
 \end{definition}
+\begin{definition}[Störgraph]
+    Der Störgraph $I$ (bezüglich C) hat als Knoten die Teilstücke.
+    Zwei Teilstücke sind adjazent genau dann, wenn sie einander stören.
+\end{definition}
+\begin{eigenschaft}
+    Sei G ein Graph mit separienedem Kreis C und Störgraphen $I$.
+    Der Graph G ist genau dann planar, wenn
+    \begin{itemize}
+        \item für jedes Teilstück P der Graph C + P planar und
+        \item der Störgraph I bipartit ist
+    \end{itemize}
+\end{eigenschaft}
 \section{Merkblatt}
 Prim: Dijkstra ohne länge Vorknoten \\
 Kruskal: Kanten nach Gewicht sortieren, dann der Reihe

@@ -34,12 +34,6 @@ def k_means(points: List[List[float]], num_centers: int):
 
     centroid_coordinates = []
 
-    # Creating three distinct random centroids
-    # while len(centroid_coordinates) < num_centers:
-    #     random_node = random.choice(range(len(features)))
-    #     random_point = (points[random_node][0], points[random_node][1])
-    #     centroid_coordinates.append(random_point)
-
     for i in range(0, 2):
         centroid_coordinates.append((features[i][0], features[i][1]))
 

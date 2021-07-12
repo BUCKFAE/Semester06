@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from sklearn import datasets
+import random
 
 """Example for Linear regression and gradient descent"""
 
@@ -9,8 +10,8 @@ def main():
 
 
     # Initial theta 0 and theta 1
-    t0 = - 5
-    t1 = - 5
+    t0 = random.random()
+    t1 = random.random()
 
     for iter_no in range(0, 100):
         current_error = (1 / len(data_x)) * sum([(t0 + t1 * data_x[i] - data_y[i]) ** 2 for i in range(len(data_x))])
