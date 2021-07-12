@@ -167,4 +167,22 @@ Wenn die klasse vorhergesagt wird, wie sicher ist die Vorhersage \\
 \textbf{Recall}: $\frac{\text{True positive}}{\text{True Positive} + 
 \text{False Negative}}$ \\
 Wie oft wird die Klasse c wieder gefunden
+\section{Gütemaße für Splits}
+\subsection{Informationsgewinn}
+\textbf{Entropie}: \\
+$entropie(T) = - \sum_{i = 1}^{k} p_i \log(p_i)$ \\
+\\
+\textbf{Informationsgewinn}: \\
+$informationsgewinn(T, A) = entropie(T) -
+\sum_{i = 1}^{m} \frac{|T_i|}{|T|} \cdot entropie(T_i)$
+\subsection{Gini-Index}
+\begin{center}
+    $gini(T) = 1 - \sum_{j = 1}^k p_j^2$
+\end{center}
+Kleiner Gini-Index $\Leftrightarrow$ geringe Unreinheit \\
+Großer Gini-Index $\Leftrightarrow$ hohe Unreinheit \\
+Gini-Index des Attributs A in Bezug auf T ist definiert als
+\begin{center}
+    $gini_A(T) = \sum_{i = 1}^m \frac{|T_i|}{|T|} \cdot gini(T_i)$
+\end{center}
 \end{document}
