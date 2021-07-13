@@ -85,7 +85,28 @@
             & dist - al(X, Y) = $\frac{1}{|X| \cdot |Y|} \cdot \sum_{x \in X, y\in Y}$ dist(x, y) \\
         \hline
     \end{tabular}
-
+\section{Dichtebasiertes Clustern}
+\begin{itemize}
+    \item \textbf{Kernobjekt}: Mehr als MinPts in $\epsilon$-Umgebung
+    \item \textbf{direkt dichte-erreichbar}: $p \in N_{\epsilon}(q)$ und 
+    $q$ ist Kernobjekt
+    \item \textbf{dichte-erreichbar}: Kette von dichte-erreichbaren
+    Objekten zwischen q und p
+    \item \textbf{dichte-verbunden} Beide von einem dritten Objekt
+    dichte-erreichbar
+\end{itemize}
+\section{DBSCAN}
+Beschreibung in Worten:
+\begin{enumerate}
+    \item Wählt zufälligen noch nicht klassifizierten Punkt
+    \item Führt ExpandiereCluster für diesen Punkt aus
+    \item \textbf{ExpandiereCluster}:
+    \begin{itemize}
+        \item Punkt ist Noise -> FALSE zurück geben
+        \item Sonst: Füge alle dichte-erreichbaren Punkte vom gegebenen
+        Punkt zum Cluster hinzu
+    \end{itemize}
+\end{enumerate}
 \section{OPTICS}
 Beschreibung in Worten: 
 \begin{enumerate}
@@ -135,6 +156,11 @@ Hinzugefügt wird?
     \textbf{must} violate C, while its subsets \textbf{might not}
     violate C
 \end{itemize}
+\section{Naive Bayes}
+Entscheidungsregel des naiven Bayes Klassifikators:
+\begin{center}
+    argmax$_{c_j \in C} P(c_j) \cdot \prod_{i = 1}^{d} P(o_i | c_j)$ 
+\end{center}
 \section{Hierarchische Assoziationsregeln}
 \begin{itemize}
     \item \textbf{Definition} Hierarchische Assoziationsregel: \\
@@ -184,5 +210,26 @@ Großer Gini-Index $\Leftrightarrow$ hohe Unreinheit \\
 Gini-Index des Attributs A in Bezug auf T ist definiert als
 \begin{center}
     $gini_A(T) = \sum_{i = 1}^m \frac{|T_i|}{|T|} \cdot gini(T_i)$
+\end{center}
+\section{Delta-Rule}
+\begin{center}
+    $w = w + \eta \cdot x \cdot (t - o)$
+\end{center}
+Vereinfacht: \\
+\begin{itemize}
+    \item Berechne $o = \Theta(w^T x)$
+    \item Falls $o > 0$ und $t = 0$
+    \begin{itemize}
+        \item Setze $w = w - x$
+    \end{itemize}
+    \item Falls $o \leq 0$ und $t = 1$
+    \begin{itemize}
+        \item Setze $w = w + x$
+    \end{itemize}
+\end{itemize}
+\section{Backpropagation}
+Fehler Output Layer:
+\begin{center}
+    $-(t_d - o_d) \cdot \Theta'(W y) \cdot y_j$
 \end{center}
 \end{document}
