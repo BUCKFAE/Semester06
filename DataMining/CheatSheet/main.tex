@@ -108,6 +108,21 @@ Beschreibung in Worten:
     \end{itemize}
 \end{enumerate}
 \section{OPTICS}
+\begin{itemize}
+    \item \textbf{Kerndistanz} eines Objekts $o$ und bzg. $\epsilon$ und MinPts:
+    \begin{itemize}
+        \item undefiniert, wenn $|N_{\epsilon}(o)| < MinPts$
+        \item Distanz$_{\text{MinPts}}$ sonst
+    \end{itemize}
+    \item \textbf{Distanz$_k$(o)}: Distanz zum k-nächsten
+    Nachbarn von o
+    \item \textbf{Erreichbarkeitsdistanz} eines Objekts $p$
+    relativ zu einem Objekt o
+    \begin{itemize}
+        \item undefiniert, wenn $|N_{\epsilon}(o)| < MinPts$
+        \item max\{Kerndistanz(o), dist(o, p)\} sonst
+    \end{itemize}
+\end{itemize}
 Beschreibung in Worten: 
 \begin{enumerate}
     \item Über alle Punkte iterieren
